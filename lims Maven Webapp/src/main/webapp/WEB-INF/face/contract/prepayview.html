@@ -1,0 +1,108 @@
+<#setting number_format="0">
+<div class="page-content">	
+	<div class="row">
+		<div class="col-xs-12">
+			<!-- PAGE CONTENT BEGINS -->
+			<form class="form-horizontal" role="form" action="" id="prepay_form">
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" > <b>合同编码:</b> ${editpact.cttcode!''}</label>					
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" > <b> 合同日期:</b>${editpact.cttdate?string("yyyy-MM-dd")}</label>
+				</div>
+				
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" > <b>借款人:</b>  <a data-remote='_customerAction_view.action?id=${editpact.cttcustomer!''}' data-draggable='false' data-mtitle='用户信息' data-id='viewcustomer_dia' data-width='950' data-height='500' data-okevent='doViewCus()' class='green pack_view_customer' class='blue' href='#'>查看</a></label>					
+				</div>				
+				
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" > <b> 借款金额:</b>${editpact.cttamount!''}</label>
+					
+				</div>
+				
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" > <b> 借款期限:</b>${editpact.cttcate!''}期</label>
+					
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" > <b> 借款利率 :</b>${ratio!''}</label>
+									</div>
+				
+				
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" > <b>借款起始日:</b><#if (editpact.cttstart??)>${editpact.cttstart?string("yyyy-MM-dd")}</#if></label>
+					
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" > <b>放款日期:</b><#if (editpact.cttloandate??)>${editpact.cttloandate?string("yyyy-MM-dd")}</#if> </label>
+					
+				</div>
+				
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" > <b>还款日 :</b><#if (editpact.cttrepayday??)>${editpact.cttrepayday?string("yyyy-MM-dd")}</#if></label>
+					
+				</div>
+				
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" > <b>已还期:</b>${editpact.ctthpaytimes!''}</label>						
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" > <b>历史欠款:</b>${editpact.ctttaa!''}</label>						
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" > <b>提前应还金额:</b><font color=red>${leftmoney!'0'}</font></label>						
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-4 control-label-0 no-padding-left" ><span style="color:red;">*</span><b>还款日期:</b>
+					</label>
+					<span style="position: relative; z-index: 9999;">
+					<input type="text" readonly="readonly" class="col-sm-6 input-sm  date-picker" data-date-format="yyyy-mm-dd" name="operday" />
+					</span>											
+					<input type="hidden" name="pid" value="${editpact.id}" />
+					<input type="hidden" name="payamount" value="${leftmoney!'0'}" />
+				</div>
+				
+			</form>
+		</div>
+		<!-- /.col -->
+	</div>
+	<!-- /.row -->
+</div>
+<!-- /.page-content -->
+<script type="text/javascript">
+	var cttfun=["购车位","装修","电器","其他"];
+	$(".pack_view_customer").each(function() {
+				$(this).wwDialog();
+	});
+	
+	var serail_span=${editpact.cttserial!''};
+	
+	$("#cttfun_span").text(cttfun[${editpact.cttfun!'0'}]);
+	$("#serial_span").text(serail_span.LenWithZero(3));
+	
+	
+	function doViewCus(){		
+		$("#viewcustomer_dia").modal('hide');		
+	}
+	$('.date-picker').datepicker({
+		autoclose : true,		
+		todayHighlight : true
+		}).on('hide', function(event) {						
+			event.preventDefault();
+			event.stopPropagation();
+		}).next().on(ace.click_event, function() {
+			$(this).prev().trigger("click");
+		});
+</script>

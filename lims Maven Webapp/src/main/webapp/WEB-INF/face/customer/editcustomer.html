@@ -1,0 +1,559 @@
+<#setting number_format="0">
+<link rel="stylesheet" href="assets/css/datepicker.css" />
+<style>
+label span {
+	color: red;
+}
+</style>
+<div class="page-content">
+	<div class="row">
+		<div class="col-xs-12">
+			<!-- PAGE CONTENT BEGINS -->
+			<form class="form-horizontal" role="form" action="_customerAction!doeditcustomer.action" id="customer_edit_form">
+				<!-- #section:elements.form -->
+				<h5 class="row header bigger lighter  col-xs-12 col-sm-12">
+					<i class="ace-icon fa fa-bars purple"></i> 借款人基本信息
+				</h5>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right"> 借款人姓名<span>*</span></label>
+					<div class="col-sm-9">
+						<input type="text" name="customername" value="${editcustomer.customername}" maxlength=20 id="form-field-1" placeholder="" class="col-sm-12 col-xs-12" />
+						<input type="hidden" name="id" value="${editcustomer.id}" />
+					</div>
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right"> 性别 </label>
+					<div class="col-sm-9">
+						<select name="customergender" class="form-control">
+							<option value="0">男</option>
+							<option value="1">女</option>
+						</select>
+					</div>
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right"> 出生日期<span>*</span></label>
+					<div class="col-sm-9">
+						<div class="input-daterange input-group">
+							<input type="text" maxlength=20 name="customerbirth" value="" class="input-sm form-control date-picker" data-date-format="yyyy-mm-dd" />
+						</div>
+						<!-- /section:plugins/date-time.datepicker -->
+					</div>
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right"> 婚姻状况<span>*</span></label>
+					<div class="col-sm-9">
+						<select name="customerwed" class="form-control">
+							<option value="0">已婚</option>
+							<option value="1">未婚</option>
+							<option value="2">离异</option>
+							<option value="3">丧偶</option>
+						</select>
+					</div>
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right"> 证件类型<span>*</span></label>
+					<div class="col-sm-9">
+						<select name="customercert" class="form-control">
+							<option value="0">身份证</option>
+							<option value="1">其他</option>
+						</select>
+					</div>
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right">证件号码<span>*</span>
+					</label>
+					<div class="col-sm-9">
+						<input name="customercertnum" maxlength=40 type="text" value="${editcustomer.customercertnum}" placeholder="" class="col-sm-12 col-xs-12" />
+					</div>
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right"> 学历</label>
+					<div class="col-sm-9">
+						<select name="customereduc" class="form-control">
+							<option value="0">研究生以上</option>
+							<option value="1">大学本科</option>
+							<option value="2">大学专科和专科学校</option>
+							<option value="3">高中及以下</option>
+						</select>
+					</div>
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right"> 联系方式<span>*</span>
+					</label>
+					<div class="col-sm-9">
+						<input name="customermobile" maxlength=20 value="${editcustomer.customermobile}" class="form-control input-mask-phone" type="text" />
+					</div>
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right">家庭住址<span>*</span>
+					</label>
+					<div class="col-sm-9">
+						<input name="customeraddr" maxlength=200 type="text" value="${editcustomer.customeraddr}" placeholder="" class="col-sm-12 col-xs-12" />
+					</div>
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right"> 住所状况<span>*</span></label>
+					<div class="col-sm-9">
+						<select name="customerresid" class="form-control">
+							<option value="0">全款</option>
+							<option value="1">按揭</option>
+							<option value="2">租用</option>
+							<option value="3">集体宿舍</option>
+							<option value="4">亲戚或父母家</option>
+							<option value="5">其它</option>
+						</select>
+					</div>
+				</div>				
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right"> 工作单位<span>*</span></label>
+					<div class="col-sm-9">
+						<input name="customercom" maxlength=40 type="text" value="${editcustomer.customercom}" placeholder="" class="col-sm-12 col-xs-12" />
+					</div>
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right"> 职务 </label>
+					<div class="col-sm-9">
+						<select name="customerpost" class="form-control">
+							<option value="0">单位主管（局级及以上）</option>
+							<option value="1">单位中层（处级及以上）</option>
+							<option value="2">部门主管（科级及以上）</option>
+							<option value="3">专业技术人员</option>
+							<option value="4">下岗或失业</option>
+							<option value="5">其它</option>
+						</select>
+					</div>
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right"> 单位地址<span>*</span></label>
+					<div class="col-sm-9">
+						<input name="customercomaddr" maxlength=200 type="text" value="${editcustomer.customercomaddr}" placeholder="" class="col-sm-12 col-xs-12" />
+					</div>
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 col-xs-12 control-label no-padding-right">年收入<span>*</span>
+					</label>
+					<div class="col-sm-6 col-xs-5">
+						<input name="customerincome" maxlength=8 type="text" value="${editcustomer.customerincome!'0'}" placeholder="" class="col-sm-12 col-xs-12" />
+					</div>
+					<label class="col-sm-2 col-xs-6 no-padding-left">万元 </label>
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right">车辆状况<span>*</span>
+					</label>
+					<div class="col-sm-9">
+						<select name="customercar" class="form-control">
+							<option value="0">无车</option>
+							<option value="1">5-15万元</option>
+							<option value="2">15-30万元</option>
+							<option value="3">30万元以上</option>
+						</select>
+					</div>
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right">QQ</label>
+					<div class="col-sm-9">
+						<input name="customerqq" maxlength=20 class="form-control" value="${editcustomer.customerqq!''}" type="text" />
+					</div>
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right">微信 </label>
+					<div class="col-sm-9">
+						<input name="customerwx" maxlength=20 class="form-control" value="${editcustomer.customerwx!''}" type="text" />
+					</div>
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right">Email</label>
+					<div class="col-sm-9">
+						<input name="customeremail" maxlength=40 class="form-control" value="${editcustomer.customeremail!''}" type="text" />
+					</div>
+				</div>
+				<div class="space-4"></div>
+				<h5 class="row header bigger lighter  col-xs-12 col-sm-12">
+					<i class="ace-icon fa fa-file-text purple"></i> 贷款信息
+				</h5>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right">房源位置 </label>
+					<div class="col-sm-9">
+						<input name="customerhouseaddr" maxlength=200 class="form-control" value="${editcustomer.customerhouseaddr!''}" type="text" />
+					</div>
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right">购买价 </label>
+					<div class="col-sm-6 col-xs-5">
+						<input name="customerhprice" maxlength=8 type="text" placeholder="" value="${editcustomer.customerhprice!''}" class="col-sm-12 col-xs-12" />
+					</div>
+					<label class="col-sm-2 col-xs-6 no-padding-left">万元 </label>
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right">紧急联系人1</label>
+					<div class="col-sm-9">
+						<input name="customercontact1" maxlength=20 class="form-control" value="${editcustomer.customercontact1}" type="text" />
+					</div>
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right">与贷款人关系1</label>
+					<div class="col-sm-9">
+						<select name="customerrealtion1" class="form-control">
+							<option value=""></option>
+							<option value="0">父母</option>
+							<option value="1">配偶</option>
+							<option value="2">兄弟，姐妹</option>
+							<option value="3">朋友</option>
+							<option value="4">其它</option>
+						</select>
+					</div>
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right">紧急联系人1电话
+					</label>
+					<div class="col-sm-9">
+						<input name="customermobile1" maxlength=20 class="form-control" value="${editcustomer.customermobile1}" type="text" />
+					</div>
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right">紧急联系人2 </label>
+					<div class="col-sm-9">
+						<input name="customercontact2" maxlength=20 class="form-control" value="${editcustomer.customercontact2!''}" type="text" />
+					</div>
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right">与贷款人关系2</label>
+					<div class="col-sm-9">
+						<select name="customerrealition2" class="form-control">
+							<option value=""></option>
+							<option value="0">父母</option>
+							<option value="1">配偶</option>
+							<option value="2">兄弟，姐妹</option>
+							<option value="3">朋友</option>
+							<option value="4">其它</option>
+						</select>
+					</div>
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right">紧急联系人2电话 </label>
+					<div class="col-sm-9">
+						<input name="customermobile2" maxlength=20 class="form-control" value="${editcustomer.customermobile2!''}" type="text" />
+					</div>
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right">代还款人1</label>
+					<div class="col-sm-9">
+						<input name="customerreplace1" maxlength=20 class="form-control" value="${editcustomer.customerreplace1!''}" type="text" />
+					</div>
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right">代还款人2</label>
+					<div class="col-sm-9">
+						<input name="customerreplace2" maxlength=20 class="form-control" value="${editcustomer.customerreplace2!''}" type="text" />
+					</div>
+				</div>
+				<h5 class="row header bigger lighter  col-xs-12 col-sm-12">
+					<i class="ace-icon fa fa-bars purple"></i> 配偶基本信息
+				</h5>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right">配偶姓名<span>*</span></label>
+					<div class="col-sm-9">
+						<input type="text" name="customertname" value="${editcustomer.customertname!''}" maxlength=20 id="form-field-1" placeholder="" class="col-sm-12 col-xs-12" />
+					</div>
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right"> 性别 </label>
+					<div class="col-sm-9">
+						<select name="customertgender" class="form-control">
+							<option value="0">男</option>
+							<option value="1">女</option>
+						</select>
+					</div>
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right"> 出生日期<span>*</span></label>
+					<div class="col-sm-9">
+						<div class="input-daterange input-group">
+							<input type="text" maxlength=20 name="customertbirth" value="" class="input-sm form-control date-picker" data-date-format="yyyy-mm-dd" />
+						</div>
+						<!-- /section:plugins/date-time.datepicker -->
+					</div>
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right"> 婚姻状况<span>*</span></label>
+					<div class="col-sm-9">
+						<select name="customertwed" class="form-control">
+							<option value="0">已婚</option>
+							<option value="1">未婚</option>
+							<option value="2">离异</option>
+							<option value="3">丧偶</option>
+						</select>
+					</div>
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right"> 证件类型<span>*</span></label>
+					<div class="col-sm-9">
+						<select name="customertcert" class="form-control">
+							<option value="0">身份证</option>
+							<option value="1">其他</option>
+						</select>
+					</div>
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right">证件号码<span>*</span>
+					</label>
+					<div class="col-sm-9">
+						<input name="customertcertnum" maxlength=40 type="text" value="${editcustomer.customertcertnum!''}" placeholder="" class="col-sm-12 col-xs-12" />
+					</div>
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right"> 学历</label>
+					<div class="col-sm-9">
+						<select name="customerteduc" class="form-control">
+							<option value="0">研究生以上</option>
+							<option value="1">大学本科</option>
+							<option value="2">大学专科和专科学校</option>
+							<option value="3">高中及以下</option>
+						</select>
+					</div>
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right"> 联系方式<span>*</span>
+					</label>
+					<div class="col-sm-9">
+						<input name="customertmobile" maxlength=20 value="${editcustomer.customertmobile!''}" class="form-control input-mask-phone" type="text" />
+					</div>
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right">家庭住址</label>
+					<div class="col-sm-9">
+						<input name="customertaddr" maxlength=200 type="text" value="${editcustomer.customertaddr!''}" placeholder="" class="col-sm-12 col-xs-12" />
+					</div>
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right"> 住所状况</label>
+					<div class="col-sm-9">
+						<select name="customertresid" class="form-control">
+							<option value="0">全款</option>
+							<option value="1">按揭</option>
+							<option value="2">租用</option>
+							<option value="3">集体宿舍</option>
+							<option value="4">亲戚或父母家</option>
+							<option value="5">其它</option>
+						</select>
+					</div>
+				</div>				
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right"> 工作单位</label>
+					<div class="col-sm-9">
+						<input name="customertcom" maxlength=40 type="text" value="${editcustomer.customertcom!''}" placeholder="" class="col-sm-12 col-xs-12" />
+					</div>
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right"> 职务 </label>
+					<div class="col-sm-9">
+						<select name="customertpost" class="form-control">
+							<option value="0">单位主管（局级及以上）</option>
+							<option value="1">单位中层（处级及以上）</option>
+							<option value="2">部门主管（科级及以上）</option>
+							<option value="3">专业技术人员</option>
+							<option value="4">下岗或失业</option>
+							<option value="5">其它</option>
+						</select>
+					</div>
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right"> 单位地址</label>
+					<div class="col-sm-9">
+						<input name="customertcomaddr" maxlength=200 type="text" value="${editcustomer.customertcomaddr!''}" placeholder="" class="col-sm-12 col-xs-12" />
+					</div>
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 col-xs-12 control-label no-padding-right">年收入
+					</label>
+					<div class="col-sm-6 col-xs-5">
+						<input name="customertincome" maxlength=8 type="text" value="${editcustomer.customertincome!'0'}" placeholder="" class="col-sm-12 col-xs-12" />
+					</div>
+					<label class="col-sm-2 col-xs-6 no-padding-left">万元 </label>
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right">车辆状况
+					</label>
+					<div class="col-sm-9">
+						<select name="customertcar" class="form-control">
+							<option value="0">无车</option>
+							<option value="1">5-15万元</option>
+							<option value="2">15-30万元</option>
+							<option value="3">30万元以上</option>
+						</select>
+					</div>
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right">QQ</label>
+					<div class="col-sm-9">
+						<input name="customertqq" maxlength=20 class="form-control" value="${editcustomer.customertqq!''}" type="text" />
+					</div>
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right">微信 </label>
+					<div class="col-sm-9">
+						<input name="customertwx" maxlength=20 class="form-control" value="${editcustomer.customertwx!''}" type="text" />
+					</div>
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right">Email</label>
+					<div class="col-sm-9">
+						<input name="customertemail" maxlength=40 class="form-control" value="${editcustomer.customertemail!''}" type="text" />
+					</div>
+				</div>
+				<div class="space-4"></div>
+				<h5 class="row header bigger lighter  col-xs-12 col-sm-12">
+					<i class="ace-icon fa fa-file-text purple"></i> 其它
+				</h5>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right">备注</label>
+					<div class="col-sm-9">
+						<input name="customerdesc" maxlength=200 class="form-control" value="${editcustomer.customerdesc!''}" type="text" />
+					</div>
+				</div>
+			</form>
+		</div>
+		<!-- /.col -->
+	</div>
+	<!-- /.row -->
+</div>
+<!-- /.page-content -->
+
+<script type="text/javascript">
+	jQuery(function($) {
+
+		$('.date-picker').datepicker({
+			"autoclose" : true
+			//,"dateFormat": "yy-mm-dd"
+		}).on('changeDate', function(ev) {
+			//
+		}).on('hide', function(event) {
+			event.preventDefault();
+			event.stopPropagation();
+		});
+		<#if (editcustomer.customergender??)>$("select[name='customergender']").val('${editcustomer.customergender}');</#if>
+		<#if (editcustomer.customerwed??)>$("select[name='customerwed']").val('${editcustomer.customerwed}');</#if>
+		<#if (editcustomer.customercert??)>$("select[name='customercert']").val('${editcustomer.customercert}');</#if>
+		<#if (editcustomer.customereduc??)>$("select[name='customereduc']").val('${editcustomer.customereduc}');</#if>
+		<#if (editcustomer.customerresid??)>$("select[name='customerresid']").val('${editcustomer.customerresid}');</#if>
+		<#if (editcustomer.customerpost??)>$("select[name='customerpost']").val('${editcustomer.customerpost}');</#if>
+		<#if (editcustomer.customercar??)>$("select[name='customercar']").val('${editcustomer.customercar}');</#if>
+		<#if (editcustomer.customerrealtion1??)>$("select[name='customerrealtion1']").val('${editcustomer.customerrealtion1}');</#if>
+		<#if (editcustomer.customerrealition2??)>$("select[name='customerrealition2']").val('${editcustomer.customerrealition2}');</#if>
+		
+		
+		
+		<#if (editcustomer.customertgender??)>$("select[name='customertgender']").val('${editcustomer.customertgender}');</#if>
+		<#if (editcustomer.customertwed??)>$("select[name='customertwed']").val('${editcustomer.customertwed}');</#if>
+		<#if (editcustomer.customertcert??)>$("select[name='customertcert']").val('${editcustomer.customertcert}');</#if>
+		<#if (editcustomer.customerteduc??)>$("select[name='customerteduc']").val('${editcustomer.customerteduc}');</#if>
+		<#if (editcustomer.customertresid??)>$("select[name='customertresid']").val('${editcustomer.customertresid}');</#if>
+		<#if (editcustomer.customertpost??)>$("select[name='customertpost']").val('${editcustomer.customertpost}');</#if>
+		<#if (editcustomer.customertcar??)>$("select[name='customertcar']").val('${editcustomer.customertcar}');</#if>
+		
+		
+		
+		<#if (editcustomer.customerbirth??)>$("input[name='customerbirth']").val("${editcustomer.customerbirth?string('yyyy-MM-dd')}");</#if>
+		<#if (editcustomer.customertbirth??)>$("input[name='customertbirth']").val("${editcustomer.customertbirth?string('yyyy-MM-dd')}");</#if>
+		
+
+	});
+	/********************************************************/
+	/* $(function() {
+		focusInputText("contract_form");
+	}); */
+	$(document).ready(function() {
+		
+		/* $.browser.mozilla = /firefox/.test(navigator.userAgent.toLowerCase());
+		$.browser.webkit = /webkit/.test(navigator.userAgent.toLowerCase());
+		$.browser.opera = /opera/.test(navigator.userAgent.toLowerCase());
+		$.browser.msie = /msie/.test(navigator.userAgent.toLowerCase()); */
+		$(':input:text:first').focus();
+		$(":input:enabled[type!='hidden']").addClass('enterIndex');
+		// get only input tags with class data-entry 
+		textboxes = $('.enterIndex');
+		// now we check to see which browser is being used 
+		if ($.browser.mozilla) {
+			$(textboxes).bind('keypress', CheckForEnter);
+			
+		} else {
+			$(textboxes).bind('keydown', CheckForEnter);
+			
+		}
+	});
+	function CheckForEnter(event) {
+		
+		if (event.keyCode == 13 && $(this).attr('type') != 'button' && $(this).attr('type') != 'submit' && $(this).attr('type') != 'textarea' && $(this).attr('type') != 'reset') {
+			var i = $('.enterIndex').index($(this));
+			var n = $('.enterIndex').length;
+			if (i < n - 1) {
+				if ($(this).attr('type') != 'radio') {
+					NextDOM($('.enterIndex'), i);
+				} else {
+					var last_radio = $('.enterIndex').index($('.enterIndex[type=radio][name=' + $(this).attr('name') + ']:last'));
+					NextDOM($('.enterIndex'), last_radio);
+				}
+			}
+			return false;
+		}
+	}
+	function NextDOM(myjQueryObjects, counter) {
+	
+		if (myjQueryObjects.eq(counter + 1)[0].disabled) {
+			NextDOM(myjQueryObjects, counter + 1);
+		} else {
+			myjQueryObjects.eq(counter + 1).trigger('focus');
+		}
+	}
+	/********************************************************/
+	
+	//$("input[name='customerincome']").mask('9999.999');
+	//$("input[name='customerhprice']").mask('9999.999');
+	
+	
+</script>

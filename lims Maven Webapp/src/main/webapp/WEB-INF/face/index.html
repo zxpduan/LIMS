@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta charset="utf-8" />
+<title>CIMS正辉信息管理系统</title>
+<meta name="description" content="overview &amp; stats" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+<link rel="shortcut icon" href="favricon.ico" />
+<!-- bootstrap & fontawesome -->
+<link rel="stylesheet" href="assets/css/bootstrap.css" />
+<link rel="stylesheet" href="assets/css/font-awesome.min.css" />
+<!-- page specific plugin styles -->
+<link rel="stylesheet" href="assets/css/jquery-ui.css" />
+<!-- text fonts -->
+<link rel="stylesheet" href="assets/css/ace-fonts.css" />
+<!-- ace styles -->
+<link rel="stylesheet" href="assets/css/ace.css" />
+<!--[if lte IE 9]>
+			<link rel="stylesheet" href="assets/css/ace-part2.min.css" />
+		<![endif]-->
+<link rel="stylesheet" href="assets/css/ace-skins.min.css" />
+<link rel="stylesheet" href="assets/css/ace-rtl.min.css" />
+<link rel="stylesheet" href="assets/css/uncompressed/jquery-confirm.css" />
+
+<link rel="stylesheet" href="assets/css/mine.css" />
+<!--[if lte IE 9]>
+		  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
+		<![endif]-->
+<!-- inline styles related to this page -->
+<!-- ace settings handler -->
+<script src="assets/js/ace-extra.min.js"></script>
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lte IE 8]>
+		<script src="assets/js/html5shiv.js"></script>
+		<script src="assets/js/respond.min.js"></script>
+		<![endif]-->
+</head>
+<body class="no-skin">
+	
+	<div id="navbar" class="navbar navbar-default">
+		<script type="text/javascript">
+				try{
+					<#if (navfix??) >
+						ace.settings.set('navbar' , 'fixed');
+						ace.settings.set('sidebar' , 'fixed');												
+						ace.settings.set('breadcrumbs' , 'fixed');						
+					</#if>
+						ace.settings.check('navbar' , 'fixed');	
+						ace.settings.check('breadcrumbs', 'fixed');
+						ace.settings.check('sidebar', 'fixed');
+					}catch(e){}
+			</script>
+		<div class="navbar-container" id="navbar-container">
+			
+			<button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler">
+				<span class="sr-only">Toggle sidebar</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+			</button>
+			
+			<div class="navbar-header pull-left">
+				
+				<a href="#" id="index_logo_a" class="navbar-brand" style="font-size:28px;font-weight:700;height:40px;line-height:40px;margin:0px;padding:0px;"> <img
+					id="index_logo" src="/lims/images/logo_w.png" /> <span id="index_logo_word" style="vertical-align:middle;">LMIS信贷信息管理系统</span>
+				</a>
+				
+				
+				
+			</div>
+			
+			<div id="index_header_right" class="navbar-buttons navbar-header pull-right" role="navigation">
+				<ul class="nav ace-nav">
+					<!-- 
+					<li class="purple"><a data-toggle="dropdown" class="dropdown-toggle" href="#"> <i class="ace-icon fa fa-bell icon-animated-bell"></i> <span
+							class="badge badge-important">8</span>
+					</a>
+						<ul class="dropdown-menu-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
+							<li class="dropdown-header"><i class="ace-icon fa fa-exclamation-triangle"></i> 8 Notifications</li>
+							<li><a href="#userAction_userman.action">
+									<div class="clearfix">
+										<span class="pull-left"> <i class="btn btn-xs no-hover btn-pink fa fa-comment"></i> New Comments
+										</span> <span class="pull-right badge badge-info">+12</span>
+									</div>
+							</a></li>
+							<li><a href="#"> <i class="btn btn-xs btn-primary fa fa-user"></i> Bob just signed up as an editor ...
+							</a></li>
+							<li><a href="#">
+									<div class="clearfix">
+										<span class="pull-left"> <i class="btn btn-xs no-hover btn-success fa fa-shopping-cart"></i> New Orders
+										</span> <span class="pull-right badge badge-success">+8</span>
+									</div>
+							</a></li>
+							<li><a href="#">
+									<div class="clearfix">
+										<span class="pull-left"> <i class="btn btn-xs no-hover btn-info fa fa-twitter"></i> Followers
+										</span> <span class="pull-right badge badge-info">+11</span>
+									</div>
+							</a></li>
+							<li class="dropdown-footer"><a href="#"> See all notifications <i class="ace-icon fa fa-arrow-right"></i>
+							</a></li>
+						</ul>
+						</li>
+					 -->
+					<!-- #section:basics/logout.contents -->
+					<li class="light-blue"><a data-toggle="dropdown" href="#" class="dropdown-toggle"> <img class="nav-user-photo" src="assets/avatars/users3.png"
+							alt="Jason's Photo" /> <span class="user-info"> <small>欢迎,</small> ${username}
+						</span> <i class="ace-icon fa fa-caret-down"></i>
+					</a>
+						<ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+							<li>
+							<a id="showuserinfo" href="#" data-remote="userAction_userinfo.action" data-mtitle="个人信息"  data-id="personid" data-width="500" data-height="380" data-backdrop=false
+			"> <i class="ace-icon fa fa-user"></i> 个人信息
+							</a>
+							</li>
+							<li class="divider"></li>
+							<li><a href="#userAction_userinfo.action#help" id="helpbtn"> <i class="ace-icon fa  fa-lightbulb-o"></i> 帮助按钮
+							</a></li>
+							<li class="divider"></li>							
+							<li><a href="loginAction!exit.action"> <i class="ace-icon fa fa-power-off"></i> 退出系统
+							</a></li>
+						</ul></li>
+					<!-- /section:basics/logout.contents -->
+				</ul>
+			</div>
+			
+		</div>
+		
+	</div>
+	
+	<div class="main-container" id="main-container">
+		<script type="text/javascript">
+				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+			</script>
+		
+		<div id="sidebar" class="sidebar                  responsive">
+			<script type="text/javascript">
+					try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
+				</script>
+			<div class="sidebar-shortcuts" id="sidebar-shortcuts">
+				<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
+					<!-- #section:basics/shortcuts.layout -->
+					<button class="btn btn-success" id="sys_favorite_btn" data-rel="tooltip" title="桌面功能设置">
+						<i class="ace-icon fa fa-star"></i>
+					</button>
+					<!-- /section:basics/shortcuts.layout -->
+					
+					<button class="btn btn-info tooltip-warning" id="id-btn-dialog1" data-rel="tooltip" data-placement="bottom" title="修改密码">
+						<i class="ace-icon fa fa-key"></i>
+					</button>
+					
+					<!-- #section:basics/shortcuts.layout.color -->
+					<button class="btn btn-warning" id="sys_skin_btn" data-rel="tooltip" title="界面色彩设置">
+						<i class="ace-icon fa fa-users"></i>
+					</button>
+					<!-- /section:basics/shortcuts.layout.color -->
+					<!-- #section:basics/shortcuts.layout.nav -->
+					<button class="btn btn-danger" id="sys_setting_btn" data-rel="tooltip" title="导航菜单设置">
+						<i class="ace-icon fa fa-cogs"></i>
+					</button>
+					<!-- /section:basics/shortcuts.layout.nav -->
+					<div id="dialog-sys-setting" class="hide">
+						
+						<!-- #section:settings.navbar -->
+						<div class="ace-settings-item mine-dialog-sys-setting">
+							<input type="checkbox" class="ace ace-checkbox-2" name="leftnavfix" value="fixed"  id="ace-settings-navbar" /> <label class="lbl" for="ace-settings-navbar"> 导航栏固定</label>
+						</div>
+						<!-- /section:settings.navbar -->
+						<!-- #section:settings.sidebar -->
+						<div class="ace-settings-item mine-dialog-sys-setting">
+							<input type="checkbox" class="ace ace-checkbox-2" name="leftnavfix" value="fixed"  id="ace-settings-sidebar" /> <label class="lbl" for="ace-settings-sidebar"> 左侧菜单栏固定</label>
+						</div>
+						<div class="ace-settings-item mine-dialog-sys-setting">
+									<input type="checkbox" name="breakcrumbsfix" value="fixed"  class="ace ace-checkbox-2" id="ace-settings-breadcrumbs" />
+									<label class="lbl" for="ace-settings-breadcrumbs"> 页头导航信息固定</label>
+						</div>
+					</div>
+					
+					
+					<div id="dialog-skin-setting" class="hide">
+						<div class="ace-settings-item mine-dialog-color-setting">
+							<div class="pull-left">
+								<input type="hidden" name="skin" />
+								<select id="skin-colorpicker" name="skin_select" class="hide">
+									<option data-skin="no-skin" value="#438EB9">#438EB9</option>
+									<option data-skin="skin-1" value="#222A2D">#222A2D</option>
+									<option data-skin="skin-2" value="#C6487E">#C6487E</option>
+									<option data-skin="skin-3" value="#D0D0D0">#D0D0D0</option>
+								</select>
+							</div>
+							<span>&nbsp; 选择界面主题颜色</span>
+						</div>
+					</div>
+					
+					<div id="dialog-destop-setting" class="hide">
+						<div class="ace-settings-item mine-dialog-color-setting">
+							<span>&nbsp; 选择功能</span>
+										<select name="deskfun">
+											<option value="report_integratedQuery.action">综合查询</option>
+											<option  value="customer_entering.action">增加客户信息</option>
+											<option value="report_ledger.action">台账</option>
+											<option  value="pactAction_pactman.action">合同管理</option>
+										</select>
+						</div>
+					</div>
+					
+					
+				</div>
+				<div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
+					<span class="btn btn-success"></span> <span class="btn btn-info"></span> <span class="btn btn-warning"></span> <span class="btn btn-danger"></span>
+				</div>
+			</div>
+			<!-- /.sidebar-shortcuts -->
+			<ul class="nav nav-list">
+				<!-- #section:basics/info.contents.desk -->
+				<li class=""><a href="#<#if (deskfun??)>${deskfun}<#else>report_integratedQuery.action</#if>"> <i class="menu-icon fa fa-desktop"></i> <span class="menu-text"> 桌面 </span>
+				</a> <b class="arrow"></b></li>
+				<!-- /section:basics/info.contents.desk -->
+				<li class=""><a href="#" class="dropdown-toggle"> <i class="menu-icon fa fa-tachometer"></i> <span class="menu-text"> 合同信息管理 </span> <b
+						class="arrow fa fa-angle-down"></b>
+				</a> <b class="arrow"></b>
+					<ul class="submenu">
+						<li class=""><a href="#pactAction_entering.action"> <i class="menu-icon fa fa-caret-right"></i> 合同录入
+						</a> <b class="arrow"></b></li>
+						<li class=""><a href="#pactAction_pactman2.action?optype=1"> <i class="menu-icon fa fa-caret-right"></i> 修改放款日
+						</a> <b class="arrow"></b></li>
+						<li class=""><a href="#pactAction_pactman2.action?optype=2"> <i class="menu-icon fa fa-caret-right"></i> 备注代还款人
+						</a> <b class="arrow"></b></li>
+						<li class=""><a href="#pactAction_pactman.action"> <i class="menu-icon fa fa-caret-right"></i> 合同管理
+						</a> <b class="arrow"></b></li>
+						<li class=""><a href="#pactAction_pactmanaudit.action"> <i class="menu-icon fa fa-caret-right"></i> 合同审核
+						</a> <b class="arrow"></b></li>
+					</ul></li>
+				<li class=""><a href="#" class="dropdown-toggle"> <i class="menu-icon fa fa-list"></i> <span class="menu-text"> 客户信息管理 </span> <b
+						class="arrow fa fa-angle-down"></b>
+				</a> <b class="arrow"></b>
+					<ul class="submenu">
+						<li class=""><a href="#customer_entering.action"> <i class="menu-icon fa fa-caret-right"></i> 客户资料录入
+						</a> <b class="arrow"></b></li>
+						<li class=""><a href="#customer_customerman.action"> <i class="menu-icon fa fa-caret-right"></i> 修改删除客户资料
+						</a> <b class="arrow"></b></li>
+					</ul></li>
+				<li class="submenu"><a href="#projectAction_projectman.action"> <i class="menu-icon fa fa-pencil-square-o"></i> <span class="menu-text"> 案场信息管理 </span>
+				</a> <b class="arrow"></b></li>
+				<li class="">
+				<!-- #section:finance/info.contents -->
+				<a href="#" class="dropdown-toggle"> <i class="menu-icon fa fa-dollar"></i> <span class="menu-text">财务管理</span> <b
+						class="arrow fa fa-angle-down"></b>
+				</a> <b class="arrow"></b>
+					
+					<ul class="submenu">
+						<li class=""><a href="#repayAction_repay.action"> <i class="menu-icon fa fa-caret-right"></i> 还款
+						</a> <b class="arrow"></b></li>
+						<li class=""><a href="#repayAction_repayRegist.action"> <i class="menu-icon fa fa-caret-right"></i> 批量还款
+						</a> <b class="arrow"></b></li>
+						<li class=""><a href="#repayAction_prepayment.action"> <i class="menu-icon fa fa-caret-right"></i> 提前还款
+						</a> <b class="arrow"></b></li>
+						<li class=""><a href="#repayAction_repayrec.action"> <i class="menu-icon fa fa-caret-right"></i> 还款记录查询
+						</a> <b class="arrow"></b></li>
+						<li class=""><a href="#repayAction_overdue.action"> <i class="menu-icon fa fa-caret-right"></i> 逾期利息查询
+						</a> <b class="arrow"></b></li>
+					</ul>
+					<!-- /section:finance/info.contents -->
+					</li>
+					
+				<li class=""><a href="#" class="dropdown-toggle"> <i class="menu-icon fa fa-list-alt"></i> <span class="menu-text"> 统计报表 </span> <b
+						class="arrow fa fa-angle-down"></b>
+				</a> <b class="arrow"></b>
+					<ul class="submenu">
+						<li class=""><a href="#report_ledger.action"> <i class="menu-icon fa fa-caret-right"></i> 贷款台账
+						</a> <b class="arrow"></b></li>
+						<li class=""><a href="#report_statisticRepay.action"> <i class="menu-icon fa fa-caret-right"></i> 贷款还款情况表
+						</a> <b class="arrow"></b></li>
+						<li class=""><a href="#report_costInterest.action"> <i class="menu-icon fa fa-caret-right"></i> 贷款本息核算情况表
+						</a> <b class="arrow"></b></li>
+						<li class=""><a href="#report_receiveUnreceive.action"> <i class="menu-icon fa fa-caret-right"></i> 贷款应收未收情况表
+						</a> <b class="arrow"></b></li>
+						<li class=""><a href="#report_integratedQuery.action"> <i class="menu-icon fa fa-caret-right"></i> 综合查询
+						</a> <b class="arrow"></b></li>
+					</ul></li>
+				<li class=""><a href="#" class="dropdown-toggle"> <i class="menu-icon fa fa-calendar"></i> <span class="menu-text"> 用户&权限 </span> <b
+						class="arrow fa fa-angle-down"></b>
+				</a> <b class="arrow"></b>
+					<ul class="submenu">
+						<li class=""><a href="#userManage_roleman.action"> <i class="menu-icon fa fa-caret-right"></i> 角色管理
+						</a> <b class="arrow"></b></li>
+						<li class=""><a href="#userAction_userman.action"> <i class="menu-icon fa fa-caret-right"></i> 用户管理
+						</a> <b class="arrow"></b></li>
+						<li class=""><a href="#deptAction_deptman.action"> <i class="menu-icon fa fa-caret-right"></i>部门管理
+						</a> <b class="arrow"></b></li>
+					</ul></li>
+				<li class=""><a href="#" class="dropdown-toggle"> <i class="menu-icon fa fa-picture-o"></i> <span class="menu-text"> 数据字典管理 </span> <b
+						class="arrow fa fa-angle-down"></b>
+				</a> <b class="arrow"></b>
+					<ul class="submenu">
+						<li class=""><a href="#sysAction_ratio.action"> <i class="menu-icon fa fa-caret-right"></i> 利率&逾期天数设置
+						</a> <b class="arrow"></b></li>
+					</ul></li>
+				<li class=""><a href="#" class="dropdown-toggle"> <i class="menu-icon fa fa-tag"></i> <span class="menu-text"> 系统设置 </span> <b
+						class="arrow fa fa-angle-down"></b>
+				</a> <b class="arrow"></b>
+					<ul class="submenu">
+						<li class=""><a href="#" id="id-btn-dialog2"> <i class="menu-icon fa fa-caret-right"></i> 修改密码
+						</a> <b class="arrow"></b></li>
+						<li class=""><a href="#sysAction_preference.action"> <i class="menu-icon fa fa-caret-right"></i> 偏好设置
+						</a> <b class="arrow"></b></li>
+						<li class=""><a href="#function_funman.action"> <i class="menu-icon fa fa-caret-right"></i> 基础功能
+						</a> <b class="arrow"></b></li>
+					</ul></li>
+			</ul>
+			<!-- /.nav-list -->
+			<div id="dialog-message" class="hide">
+				<form>
+					
+					<fieldset>
+						<label class="block clearfix"> 旧密码 <span class="block input-icon input-icon-right"><input type="password" class="form-control"
+								name="oldpasswd" placeholder="现在的密码" /> <i class="ace-icon fa fa-lock"></i>
+						</span>
+						</label> 
+						<label class="block clearfix"> 新密码<span class="block input-icon input-icon-right"> <input type="password" class="form-control"
+							name="newpasswd1"	placeholder="新密码" /> <i class="ace-icon fa fa-lock"></i>
+						</span>	</label> 
+						<label class="block clearfix">确认密码 <span class="block input-icon input-icon-right"> <input type="password" class="form-control"
+							 name="newpasswd2" placeholder="确认新密码" /> <i class="ace-icon fa fa-lock"></i>
+						</span>
+						</label>
+					</fieldset>
+					
+				</form>
+			</div>
+			<!-- #dialog-message change password-->
+			<!-- #section:basics/info.contents.minimize -->
+			<div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
+				<i class="ace-icon fa fa-angle-double-left" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+			</div>
+			<!-- /section:basics/info.contents.minimize -->
+			<script type="text/javascript">
+					try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}
+				</script>
+		</div>
+		
+		<div class="main-content">
+		</div>
+		<!-- /.main-content -->
+		<div class="footer">
+			<div class="footer-inner">
+				
+				<div class="footer-content">
+					<span class="bigger-120"> <span class="blue bolder">CIMS</span> 正辉小额贷款有限公司 &copy; 2017-2018
+					</span>
+				</div>
+				
+			</div>
+		</div>
+		<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse"> <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+		</a>
+	</div>
+	<!-- /.main-container -->
+	<!-- basic scripts -->
+	<!--[if !IE]> -->
+	<script type="text/javascript">
+			window.jQuery || document.write("<script src='assets/js/uncompressed/jquery.js'>"+"<"+"/script>");
+		</script>
+	<!-- <![endif]-->
+	<!--[if IE]>
+<script type="text/javascript">
+ window.jQuery || document.write("<script src='assets/js/jquery1x.min.js'>"+"<"+"/script>");
+</script>
+<![endif]-->
+	<script type="text/javascript">
+			if('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+		</script>
+	<script src="assets/js/uncompressed/bootstrap.js"></script>
+	<!-- page specific plugin scripts -->
+	<!--[if lte IE 8]>
+		  <script src="assets/js/excanvas.min.js"></script>
+		<![endif]-->
+	<script src="assets/js/jquery-ui.js"></script>
+	<script src="assets/js/uncompressed/jquery-ui.custom.js"></script>
+	<script src="assets/js/jquery.ui.touch-punch.min.js"></script>
+	<script src="assets/js/jquery.easypiechart.min.js"></script>
+	<script src="assets/js/jquery.sparkline.min.js"></script>
+	<script src="assets/js/flot/jquery.flot.min.js"></script>
+	<script src="assets/js/flot/jquery.flot.pie.min.js"></script>
+	<script src="assets/js/flot/jquery.flot.resize.min.js"></script>
+	<!-- ace scripts -->
+	<script src="assets/js/ace-elements.min.js"></script>
+	<script src="assets/js/ace.js"></script>
+	<script src="assets/js/uncompressed/bootstrap.wwindow.js"></script>
+	<!-- inline scripts related to this page -->
+	<script type="text/javascript">
+			jQuery(function($) {
+				//override dialog's title function to allow for HTML titles
+				$.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {
+					_title: function(title) {
+						var $title = this.options.title || '&nbsp;'
+						if( ("title_html" in this.options) && this.options.title_html == true )
+							title.html($title);
+						else title.text($title);
+					}
+				}));
+				$( "#id-btn-dialog1" ).on('click', function(e) {
+					e.preventDefault();
+					showSimpleDialogByKevin("修改密码","dialog-message",modifypasswd,500);
+				});
+				
+				$( "#id-btn-dialog2" ).on('click', function(e) {
+					e.preventDefault();
+					showSimpleDialogByKevin("修改密码","dialog-message",modifypasswd,500);
+				});
+				function modifypasswd(dialog){
+					if ($("input[name='oldpasswd']").val().trim()==""||$("input[name='newpasswd1']").val().trim()==""||$("input[name='newpasswd2']").val().trim()==""){
+						alert("密码不能为空");
+						return;
+					}
+					if ($("input[name='newpasswd1']").val()!=$("input[name='newpasswd2']").val()){
+						alert("密码不一致");
+						return;
+					}
+					
+					$.post("userAction!chpw.action", 
+								[ {	"name" :"pw","value":$("input[name='newpasswd1']").val()},{"name" :"oldpw","value":$("input[name='oldpasswd']").val()} ],"json" 
+							).done(function(data) {					
+								if(data==200){//success									
+									showMsgByKevin("<center>修改成功</center>","消息");
+									$(dialog).dialog("close");
+								}else if(data==250){
+									showMsgByKevin("<center>原密码无效</center>");									
+								}else{
+									alert("Server error!");
+									
+								}							
+							}).fail(function() {
+								alert("Server error!Please check Network.");
+								
+							});
+						
+					}
+				///////////////save preference
+				function modifypreference(dialog){
+				
+					console.log($("#ace-settings-navbar").prop("checked"));
+					console.log($("#ace-settings-sidebar").prop("checked"));
+					console.log($("#ace-settings-breadcrumbs").prop("checked"));
+					console.log($("input[name='skin']").val());
+					console.log($("select[name='deskfun']").val());
+					
+					var data=[ 
+						{"name" :"breakcrumbsfix","value":$("#ace-settings-navbar").prop("checked")?'fixed':''},
+						{"name" :"leftnavfix","value":$("#ace-settings-sidebar").prop("checked")?'fixed':''},
+						{"name" :"navfix","value":$("#ace-settings-navbar").prop("checked")?'fixed':''},
+						{"name" :"skin","value":$("input[name='skin']").val()},
+						{"name" :"deskfun","value":$("select[name='deskfun']").val()}
+						];
+					$.post("sysAction!savePreference.action", 
+								data,"json" 
+							).done(function(data) {					
+								if(data==200){//success									
+									showMsgByKevin("<center>保存成功</center>","消息");
+									$(dialog).dialog("close");
+								}else{
+									alert("Server error!");
+								}							
+							}).fail(function() {
+								alert("Server error!Please check Network.");
+								
+							});
+						
+					}	
+				
+				$( "#sys_favorite_btn" ).on('click', function(e) {
+					e.preventDefault();
+					showSimpleDialogByKevin("设置桌面功能","dialog-destop-setting",modifypreference);
+				});
+				$( "#sys_setting_btn" ).on('click', function(e) {
+						e.preventDefault();
+						showSimpleDialogByKevin("系统设置","dialog-sys-setting",modifypreference);
+						
+				});
+				$( "#sys_skin_btn" ).on('click', function(e) {
+						e.preventDefault();
+						showSimpleDialogByKevin("界面色彩设置","dialog-skin-setting",modifypreference);
+						
+				});
+			
+				$('.dialogs,.comments').ace_scroll({
+					size: 300
+			    });
+				
+				$("select[name='skin_select']").on("change",function(){
+  		
+  					var skinx=$(this).children("option[value='"+$(this).val()+"']").attr("data-skin");
+  					$("input[name='skin']").val(skinx);
+  				});
+				//Android's default browser somehow is confused when tapping on label which will lead to dragging the task
+				//so disable dragging when clicking on label
+				var agent = navigator.userAgent.toLowerCase();
+				if("ontouchstart" in document && /applewebkit/.test(agent) && /android/.test(agent))
+				  $('#tasks').on('touchstart', function(e){
+					var li = $(e.target).closest('#tasks li');
+					if(li.length == 0)return;
+					var label = li.find('label.inline').get(0);
+					if(label == e.target || $.contains(label, e.target)) e.stopImmediatePropagation() ;
+				});
+			
+				$('#tasks').sortable({
+					opacity:0.8,
+					revert:true,
+					forceHelperSize:true,
+					placeholder: 'draggable-placeholder',
+					forcePlaceholderSize:true,
+					tolerance:'pointer',
+					stop: function( event, ui ) {
+						//just for Chrome!!!! so that dropdowns on items don't appear below other items after being moved
+						$(ui.item).css('z-index', 'auto');
+					}
+					}
+				);
+				$('#tasks').disableSelection();
+				$('#tasks input:checkbox').removeAttr('checked').on('click', function(){
+					if(this.checked) $(this).closest('li').addClass('selected');
+					else $(this).closest('li').removeClass('selected');
+				});
+			
+			
+				//show the dropdowns on top or bottom depending on window height and menu position
+				$('#task-tab .dropdown-hover').on('mouseenter', function(e) {
+					var offset = $(this).offset();
+			
+					var $w = $(window)
+					if (offset.top > $w.scrollTop() + $w.innerHeight() - 100) 
+						$(this).addClass('dropup');
+					else $(this).removeClass('dropup');
+				});
+				
+				
+			
+			})
+			
+			//section1 add by kevin for load page in one page
+			var href = getHref(window.location.hash);
+			//used for top next/prev buttons
+			var section_list = [], section_map = {}, current = 0;
+			var sindex = 0;
+			
+			$(document).off('click', '.submenu');
+			$(document).on('click', '.submenu a', function(e) {
+				
+				var href = getHref($(this).attr('href'));				
+				if(!href) return false;
+			});
+			function getHref(href) {				
+				if (href.indexOf("#help")!=-1){
+					href = href && href.replace(/.*(?=#.*#[^\s]*$)/, '') // strip for ie7					
+					href="#"+(href.split("#"))[1];//把#help去掉，仅仅保留原来的请求
+					
+				}else{
+					href = href && href.replace(/.*(?=#[^\s]*$)/, '') // strip for ie7
+					
+				}	
+				$("#helpbtn").attr("href",href+"#help");			
+				href = $.trim(href);
+				if(href.match(/[\#\/]$/i)) return false;
+				return href;
+			} 
+			function gotoUrl(href) {				
+				current = section_map[href];									
+				var url = href.replace(/#/gi , '')
+				
+				
+				/* var parts = url.split('/');				
+				if(parts.length >= 2) {					
+					if(url.length == 0) url = '';
+					else url = parts[0]+'/'+parts[1]+'.html';
+				}
+				else {				
+					url = url+'.html';
+				}	 */
+							
+				$('.nav .active').removeClass('active');
+				var link = $('a[href="'+href+'"]').eq(0);
+				link.parents('li').addClass('active');
+				link.parents('li').eq(1).addClass('open');
+				if(!scrollToTarget(href)) {
+					$('.main-content').empty().html('<i class="ace-icon fa fa-spinner fa-spin blue fa-2x"></i>');
+				
+					//otherwise try downloading the page
+					//$.ajax({url: '../face/'+url,cache:false}).done(function(result) {
+					$.ajax({url:url,cache:false}).done(function(result) {
+						
+						if (result=="500"){							
+							$('.main-content').empty().html('<div class="alert alert-danger"><i class="fa fa-warning"></i> No priviledge to load page!</div>');
+							return;	
+						}
+						
+						result = result.replace(/\<pre(?:\s+)data\-language=["'](?:html|javascript|php)["']\>([\S|\s]+?)\<\/pre\>/ig, function(a, b){
+							return a.replace(b , b.replace(/\</g , '&lt;').replace(/\>/g , '&gt;'));
+						});
+						
+						$('.main-content').addClass('hidden').empty().html(result);
+						formatResult();
+						
+						scrollToTarget(href);
+					}).fail(function() {
+						$('.main-content').empty().html('<div class="alert alert-danger"><i class="fa fa-warning"></i> Unable to load page!</div>');
+					});
+				}
+	
+				return true;
+			}
+			function formatResult() {
+				$('.main-content .info-section').each(function() {
+					var header = $(this).prevAll('.info-title').eq(0).addClass('widget-title').wrap('<div class="widget-header" />')
+					.parent().append('<div class="widget-toolbar no-border">\
+					<a href="#" data-action="collapse">\
+						<i data-icon-hide="fa-minus" data-icon-show="fa-plus" class="ace-icon fa fa-plus"></i>\
+					</a>\
+				</div>').closest('.widget-header');
+	
+					$(this).wrap('<div class="widget-box transparent'+(header.length > 0 ? ' collapsed':'')+'"><div class="widget-body"><div class="widget-main"></div></div></div>');
+					$(this).closest('.widget-box').prepend(header);
+					
+					$(this).ace_scroll({size: parseInt($(window).height()  - 200), reset: true});
+					//.parent().css({'max-height':400, 'overflow-y':'scroll'});//
+				});
+				
+				//Rainbow.color();
+				
+				$('.main-content').removeClass('hidden');
+			}
+			function scrollToTarget(href) {
+				target = $('[data-id="'+href+'"]').eq(0);
+				if(target.length == 1) {
+					target.closest('.widget-box').widget_box('show');
+	
+					//if target exists on page scroll to it
+					$('html,body').animate({scrollTop: target.offset().top - 75} , 300);
+					if(prev_target) prev_target.find('.fa-angle-right').remove();
+					
+					if(!target.is('h1')) target.prepend('<i class="fa fa-angle-right red"></i> ');
+					prev_target = target;
+					
+					return true;
+				}
+				return false;//section not found, go back and get it via ajax
+			}	
+			$(window).on('hashchange.start_help', function(e) {
+				
+				var href = getHref(window.location.hash);								
+				if(!href) return false;
+				return gotoUrl(href);			
+			})
+			var href = getHref(window.location.hash);
+			
+			if(!href) {				
+				window.location.hash = '#report_integratedQuery.action';//load default page
+			}else{
+				$(window).triggerHandler('hashchange.start_help');
+			}			
+			<#if (skin??)>
+			changeSkin('${skin}');
+			<#else>
+			changeSkin('no-skin');
+			</#if>
+			
+			$('[data-rel=tooltip]').tooltip({
+				container : 'body',
+				'template': '<div class="tooltip tooltip-success"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
+			});	
+			//end section1
+			//$(window).bind('beforeunload',function(){				return confirm("确定离开此页面吗？");	});			
+			$("#showuserinfo").wwDialog();
+			var help = null;
+		</script>
+	<script type="text/javascript"> ace.vars['base'] = '..'; </script>
+	<script src="assets/js/uncompressed/bootstrap-suggest.js"></script>
+	<link rel="stylesheet" href="assets/css/ace.onpage-help.css" />	
+	<script src="assets/js/ace/ace.new.fun.onpage-help.js"></script>	
+	<script src="docs/assets/js/rainbow.js"></script>
+	<script src="assets/js/jquery.validate.min.js"></script>
+	<script src="assets/js/message_zh.js"></script>
+	<script src="assets/js/uncompressed/jquery-confirm.js"></script>	
+	<script src="assets/js/mine.js"></script>	
+	<link rel="stylesheet" href="assets/css/datepicker.css" />
+	<script src="assets/js/date-time/bootstrap-datepicker.js"></script>
+	<script src="assets/js/uncompressed/jquery.dataTables.js"></script>
+		<script src="assets/js/jquery.dataTables.bootstrap.js"></script>	
+</body>
+</html>

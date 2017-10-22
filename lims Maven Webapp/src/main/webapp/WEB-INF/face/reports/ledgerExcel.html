@@ -1,0 +1,38 @@
+<table border="1">
+			<thead>
+				<tr>
+					<th class="center">序号</th>
+					<th>合同编号</th>						
+					<th>借款人姓名</th>
+					<th>借款金额</th>
+					<th>利率</th>
+					<th>借款期限</th>
+					<th>借款起始日</th>
+					<th>借款到期日</th>
+					<th>联系方式</th>
+					<th>主办</th>
+					<th>贷款余额</th>
+				</tr>				
+			</thead>
+			<tbody>
+			<#if ledgers?exists >
+				 <#if (ledgers.size()>0) >					 		 
+					<#list ledgers as ledger>
+						<tr>
+							<td>${ledger_index + 1}</td>
+							<td>${ledger["CTTCODE"]!''}</td>
+							<td>${ledger["CUSTOMERNAME"]!''}</td>
+							<td>${ledger["CTTAMOUNT"]!''}</td>
+							<td>${ledger["RATIO"]!''}</td>
+							<td>${ledger["CTTCATE"]!''}</td>
+							<td>${ledger["CTTSTART"]!''}</td>
+							<td>${ledger["PAYDAY"]!''}</td>
+							<td>${ledger["CUSTOMERMOBILE"]!''}</td>
+							<td>${ledger["USERNAME"]!''}</td>
+							<td>${ledger["CTTBALANCE"]!''}</td>
+					      </tr>
+					</#list>	 
+				</#if> 
+			</#if> 
+			</tbody>
+		</table>

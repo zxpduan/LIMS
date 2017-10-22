@@ -1,0 +1,62 @@
+<table border="1">
+			<thead>
+				<tr>
+					<th width="47" rowspan="2" align="center" nowrap="nowrap" scope="col">序号</th>
+					<th width="99" rowspan="2" align="center" nowrap="nowrap" scope="col">放款时间</th>
+					<th width="57" rowspan="2" align="center" nowrap="nowrap" scope="col">贷款人</th>
+					<th width="76" rowspan="2" align="center" nowrap="nowrap" scope="col">贷款金额</th>
+					<th width="57" rowspan="2" align="center" nowrap="nowrap" scope="col">月利率</th>
+					<th width="95" rowspan="2" align="center" nowrap="nowrap" scope="col">借款起始日</th>
+					<th width="95" rowspan="2" align="center" nowrap="nowrap" scope="col">借款到期日</th>
+					<th width="76" rowspan="2" align="center" nowrap="nowrap" scope="col">客户经理</th>
+					<th colspan="5" align="center" nowrap="nowrap" scope="col">本期应还金额</th>
+					<th colspan="5" align="center" nowrap="nowrap" scope="col">本期实还金额</th>
+					<th width="76" rowspan="2" align="center" nowrap="nowrap" scope="col">应还期数</th>
+					<th width="76" rowspan="2" align="center" nowrap="nowrap" scope="col">已还期数</th>
+					<th width="60" rowspan="2" align="center" scope="col">贷款本金余额</th>
+				</tr>
+				<tr>
+					<th width="76" height="22" align="center" nowrap="nowrap">应还款日</th>
+					<th width="58" align="center" nowrap="nowrap">本金</th>
+					<th width="58" align="center" nowrap="nowrap">利息</th>
+					<th width="76" align="center" nowrap="nowrap">逾期利息</th>
+					<th width="58" align="center" nowrap="nowrap">合计</th>
+					<th width="76" align="center" nowrap="nowrap">还款日期</th>
+					<th width="58" align="center" nowrap="nowrap">本金</th>
+					<th width="58" align="center" nowrap="nowrap">利息</th>
+					<th width="76" align="center" nowrap="nowrap">逾期利息</th>
+					<th width="58" align="center" nowrap="nowrap">合计</th>
+				</tr>
+			</thead>
+			<tbody>
+			<#if costIns?? >
+				 <#if (costIns.size()>0) >					 		 
+					<#list costIns as costIn>
+					<tr>						
+							<td>${costIn["RN"]!''}</td>
+							<td>${costIn["CTTLOANDATE"]!''}</td>							
+							<td>${costIn["CUSTOMERNAME"]!''}</td>
+							<td>${costIn["CTTAMOUNT"]!''}</td>
+							<td>${costIn["RATIO"]!''}</td>							
+				            <td>${costIn["CTTSTART"]!''}</td>				            
+				            <td>${costIn["CTTLOADENDDATE"]!''}</td>
+				            <td>${costIn["USERNAME"]!''}</td>
+				            <td>${costIn["PAYDAY"]!''}</td>
+				            <td>${costIn["COST"]!''}</td>
+				            <td>${costIn["INTEREST"]!''}</td>
+				            <td>${costIn["OVERINTEREST"]!''}</td>
+				            <td>${costIn["TOTAL1"]!''}</td>
+				            <td>${costIn["REPAYDATE"]!''}</td>
+				            <td>${costIn["COSTED"]!''}</td>
+				            <td>${costIn["INTERESTED"]!''}</td>
+				            <td>${costIn["REPAYINTEREST"]!''}</td>
+				            <td>${costIn["TOTAL2"]!''}</td>
+            				<td>${costIn["CTTSPAYTIMES"]!''}</td>
+            				<td>${costIn["CTTHPAYTIMES"]!''}</td>
+            				<td>${costIn["CTTBALANCE"]!''}</td>     
+            			</tr>
+					</#list>	 
+				</#if> 
+			</#if> 
+			</tbody>
+		</table>

@@ -1,0 +1,250 @@
+<!-- #section:basics/info.contents.breadcrumbs -->
+<div class="breadcrumbs" id="breadcrumbs">
+	<script type="text/javascript">
+		try {
+			ace.settings.check('breadcrumbs', 'fixed')
+		} catch (e) {
+		}
+	</script>
+	<ul class="breadcrumb">
+		<li><i class="ace-icon fa fa-desktop"></i> <a href="#"></a></li>
+		<li>统计报表</li>
+		<li>利率设置</li>
+	</ul>
+	<!-- /.breadcrumb -->
+</div>
+<div class="page-content">
+	<div class="row">
+		<form class="form-horizontal" role="form" id="contract_form">
+			<div class="col-xs-12 col-sm-8 col-sm-offset-2">
+				<div class="widget-box">
+					<div class="widget-header">
+						<h4 class="widget-title">利率设置</h4>
+						<div class="widget-toolbar"></div>
+					</div>
+					<div class="widget-body">
+						<div class="widget-main">
+							<div class="row">
+								<label class="col-xs-4" style="text-align:right;">利率</label>
+								<div class="col-xs-4 col-sm-3">
+								<select	class=" form-control" name="ratio" id="select_ratio">
+								
+								<#if editratios?exists >
+									 <#if (editratios.size()>0) >					 		 
+										<#list editratios as ratio>
+										<option value="${ratio.id}">${ratio.ratio}|${ratio.ratiodesc!''}</option>									
+										</#list>	 
+									</#if> 
+								</#if>  
+								</select>
+								</div> 
+								<a href="#" data-remote="ratioAction_addRatio.action" data-mtitle="增加利率" data-id="addratio_dia" data-width="600" data-height="320"
+							data-backdrop=true data-okevent="addRatio()" data-oktitle="增加"  class="btn btn-sm btn-success ratiodelop" style="height:34px;width:35px;" title="增加"><i class="ace-icon fa fa-plus"></i></a> 
+							<a href="#"	class="btn btn-sm btn-danger" id="del_ratio_btn" style="height:34px;width:35px;" title="删除"><i class="ace-icon fa fa-minus"></i></a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			</form>
+			<form class="form-horizontal" action="sysAction_doeditsysparam.action" role="form" id="sysparam_form">
+			<!-- /.span -->
+			<div class="col-xs-12 col-sm-8 col-sm-offset-2">
+				<div class="widget-box">
+					<div class="widget-header">
+						<h4 class="widget-title">逾期天数设置</h4>
+						<div class="widget-toolbar"></div>
+					</div>
+					<div class="widget-body">
+						<div class="widget-main">
+							<div class="row">
+								<label class="col-xs-4" style="text-align:right;">逾期天数</label> 
+								<input type="hidden" name="id" value="${editsysparam.id!''}" />
+								<input class="col-xs-4 col-sm-3" type="text" name="overdueday" value="${editsysparam.overdueday!''}" id="form-field-mask-2" /> 
+								<a href="#" id="saveSysparam"
+									class="btn btn-sm btn-success" style="height:34px;width:35px;" title="保存"><i class="ace-icon fa fa-save"></i></a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+		</form>
+	</div>
+</div>
+<script src="assets/js/jquery.maskedinput.min.js"></script>
+<script>
+	var validator=null;//for sysparam  form validate
+	var validator2=null;//for ratio  form validate
+			/*
+				validate form
+			*/
+			
+	function validateCheck(form_id_str){
+				return validator=$("#"+form_id_str).validate({
+					debug: true, //调试模式取消submit的默认提交功能   
+	                //errorClass: "label.error", //默认为错误的样式类为：error   
+	                focusInvalid: true, //当为false时，验证无效时，没有焦点响应  
+	                onkeyup: false,   
+	                submitHandler: function(form){   //表单提交句柄,为一回调函数，带一个参数：form   
+	                    alert("提交表单");
+	                },   
+					rules: {  
+				      overdueday: {  
+				         required: true,
+				         number:true				         
+				      }
+				   },  
+				   messages: {  
+				      overdueday: {  
+				         required: 'reqired'				           
+				      }
+				   },
+				   	highlight: function(element) {
+     					//$(element).addClass("has-error");
+     					$(element).css("border","1px solid rgb(213, 9, 0)");
+  				   	},
+				  	unhighlight: function(element) {
+				     	$(element).css("border","1px solid rgb(213, 213, 213)");
+				     	
+				     	
+				  	},				 
+				   errorPlacement: function(error, element) {
+	     					/* if (element.attr("name") == "account" || element.attr("name") == "deptname")
+	       						error.insertAfter("#addfunform");
+	     					else
+	       						error.insertAfter(element); */
+	       					 		   						  
+   					} 
+				});
+			}
+	function validateCheck2(form_id_str){
+				return validator=$("#"+form_id_str).validate({
+					debug: true, //调试模式取消submit的默认提交功能   
+	                //errorClass: "label.error", //默认为错误的样式类为：error   
+	                focusInvalid: true, //当为false时，验证无效时，没有焦点响应  
+	                onkeyup: false,   
+	                submitHandler: function(form){   //表单提交句柄,为一回调函数，带一个参数：form   
+	                    alert("提交表单");
+	                },   
+					rules: {  
+				      ratio: {  
+				         required: true,
+				         number:true				         
+				      }
+				   },  
+				   messages: {  
+				      overdueday: {  
+				         required: 'reqired'				           
+				      }
+				   },
+				   	highlight: function(element) {
+     					//$(element).addClass("has-error");
+     					$(element).css("border","1px solid rgb(213, 9, 0)");
+  				   	},
+				  	unhighlight: function(element) {
+				     	$(element).css("border","1px solid rgb(213, 213, 213)");
+				     	
+				     	
+				  	},				 
+				   errorPlacement: function(error, element) {
+	     					/* if (element.attr("name") == "account" || element.attr("name") == "deptname")
+	       						error.insertAfter("#addfunform");
+	     					else
+	       						error.insertAfter(element); */
+	       					 		   						  
+   					} 
+				});
+			}		
+	$('.input-mask-eyescript').mask('9.999');
+	$('.input-mask-overdue').mask('999');
+	function updateSysparam(){
+		var $form=$("#sysparam_form");
+		validator=validateCheck("sysparam_form");				
+		if (validator.form()){
+						var jqxhr = $.post($form.attr("action"), 
+							$form.serialize() 
+						).done(function(data) {	
+							if (data.indexOf("无权访问")!=-1){
+								alert("无权访问，请联系管理员！");
+								return;
+							}		
+							if(data==250){
+								alert("Server db error!");							
+							}else if(data==200){//success
+								showMsgByKevin("<center>修改成功</center>","消息");								
+							}else{
+								alert("Server error!");
+							}							
+						}).fail(function() {
+							alert("Server error!Please check Network.");
+						});
+				}
+	}
+	$("#saveSysparam").on("click",function(){
+		updateSysparam();
+	})
+	function addRatio(){
+		var $form=$("#addratioform");
+		validator2=validateCheck2("addratioform");				
+		if (validator2.form()){
+			var jqxhr = $.post($form.attr("action"), 
+					$form.serialize(),"json" 
+				).done(function(data) {
+					if (data.indexOf("无权访问")!=-1){
+						alert("无权访问，请联系管理员！");
+						return;
+					}
+					data=JSON.parse(data);//parse to object							
+					if (data.state==300){
+								alert("利率重复!");
+							}else if(data.state==250){
+								alert("Server db error!");							
+							}else if(data.state==200){//success
+								$("#select_ratio").prepend("<option value='"+data.id+"'>"+$("#addratioform").find("input[name='ratio']").val()+"|"+$("#addratioform").find("input[name='ratiodesc']").val()+"</option>")
+								showMsgByKevin("<center>添加成功</center>","消息");
+								$("#addratio_dia").modal('hide');
+								
+							}else{
+								alert("Server error!");
+							}		
+				}).fail(function() {
+					alert("Server error!Please check Network.");
+				});
+		}
+	}
+	$("#del_ratio_btn").on("click",function(){
+		showConfirmDialogByKevin("<center>本操作会引起所有采用本利率的合同利率失效，建议不要删除，确定删除吗？</center>",function(){
+									doDelRatio();
+		});
+	});
+	function doDelRatio(){
+		var jqxhr = $.post("ratioAction_delRatio.action", 
+					[ {	name : 'id',value : $("#select_ratio").val()} ],"json" 
+				).done(function(data) {
+					if (data.indexOf("无权访问")!=-1){
+						alert("无权访问，请联系管理员！");
+						return;
+					}																	
+					if (data==200){
+								
+								//$("#select_ratio").prepend("<option value='"+data.id+"'>"+$("#addratioform").find("input[name='ratio']").val()+"|"+$("#addratioform").find("input[name='ratiodesc']").val()+"</option>")
+								//alert($("#select_ratio").get(0).selectedIndex);  
+								  $("#select_ratio option[value='"+$("#select_ratio").val()+"']").remove();
+								  // $("#select_ratio option:last").remove();
+								showMsgByKevin("<center>删除成功</center>","消息");
+								
+								
+							}else{
+								alert("del error!");
+							}		
+				}).fail(function() {
+					alert("Server error!Please check Network.");
+				});
+	}
+	$(document).ready(function() {
+		$('.ratiodelop').wwDialog();
+			
+	});
+</script>
+<script src="assets/js/ace/ace.new.onpage-help1.js"></script>

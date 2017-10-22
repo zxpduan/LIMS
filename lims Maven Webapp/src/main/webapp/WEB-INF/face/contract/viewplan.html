@@ -1,0 +1,106 @@
+<div class="page-content">
+	<div class="row">
+		<table id="plan-table-list" class="col-sm-12 col-xs-12 table table-striped table-bordered table-hover mine-table-center">
+			<thead>
+				<tr style="background: url(assets/css/img/mine_thead_bg.png);">					
+					<th>期数</th>
+					<th>月供</th>
+					<th class="hidden-480">本金</th>
+					<th class="hidden-480">利息</th>
+					<th class="hidden-480">还款日</th>
+				</tr>
+			</thead>
+			<tbody>
+			</tbody>
+		</table>
+	</div>	
+		<script src="assets/js/uncompressed/jquery.dataTables.js"></script>
+		<script src="assets/js/jquery.dataTables.bootstrap.js"></script>
+		<script type="text/javascript">	
+					
+			var oTable_viewplan=null;
+			
+			jQuery(function($) {
+				oTable_viewplan = $('#plan-table-list')
+				//.wrap("<div class='dataTables_borderWrap' />"),   //if you are applying horizontal scrolling (sScrollX)			
+				.dataTable({
+				//fixedHeader : {		header : true,	footer : true	},
+				"fnInitComplete" : function() {
+					setTimeout("sdialog()", 100);
+				},
+				"aoColumns" : [ {
+				"mData" : 
+				"id1",
+				"bSortable" : false,
+				"sWidth" : "110"				
+				}, {
+					"mData" : "id2"
+					
+				}, {
+					"mData" : "id3",
+					"sClass":"hidden-480"					
+				}, {
+					"mData" : "id4",
+					"sClass":"hidden-480"
+				}, {
+					"mData" : "id5",
+					"bSortable" : false,
+					"sClass":"hidden-480"
+				}],
+				"oLanguage" : {
+				"sLengthMenu" : "每页 _MENU_ 条记录",
+				"sZeroRecords" : "对不起，没有匹配的数据",
+				"sInfo" : "第 _START_ - _END_ 条 / 共 _TOTAL_ 条数据",
+				"sInfoEmpty" : "没有匹配的数据",
+				"sInfoFiltered" : "(数据表中共 _MAX_ 条记录)",
+				"sProcessing" : "正在加载中...",
+				"sSearch" : "全文过滤：",
+				"oPaginate" : {
+				"sFirst" : "第一页",
+				"sPrevious" : " 上一页 ",
+				"sNext" : " 下一页 ",
+				"sLast" : " 最后一页 "
+				}
+				},
+
+				//"sScrollXInner" : "160%",
+				//"bScrollCollapse" : true,
+				//Note: if you are applying horizontal scrolling (sScrollX) on a ".table-bordered"
+				//you may want to wrap the table inside a "div.dataTables_borderWrap" element
+
+				"bDestroy":true,
+				// "bProcessing" : true, //DataTables载入数据时，是否显示‘进度’提示  
+				"bServerSide" : true, //是否启动服务器端数据导入  
+				"bStateSave" : true, //是否打开客户端状态记录功能,此功能在ajax刷新纪录的时候不会将个性化设定回复为初始化状态  
+				//"bJQueryUI" : true, //是否使用 jQury的UI theme  
+				//"sScrollY" : ($(window).height() - 420), //DataTables的高  
+				//"sScrollX" : "100%", //DataTables的宽
+				//"scrollX" : true,
+				"aLengthMenu" : [ 10, 20, 30, 60,100 ], //更改显示记录数选项  
+				"iDisplayLength" : 10, //默认显示的记录数  
+				"bAutoWidth" : false, //是否自适应宽度  
+				"bScrollInfinite" : false, //是否启动初始化滚动条  
+				"bScrollCollapse" : true, //是否开启DataTables的高度自适应，当数据条数不够分页数据条数的时候，插件高度是否随数据条数而改变  
+				"bPaginate" : false, //是否显示（应用）分页器  
+				"bInfo" : true, //是否显示页脚信息，DataTables插件左下角显示记录数  
+				"sPaginationType" : "full_numbers", //详细分页组，可以支持直接跳转到某页  
+				"bSort" : true, //是否启动各个字段的排序功能  
+				//"aaSorting" : [ [ 1, "desc" ] ], //默认的排序方式，第2列，升序排列  
+				"bFilter" : false, //是否启动过滤、搜索功能
+				"sAjaxSource" : "pactAction_ajaxdata7.action?id=${editpact.id!''}",
+				"fnServerData": function (sSource, aoData, fnCallback, oSettings) {
+					oSettings.jqXHR = $.ajax({
+	                				"dataType": 'json',
+	                				"type": "POST",
+	                				"url": sSource,
+	                				"data": aoData,
+	                				"success": function (json) {
+	                					//alert(JSON.stringify(json));
+	                    				fnCallback(json);
+	                				}
+            					});
+				}						
+				});
+				});
+				
+		</script>

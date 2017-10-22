@@ -1,0 +1,25 @@
+{
+	"message": "",
+	"value": [
+		<#if sugestpacts?exists >
+				 <#if (sugestpacts.size()>0) >					 		 
+					<#list sugestpacts as pact>
+					{						
+						"customername": "${pact["CUSTOMERNAME"]!''}",
+						"pcode": "${pact["CTTCODE"]!''}",						
+						"id": "${pact["ID"]!''}",
+						"arrears": "${pact["CTTTAA"]!'0'}",
+						"instalment": "${pact["CTTHPAYTIMES"]!''}",
+						"nextrepayday": "${pact["NEXTREPAYDAY"]!''}",			
+						"repaymonth": "${pact["CTTPAYMONTH"]!''}",
+						"auditstate": "${pact["AUDITSTATE"]!''}"
+					}						
+					<#if pact_has_next>,</#if>	 
+					</#list>	 
+				</#if> 
+			</#if>  
+		
+	],
+	"code": 200,
+	"redirect": ""
+}

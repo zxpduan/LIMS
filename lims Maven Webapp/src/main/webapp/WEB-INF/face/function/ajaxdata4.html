@@ -1,0 +1,22 @@
+{	"sEcho": ${sEcho},
+    "iTotalRecords": ${iTotalRecords},
+    "iTotalDisplayRecords": ${iTotalDisplayRecords},
+	"aaData": [
+			<#if funs?exists >
+				 <#if (funs.size()>0) >					 		 
+					<#list funs as fun>
+						{
+							"id1": "<label class='position-relative'><b style='display:none;'>${fun["ID"]}</b><input type='checkbox' class='ace checkbtn' /><span class='lbl'>${fun["RN"]!''}</span></label>",
+							"id2": "${fun["FUNNAME"]!''}",
+							"id3": "${fun["FUNCODE"]!''}",
+							"id4": "${fun["FUNRUL"]!''}",
+							"id5": "<#if fun["FUNDESC"]?exists ><#if (fun["FUNDESC"]?length>10) >${fun["FUNDESC"][1..10]}...<#else>${fun["FUNDESC"]}</#if></#if>",					        
+					        "id6": "<div class='hidden-sm hidden-xs action-buttons'> <a data-remote='funAction_editfun.action?id=${fun["ID"]}' data-draggable='true' data-mtitle='修改模块' data-id='editFun_dia' data-width='600' data-height='400' data-okevent='doSaveEdit()' data-oktitle='保存'  class='green user_delop' href='#'> <i class='ace-icon fa fa-pencil bigger-130'></i></a> <a data-id='${fun["ID"]}'  class='red delbtn' href='#'> <i class='ace-icon fa fa-trash-o bigger-130'></i></a></div><div class='hidden-md hidden-lg'><div class='inline position-relative'><button class='btn btn-minier btn-yellow dropdown-toggle' data-toggle='dropdown' data-position='auto'><i class='ace-icon fa fa-caret-down icon-only bigger-120'></i></button><ul class='dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close'><li><a data-remote='funAction_editfun.action?id=${fun["ID"]}' data-draggable='true' data-mtitle='修改模块' data-id='editFun_dia' data-width='600' data-height='400' data-okevent='doSaveEdit()' data-oktitle='保存'  class='green user_delop' href='#' class='tooltip-success' data-rel='tooltip' title='Edit'><span class='green'><i class='ace-icon fa fa-pencil-square-o bigger-120'></i></span></a></li><li><a data-id='${fun["ID"]}'  class='red delbtn' href='#' class='tooltip-error' data-rel='tooltip' title='Delete'><span class='red'><i class='ace-icon fa fa-trash-o bigger-120'></i></span></a></li></ul></div></div>"
+					      }
+						<#if fun_has_next>,</#if>	 
+					</#list>	 
+				</#if> 
+			</#if>  
+	    ]  
+}
+

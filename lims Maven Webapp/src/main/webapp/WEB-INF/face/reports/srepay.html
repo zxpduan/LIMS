@@ -1,0 +1,35 @@
+{"sEcho": ${sEcho},
+    "iTotalRecords": ${iTotalRecords},
+    "iTotalDisplayRecords": ${iTotalDisplayRecords},
+	"aaData":[
+	<#if srepays?exists >
+				 <#if (srepays.size()>0) >					 		 
+					<#list srepays as srepay>
+						{
+							"id1": "${srepay["RN"]}",
+							"id2": "${srepay["CTTCODE"]!''}",
+							"id3": "${srepay["PNAME"]!''}",
+							"id4": "${srepay["CUSTOMERNAME"]!''}",
+							"id5": "${srepay["CTTAMOUNT"]!''}",
+							"id6": "${srepay["RATIO"]!''}",
+							"id7": "${srepay["CTTCATE"]!''}",
+				            "id8": "${srepay["CTTSTART"]!''}",				            
+				            "id9": "${srepay["CTTLOADENDDATE"]!''}",
+				            "id10": "${srepay["PAYDAY"]!''}",
+				            "id11": "${srepay["CTTPAYMONTH"]!''}",
+				            "id12": "${srepay["REPAYDATE"]!''}",
+				            "id13": "${srepay["DIFFDAYS"]!''}",
+				            "id14": "${srepay["SAMOUNT"]!''}",
+				            "id15": "${srepay["ACTUAL_AMOUNT"]!''}",
+				            "id16": "${srepay["OVERDUE_TIMES"]!''}",
+				            "id17": "${srepay["USERNAME"]!''}"
+            
+					      }
+						<#if srepay_has_next>,</#if>	 
+					</#list>	 
+				</#if> 
+			</#if> 
+		
+	    ]  
+}
+

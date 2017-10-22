@@ -1,0 +1,38 @@
+{	"sEcho": ${sEcho},
+    "iTotalRecords": ${iTotalRecords},
+    "iTotalDisplayRecords": ${iTotalDisplayRecords},
+	"aaData": [
+			<#if pacts?exists >
+				 <#if (pacts.size()>0) >					 		 
+					<#list pacts as pact>
+						{
+							"id1": "<label class='position-relative'><b style='display:none;'>${pact["ID"]}</b><input type='checkbox' class='ace checkbtn' /><span class='lbl'>${pact["RN"]}</span></label>",
+							"id2": "${pact["CTTCODE"]!''}",
+							"id3": "${pact["CUSTOMERNAME"]!''} ${pact["CUSTOMERREPLACE1"]!''} ${pact["CUSTOMERREPLACE2"]!''}",
+							<#if (pact["AUDITSTATE"]??)>
+								<#if pact["AUDITSTATE"]?string="1" >
+									"id4": "<span class='label label-success arrowed '>审核中</span>",
+								<#elseif (pact["AUDITSTATE"]?string="2") >
+									"id4": "<span class='label label-info arrowed-in-right arrowed '>审核通过</span>",
+									<#elseif (pact["AUDITSTATE"]?string="3") >
+									"id4": "<span class='label label-warning '><i class='ace-icon fa fa-exclamation-triangle bigger-120'></i>审核未通过</span>",
+									<#elseif (pact["AUDITSTATE"]?string="4")>
+									"id4": "<span class='label label-primary'>已还完</span>",		
+									<#else>
+									"id4": "<span class='label label-inverse'>未审核</span>",
+								</#if>
+								<#else>
+									"id4": "<span class='label label-inverse'>未审核</span>",
+							</#if>
+							"id5": "${pact["USERNAME"]!''}",
+							"id6": "${pact["CTTAMOUNT"]!''}",
+					        "id7": "${pact["ADDTIME"]!''}",
+					        "id8": "<div class='hidden-sm hidden-xs action-buttons'><a class='red' class='blue' href='#pactAction_pactaudit.action?id=${pact["ID"]}' title='审核'> <i class='ace-icon fa fa-eye bigger-130'></i></a><a data-remote='pactAction_view.action?id=${pact["ID"]}' data-draggable='false' data-mtitle='合同信息' data-id='viewpact_dia' data-width='950' data-height='500' data-okevent='doView()' class='green user_delop' class='blue' href='#' title='查看详细'> <i class='ace-icon fa fa-search-plus bigger-130'></i></a><a data-remote='pactAction_editpact.action?id=${pact["ID"]}' data-draggable='false' data-mtitle='修改合同信息' data-id='editpact_dia' data-width='950' data-height='600' data-okevent='doSaveEdit()' data-oktitle='保存'  class='green user_delop' href='#' title='编辑'> <i class='ace-icon fa fa-pencil bigger-130'></i></a> <a data-id='${pact["ID"]}'  class='red delbtn' href='#' title='删除'> <i class='ace-icon fa fa-trash-o bigger-130'></i></a></div><div class='hidden-md hidden-lg'><div class='inline position-relative'><button class='btn btn-minier btn-yellow dropdown-toggle' data-toggle='dropdown' data-position='auto'><i class='ace-icon fa fa-caret-down icon-only bigger-120'></i></button><ul class='dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close'><li><a class='red' class='blue' href='#pactAction_pactaudit.action?id=${pact["ID"]}' title='审核'> <i class='ace-icon fa fa-eye bigger-130'></i></a></li><li><a data-remote='pactAction_view.action?id=${pact["ID"]}' data-draggable='false' data-mtitle='合同信息' data-id='viewpact_dia' data-width='950' data-height='500' data-okevent='doView()'  class='green user_delop' class='blue' href='#'> <i class='ace-icon fa fa-search-plus bigger-130'></i></a></li><li><a data-remote='pactAction_editpact.action?id=${pact["ID"]}' data-draggable='false' data-mtitle='修改合同信息' data-id='editpact_dia' data-width='950' data-height='600' data-okevent='doSaveEdit()' data-oktitle='保存'  class='green user_delop' href='#' title='编辑'><span class='green'><i class='ace-icon fa fa-pencil-square-o bigger-120'></i></span></a></li><li><a data-id='${pact["ID"]}'  class='red delbtn' href='#' class='tooltip-error' data-rel='tooltip' title='删除'><span class='red'><i class='ace-icon fa fa-trash-o bigger-120'></i></span></a></li></ul></div></div>"
+					      }
+						<#if pact_has_next>,</#if>	 
+					</#list>	 
+				</#if> 
+			</#if>  
+	    ]  
+}
+

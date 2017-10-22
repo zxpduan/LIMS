@@ -1,0 +1,524 @@
+<!-- #section:basics/info.contents.breadcrumbs -->
+<div class="breadcrumbs" id="breadcrumbs">
+	<script type="text/javascript">
+		try {
+			ace.settings.check('breadcrumbs', 'fixed')
+		} catch (e) {
+		}
+	</script>
+	<ul class="breadcrumb">
+		<li><i class="ace-icon fa fa-desktop"></i> <a href="#"></a></li>
+		<li>统计报表</li>
+		<li>合同管理</li>
+	</ul>
+	<!-- /.breadcrumb -->
+</div>
+<!-- /section:basics/info.contents.breadcrumbs -->
+<div class="page-content">
+	<div class="row">
+	<!-- widget-box -->
+	<div class="col-xs-12 col-sm-12">
+		<div class="widget-box">				
+			<div class="widget-body" >
+				<div class="widget-main" style="padding:2px;">						
+					<div class="col-sm-12 col-xs-12  chosen-mine-div">
+			<form class="form-horizontal" role="form">
+				<label class="chosen-mine-label" for="form-field-1"> 合同编号/用户姓名 </label>
+				<div class="row">
+					<div class="col-lg-4 col-xs-12 col-sm-4 col-md-4">
+						<div class="input-group">
+							<input type="text" class="form-control" id="pactSerarchText">
+							<div class="input-group-btn">
+								<button type="button" class="btn btn-info btn-white dropdown-toggle" data-toggle="dropdown">
+									<span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu" role="menu">
+								</ul>
+							</div>
+							<!-- /btn-group -->
+						</div>
+					</div>
+					<div class="col-lg-6 col-xs-12 col-sm-6 col-md-6">
+						<button type="button" id="user_serarch_btn" class="btn btn-primary btn-sm chosen-mine-button">
+							<i class="ace-icon fa fa-search align-top bigger-125"></i> 查找
+						</button>
+						<a href="#" id="del_pact_bat" class="btn btn-yellow btn-sm chosen-mine-button"> <i class="ace-icon fa fa-plus align-top bigger-125"></i>批量删除
+						</a>
+					</div>
+				</div>
+			</form>
+		</div>
+		<table id="user-table-list" class="col-sm-12 col-xs-12 table table-striped table-bordered table-hover mine-table-center">
+			<thead>
+				<tr style="background: url(assets/css/img/mine_thead_bg.png);">
+					<th class="center"><label class="position-relative"> <input type="checkbox" class="ace" /> <span class="lbl">序号</span>
+					</label></th>
+					<th>合同编号</th>
+					<th>姓名</th>
+					<th>状态</th>
+					<th>主办</th>
+					<th><i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i> 总金额</th>
+					<th class="hidden-480">录入时间</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+			</tbody>
+		</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--end widget-box -->
+		
+	</div>
+</div>	
+		
+		<script src="assets/js/uncompressed/jquery.dataTables.js"></script>
+		<!--加载assets/js/jquery.dataTables.bootstrap.js 可以改变表格样式-->
+		<!-- 
+		<script src="assets/js/jquery.dataTables.bootstrap.js"></script>
+		 -->
+		<script type="text/javascript">	
+					
+			var oTable1=null;
+			var del_select_ids=[];//ids to delete
+			
+			function sdialog() {
+				$(".repaydiag").each(function() {
+					$(this).wwDialog();
+					//alert($(this).parent().html());
+				});
+			}
+			/*
+			
+			oTable1.fnReloadAjax(url); //使用默认url refresh table
+			*/
+			$("#user_serarch_btn").on("click",function(){
+				var datatable_setting=oTable1.fnSettings();
+				var t_url=datatable_setting.sAjaxSource;
+				var o_url=t_url.split("?");
+				oTable1.fnReloadAjax(o_url[0]+"?suggestparam="+$("#pactSerarchText").val());
+			});
+			function btn_serarch(){
+			}
+			jQuery(function($) {
+				oTable1 = $('#user-table-list')
+				//.wrap("<div class='dataTables_borderWrap' />"),   //if you are applying horizontal scrolling (sScrollX)			
+				.dataTable({
+				//fixedHeader : {		header : true,	footer : true	},
+				"fnInitComplete" : function() {
+					setTimeout("sdialog()", 100);
+				},
+				"aoColumns" : [ {
+				"mData" : "id1",
+				"bSortable" : false,
+				"sWidth" : "110"				
+				}, {
+					"mData" : "id2"
+					
+				}, {
+					"mData" : "id3"
+					
+				}, {
+					"mData" : "id4",
+					"bSortable" : false
+				}, {
+					"mData" : "id5",
+					"bSortable" : false,
+					"sClass":"hidden-480"
+				}, {
+					"mData" : "id6",
+					"bSortable" : false,
+					"sClass":"hidden-480"
+				}, {
+					"mData" : "id7",
+					"bSortable" : false
+				}, {
+					"mData" : "id8",
+					"bSortable" : false
+				} ],
+				"oLanguage" : {
+				"sLengthMenu" : "每页 _MENU_ 条记录",
+				"sZeroRecords" : "对不起，没有匹配的数据",
+				"sInfo" : "第 _START_ - _END_ 条 / 共 _TOTAL_ 条数据",
+				"sInfoEmpty" : "没有匹配的数据",
+				"sInfoFiltered" : "(数据表中共 _MAX_ 条记录)",
+				"sProcessing" : "正在加载中...",
+				"sSearch" : "全文过滤：",
+				"oPaginate" : {
+				"sFirst" : "第一页",
+				"sPrevious" : " 上一页 ",
+				"sNext" : " 下一页 ",
+				"sLast" : " 最后一页 "
+				}
+				},
+
+				//"sScrollXInner" : "160%",
+				//"bScrollCollapse" : true,
+				//Note: if you are applying horizontal scrolling (sScrollX) on a ".table-bordered"
+				//you may want to wrap the table inside a "div.dataTables_borderWrap" element
+
+				"bDestroy":true,
+				// "bProcessing" : true, //DataTables载入数据时，是否显示‘进度’提示  
+				"bServerSide" : true, //是否启动服务器端数据导入  
+				"bStateSave" : true, //是否打开客户端状态记录功能,此功能在ajax刷新纪录的时候不会将个性化设定回复为初始化状态  
+				//"bJQueryUI" : true, //是否使用 jQury的UI theme  
+				//"sScrollY" : ($(window).height() - 420), //DataTables的高  
+				//"sScrollX" : "100%", //DataTables的宽
+				//"scrollX" : true,
+				"aLengthMenu" : [ 10,15,20,30,60,100 ], //更改显示记录数选项  
+				"iDisplayLength" : 15, //默认显示的记录数  
+				"bAutoWidth" : false, //是否自适应宽度  
+				"bScrollInfinite" : false, //是否启动初始化滚动条  
+				"bScrollCollapse" : true, //是否开启DataTables的高度自适应，当数据条数不够分页数据条数的时候，插件高度是否随数据条数而改变  
+				"bPaginate" : true, //是否显示（应用）分页器  
+				"bInfo" : true, //是否显示页脚信息，DataTables插件左下角显示记录数  
+				//"sPaginationType" : "full_numbers", //详细分页组，可以支持直接跳转到某页  
+				"bSort" : true, //是否启动各个字段的排序功能  
+				//"aaSorting" : [ [ 1, "desc" ] ], //默认的排序方式，第2列，升序排列  
+				"bFilter" : false, //是否启动过滤、搜索功能
+				"sAjaxSource" : "pactAction_ajaxdata4.action",
+				"fnServerData": function (sSource, aoData, fnCallback, oSettings) {//do something after ajax load
+	            					oSettings.jqXHR = $.ajax({
+	                				"dataType": 'json',
+	                				"type": "POST",
+	                				"url": sSource,
+	                				"data": aoData,
+	                				"success": function (json) {
+	                    				fnCallback(json);	                  　							
+	                    				//for init dialog e.g. after load ajax data
+						                $(".user_delop").each(function() {
+											$(this).wwDialog();//for dialog											
+										});
+										//for single check to delete  
+										$(".checkbtn").each(function() {
+											var that=this;											
+											$(this).on("click",function(){
+												var v=$(that).parent().find("b").text();
+												if (that.checked) del_select_ids.push(v);
+												else del_select_ids.removevalue(v);												
+												//alert(del_select_ids.toString());
+											})											
+										});										
+										//for del btn											
+										$(".delbtn").each(function(){
+											$(this).on('click',function(){
+												var that=$(this);//for transfer parameter to callback function
+												showConfirmDialogByKevin("<center>确定删除吗？</center>",function(){
+													
+													var request_del_ids = [];//save ids to delete
+													request_del_ids.push(that.attr("data-id"));	
+													$.post(
+															"pactAction!delpact.action", 
+															[ {	name : 'delids',value : request_del_ids.toString()} ], "json" 
+															).done(function(data) {
+																if (data.indexOf("无权访问")!=-1){
+																	 alert("无权访问，请联系管理员！");
+																	 return;
+																}	
+																data=JSON.parse(data);//parse to object
+																if (data.state==300){
+																	alert("包含了通过审核或者正在审核的合同，无法完成删除！");
+																 }
+																else if (data.state==310){//success
+																	alert("您无权操作该合同！");
+																}else if (data.state==200){//success
+																	oTable1.fnReloadAjax(); //使用默认url refresh table
+																}else{
+																	 alert("Server error!");
+																}
+															}).fail(function() {
+																alert("Server error!Please check Network.");
+															});
+													
+												});
+											});
+										});
+	                				}
+            					});
+        			}
+				});
+				/* setInterval(function() {
+					//oTable1.fnReloadAjax('pages/getPlayerNewData.php);
+					oTable1.fnReloadAjax(); //使用默认					
+				}, 5000); */
+				/* $(window).bind('resize', function() {
+					oTable1.fnAdjustColumnSizing();
+					//be care of fnAdjustColumnSizing() method,fnAdjustColumnSizing make a ajax request to server
+				}); */
+
+				//$('#user-table-list').find("td").css( "background", "red");
+				$(document).off('click', 'th input:checkbox');
+				$(document).on('click', 'th input:checkbox', function() {
+					var that = this;
+					$(this).closest('table').find('tr > td:first-child input:checkbox').each(function() {
+						this.checked = that.checked;
+						//add by kevin for get the all ids to delete
+						if (this.checked)						
+						del_select_ids.push($(this).parent().find("b").text());						
+						//end by kevin
+						$(this).closest('tr').toggleClass('selected');
+					});
+					if (!that.checked){
+						del_select_ids.length=0;
+					}
+					//console.log(del_select_ids.toString());
+				});
+
+				$('[data-rel="tooltip"]').tooltip({
+					placement : tooltip_placement
+				});
+				function tooltip_placement(context, source) {
+					var $source = $(source);
+					var $parent = $source.closest('table')
+					var off1 = $parent.offset();
+					var w1 = $parent.width();
+
+					var off2 = $source.offset();
+					//var w2 = $source.width();
+
+					if (parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2))
+						return 'right';
+					return 'left';
+				}
+				
+			})
+			/* function adtable() {
+				$('#user-table-list').dataTable().fnAdjustColumnSizing();
+				//be care of fnAdjustColumnSizing() method,fnAdjustColumnSizing make a ajax request to server
+			}
+			setTimeout("adtable()", 50); */
+			$(".userdelop").each(function() {
+				$(this).wwDialog();
+			});
+			
+			function refreshTable(){
+				oTable1.fnReloadAjax(); //使用默认
+			}
+			
+			/*
+			batch delete function
+			*/
+			function bat_del_pacts(){								
+				$.post(//submit delete to server
+					"pactAction!delpact.action", 
+					[ {	name : 'delids',value : del_select_ids.toString()} ], "json" 
+					).done(function(data) {						
+						if (data.indexOf("无权访问")!=-1){
+							 alert("无权访问，请联系管理员！");
+							 return;
+						}												
+						data=JSON.parse(data);//parse to object
+						if (data.state==300){
+							alert("包含了通过审核或者正在审核的合同，无法完成删除！");
+						}else if (data.state==310){//success
+							alert("您无权操作该合同！");
+						}else if (data.state==200){//success
+							oTable1.fnReloadAjax();//使用默认url refresh table
+							del_select_ids.length=0;
+						}else{
+							 alert("Server error!");
+						}
+					}).fail(function() {
+							alert("Server error!Please check Network.");
+					});
+			}
+			/*
+			batch delete Button	
+			*/
+			$("#del_pact_bat").on("click",function(){
+				if (del_select_ids.length==0){//Whether select checked
+					showMsgByKevin("<center>请选择要删除的合同</center>");
+					return;
+				}				
+				showConfirmDialogByKevin("<center>确定删除吗？</center>",bat_del_pacts);				
+			});
+			/*
+				close view dialog
+			*/
+			function doView(){
+				$("#viewpact_dia").modal('hide');		
+			}
+			/*
+				save edit user information
+			*/
+			function doSaveEdit(){
+				if ($("input[name='ctthpaytimes']").val().trim()==""){
+					$("input[name='ctthpaytimes']").val(0);
+				}			
+				if ($("select[name='cttcate']").val()<$("input[name='ctthpaytimes']").val()){
+					alert("已还期限超出贷款期限，或者已经还完，无法修改");
+					return;	
+				}
+				var $form=$("#pact_edit_form");
+				validator=validateCheckEditPact("pact_edit_form");
+				//only valid after excute validte mothod 
+				if ($("select[name='cttfun']").val()=="0"){//loan for car park
+					$("input[name='cttcarloc']").rules("add",{required:true});
+					$("input[name='ctthouseloc']").rules("remove");
+				}else if($("select[name='cttfun']").val()=="1"){//loan for buying house
+					$("input[name='ctthouseloc']").rules("add",{required:true});
+					$("input[name='cttcarloc']").rules("remove");
+				}else{
+					$("input[name='ctthouseloc']").rules("remove");
+					$("input[name='cttcarloc']").rules("remove");
+				}
+				if (validator.form()){
+					if (!$form.find("input[name='cttdiscount']").prop("checked")){						
+						$form.find("input[name='cttdiscount']").val("0");
+					}
+					var jqxhr = $.post($form.attr("action"), 
+								$form.zxp_serialize() 
+							).done(function(data) {
+								if (data==310){
+									alert("该合同正在审核或通过了审核，无法修改！");
+								}else if (data==300){
+									alert("合同编码或者流水号重复!");
+								}else if(data==250){
+									alert("Server db error!");							
+								}else if(data==200){//success
+									refreshTable();
+									showMsgByKevin("<center>修改成功</center>","温馨提示");
+									$("#editpact_dia").modal('hide');								
+								}else{
+									alert("Server error!");
+								}							
+							}).fail(function() {
+								alert("Server error!Please check Network.");
+							});
+					}
+			}
+			/*
+			submit form of user adding
+			param:
+			form is string ,form's id
+			dia_id is dialog id			
+			*/
+			var validator=null;//for add user form validate
+			/*
+				validate form
+			*/
+			function validateCheckEditPact(form_id_str){
+				return validator=$("#"+form_id_str).validate({
+					debug: true, //调试模式取消submit的默认提交功能   
+	                //errorClass: "label.error", //默认为错误的样式类为：error   
+	                focusInvalid: true, //当为false时，验证无效时，没有焦点响应  
+	                onkeyup: false,   
+	                submitHandler: function(form){   //表单提交句柄,为一回调函数，带一个参数：form   
+	                    alert("提交表单");
+	                },   
+					rules: {  
+				     cttcode: {  
+				         required: true
+				      },
+				      cttprojectname:{  
+				         required: true
+				      },
+				      cttserial: {  
+				         required: true
+				         ,number:true
+				      },
+				      cttlender: {
+				         //email:true
+				         required: true
+				      },
+				       cttamount: {
+				         number:true
+				      },
+				       cttselfprice: {
+				         number:true
+				      },
+				       cttrepayday: {
+				         required: true
+				         //number:true
+				      },
+				      cttloandate:{
+				      	required: true
+				      },
+				      cttstart:{
+				      	required: true
+				      },
+				      ctthpaytimes:{
+				      	number:true
+				      },
+				      ctttaa:{
+				      	number:true
+				      }	
+				   },  
+				   messages: {  
+				      customername: {  
+				         required: 'aa'				           
+				      },  
+				      customerbirth: {  
+				         required: 'bb'
+				      }
+				   },
+				   	highlight: function(element) {
+     					//$(element).addClass("has-error");
+     					$(element).css("border","1px solid rgb(213, 9, 0)");
+  				   	},
+				  	unhighlight: function(element) {
+				     	$(element).css("border","1px solid rgb(213, 213, 213)");
+				     	
+				     	
+				  	},
+				   //errorElement: "input",
+				   errorPlacement: function(error, element) {
+	     					/* if (element.attr("name") == "account" || element.attr("name") == "deptname")
+	       						error.insertAfter("#addfunform");
+	     					else
+	       						error.insertAfter(element); */
+	       					 		   						  
+   						} 
+				});
+			}
+			
+			
+			function initTest() {
+				$("#pactSerarchText").bsSuggest('init', {
+				/*url: "/rest/sys/getuserlist?keyword=",
+				effectiveFields: ["userName", "email"],
+				searchFields: [ "shortAccount"],
+				effectiveFieldsAlias:{userName: "姓名"},*/
+				effectiveFields: ["pcode", "customername"],
+				effectiveFieldsAlias:{pcode: "合同编码",customername:"客户姓名"},
+				clearable : true,
+				url : "pactAction_suggestPacts.action?suggestparam=",
+				idField : "userId",
+				keyField : "customername",
+				getDataMethod: "url",    //获取数据的方式，总是从 URL 获取
+				delayUntilKeyup: true //获取数据方式为 firstByUrl 时，延迟到有输入/获取到焦点时请求
+				}).on('onDataRequestSuccess', function(e, result) {
+					console.log('onDataRequestSuccess: ', result);
+				}).on('onSetSelectValue', function(e, keyword, data) {
+					console.log('onSetSelectValue: ', keyword, data);
+				}).on('onUnsetSelectValue', function() {
+					console.log('onUnsetSelectValue');
+				});
+			}
+			initTest();
+			/* $("#myModal").modal({
+				remote : "testdialog.html"
+			});
+			$('#myModal').on('hidden.bs.modal', function(e) {
+				$(this).removeData('bs.modal');
+			}); */
+			//$("#testDialog").openWidow({id:"abc",width:700,height:200,title:"测试",url:"testdialog.html"});
+			/* $('[data-rel=tooltip]').tooltip({
+					container : 'body',
+					'template': '<div class="tooltip tooltip-success"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
+			});	 */
+			//or change it into a date range picker
+			$('.date-picker').datepicker({
+				autoclose : true
+			});
+			function initSerachTable(){
+				var datatable_setting=oTable1.fnSettings();
+				var t_url=datatable_setting.sAjaxSource;
+				var o_url=t_url.split("?");
+			}
+			
+			//alert(oTable1.fnSettings().sAjaxSource);
+		</script>
+		<script src="assets/js/ace/ace.new.onpage-help1.js"></script>

@@ -1,0 +1,18 @@
+<root>
+  <facet id="me.hibernate"/>
+  <facet id="me.spring">
+    <node name="libprov">
+      <attribute name="provider-id" value="maven-lib-provider"/>
+    </node>
+  </facet>
+  <facet id="maven"/>
+  <facet id="wst.jsdt.web"/>
+  <facet id="jst.web"/>
+  <facet id="java"/>
+  <facet id="web.struts2"/>
+  <facet id="jst.jaxrs">
+    <node name="libprov">
+      <attribute name="provider-id" value="maven-lib-provider"/>
+    </node>
+  </facet>
+</root>

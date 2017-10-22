@@ -1,0 +1,226 @@
+<!-- #section:basics/info.contents.breadcrumbs -->
+<div class="breadcrumbs" id="breadcrumbs">
+	<script type="text/javascript">
+		try {
+			ace.settings.check('breadcrumbs', 'fixed')
+		} catch (e) {
+		}
+	</script>
+	<ul class="breadcrumb">
+		<li><i class="ace-icon fa fa-desktop"></i> <a href="#"></a></li>
+		<li>合同管理</li>
+		<li>合同审核</li>
+	</ul>
+	<!-- /.breadcrumb -->
+</div>
+<!-- /section:basics/info.contents.breadcrumbs -->
+<div class="page-content">	
+	<div class="row">
+		<div class="col-xs-12">
+			<!-- PAGE CONTENT BEGINS -->
+			<form class="form-horizontal" role="form" action="" id="audit_form">
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" > <b>合同编码:</b> ${editpact.cttcode!''}</label>
+					<input type="hidden" name="id" value="${editpact.id!''}">					
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" > <b> 合同日期:</b>${editpact.cttdate?string("yyyy-MM-dd")}</label>
+				</div><div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" > <b> 审核状态:</b>
+					<#if (editpact.auditstate??)>
+								<#if editpact.auditstate?string="1" >
+									<span class='audit'>审核中</span>
+								<#elseif (editpact.auditstate?string="2") >
+									<span class='audited'>审核通过</span>
+									<#else>
+									<span class='noaudit'>未审核</span>
+								</#if>
+								<#else>
+									<span class='noaudit'>未审核</span>
+							</#if>
+					</label>
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" > <b>  案场:</b> <a data-remote='projectAction_editproject.action?id=${editpact.cttproject!''}' onclick="countC()" data-draggable='true' data-mtitle='案场信息' data-id='viewProject_dia' data-width='600' data-height='400' data-okevent='doviewProject()' data-oktitle='确定'  class='green pack_view_customer' href='#'> <i class='ace-icon fa fa-search-plus bigger-130'></i></a></label>
+				</div>				
+				<div class="space-4"></div>				
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" > <b> 是否优惠:</b><#if (editpact.cttdiscount??)>${(editpact.cttdiscount==1)?string('优惠','不优惠')}</#if> </label>
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" > <b> 流水号:</b><span id="serial_span"></span></label>
+					
+				</div>
+				
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" > <b>借款人:</b>  <a data-remote='_customerAction_view.action?id=${editpact.cttcustomer!''}' onclick="countC()" data-draggable='false' data-mtitle='用户信息' data-id='viewcustomer_dia' data-width='950' data-height='500' data-okevent='doViewCus()' class='green pack_view_customer' class='blue' href='#'>查看</a></label>					
+				</div>				
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" > <b>开户银行:</b>${editpact.cttbank!''}</label>					
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" > <b>银行账号:</b> ${editpact.cttbankcard!''}</label>
+					
+				</div>
+				
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" > <b> 借款金额:</b>${editpact.cttamount!''}<a data-remote='pactAction_viewplan.action?id=${editpact.id!''}' data-draggable='false' data-mtitle='还款计划' data-id='viewrepayplan_dia' data-width='650' data-height='500' data-okevent='doViewPlan()' class='green pack_view_repayplan' class='blue' href='#'>查看还款计划</a></label>
+					
+				</div>
+				
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" > <b> 借款期限:</b>${editpact.cttcate!''}期</label>
+					
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" > <b> 借款利率 :</b>${ratio!''}</label>
+									</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" > <b> 月供计算方法 :</b><#if (editpact.calculatecate??)>${(editpact.calculatecate==1)?string('分段法','普通法')}</#if></label>
+									</div>								
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" > <b> 还款方式:</b><#if (editpact.cttrepaycate??)>${(editpact.cttrepaycate==0)?string('等额本息','等额本金')}</#if></label>
+					
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 col-xs-12 control-label-0 no-padding-left" > <b>贷款用途:</b><span id="cttfun_span"></span></label>
+					
+					
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" > <b>购买金额:</b>${editpact.cttprice!''}</label>
+					
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" > <b>客户自付款:</b> ${editpact.cttselfprice!''}</label>
+					
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" > <b>借款起始日:</b><#if (editpact.cttstart??)>${editpact.cttstart?string("yyyy-MM-dd")}</#if></label>
+					
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" > <b>放款日期:</b><#if (editpact.cttloandate??)>${editpact.cttloandate?string("yyyy-MM-dd")}</#if> </label>
+					
+				</div>
+				
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" > <b>还款日 :</b>${editpact.cttrepayday!''}</label>
+					
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" > <b>车位位置 :</b> ${editpact.cttcarloc!''}</label>
+					
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" > <b>房屋位置:</b>${editpact.ctthouseloc!''}</label>
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" > <b>已还期:</b>${editpact.ctthpaytimes!''}</label>
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" > <b>历史欠款:</b>${editpact.ctttaa!''}</label>
+				</div>
+				<div class="space-4"></div>
+				<div class="col-xs-12">
+					<div>
+						<center>
+							<button id="audit_contract_btn" class="btn btn-success" type="button">
+								<i class="ace-icon fa fa-check bigger-110"></i> 通过审核
+							</button>
+							&nbsp; &nbsp; &nbsp;							
+							<button id="noaudit_contract_btn" class="btn btn-danger" type="button">
+								<i class="ace-icon fa fa-check bigger-110"></i> 审核不通过
+							</button>
+							&nbsp; &nbsp; &nbsp;
+							<a class="btn btn-info" onclick="go()">
+								<i class="ace-icon fa fa-share bigger-110"></i> 返回
+							</a>
+						</center>
+					</div>
+				</div>
+			</form>
+		</div>
+		<!-- /.col -->
+	</div>
+	<!-- /.row -->
+</div>
+<!-- /.page-content -->
+<script type="text/javascript">
+	var clicknum=0;
+	var cttfun=["购车位","装修","电器","其他"];
+	$(".pack_view_customer").each(function() {
+				$(this).wwDialog();
+			});
+	var serail_span=${editpact.cttserial!''};
+	
+	$("#cttfun_span").text(cttfun[${editpact.cttfun!'0'}]);
+	$("#serial_span").text(serail_span.LenWithZero(3));
+	function doviewProject(){		
+		$("#viewProject_dia").modal('hide');		
+	}
+	function doViewCus(){		
+		$("#viewcustomer_dia").modal('hide');		
+	}
+	function countC(){
+		clicknum++;
+	}
+	function go(){
+		
+		history.go(-(clicknum+1));
+	}	
+	function doaudit(state){				
+				
+					var id=$("input[name='id']").val();
+					var jqxhr = $.post("pactAction_audit.action", 
+								[ {	name : 'id',value : id},{name:'auditstate',value:state} ], "json" 
+							).done(function(data) {
+								if (data.indexOf("无权访问")!=-1){
+									alert("无权访问，请联系管理员！");
+									return;
+								}								
+								if(data==200){//success									
+									showMsgByKevin("<center>操作成功！</center>","消息");
+								}else if(data==320){
+									alert("不能重复审核通过!");
+								}else if(data==330){
+									alert("通过审核后不允许再次不通过!");
+								}else{
+									alert("检查合同的贷款额度、期数、利率是否输入有错误，如果还不能解决问题请联系系统管理员!");
+								}							
+							}).fail(function() {
+								alert("Server error!Please check Network.");
+							});
+				
+	}
+	$("#audit_contract_btn").on("click",function(){doaudit(2)});
+	$("#noaudit_contract_btn").on("click",function(){doaudit(3)});	
+	$(".pack_view_repayplan").each(function() {
+				$(this).wwDialog();
+	});
+	function doViewPlan(){		
+		$("#viewrepayplan_dia").modal('hide');		
+	}	
+</script>

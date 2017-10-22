@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:web="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	<display-name>CIMS</display-name>
+	<filter>
+		<filter-name>struts2</filter-name>
+		<filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>struts2</filter-name>
+		<url-pattern>*.action</url-pattern>
+	</filter-mapping>
+	<welcome-file-list>
+		<welcome-file>login_face.action</welcome-file>
+	</welcome-file-list>
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<!-- 自定义参数-->
+  <listener>
+    <description>ServletContextListener</description>
+    <listener-class>com.ioes.lims.task.ContextInitListener</listener-class>
+  </listener>
+  <listener>
+		<listener-class>com.ioes.lims.task.OverdueScanListener</listener-class>
+  </listener>
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:applicationContext.xml</param-value>
+	</context-param>
+	<filter>
+		<filter-name>Log4jFilter</filter-name>
+		<filter-class>com.sias.log4jextends.Log4jFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>Log4jFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<context-param>
+		<param-name>log4jConfigLocation</param-name>
+		<param-value>/WEB-INF/log4j.xml</param-value>
+	</context-param>
+	<listener>
+		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+	</listener>
+	<!-- start druid -->
+	<filter>
+		<filter-name>DruidWebStatFilter</filter-name>
+		<filter-class>com.alibaba.druid.support.http.WebStatFilter</filter-class>
+		<init-param>
+			<!-- 经常需要排除一些不必要的url，比如.js,/jslib/等等。配置在init-param中 -->
+			<param-name>exclusions</param-name>
+			<param-value>*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*</param-value>
+		</init-param>
+		<!-- 缺省sessionStatMaxCount是1000个。你可以按需要进行配置 -->
+		<init-param>
+			<param-name>sessionStatMaxCount</param-name>
+			<param-value>1000</param-value>
+		</init-param>
+		<init-param>
+			<param-name>sessionStatEnable</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<!-- druid 0.2.7版本开始支持profile，配置profileEnable能够监控单个url调用的sql列表 -->
+		<init-param>
+			<param-name>profileEnable</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<init-param>
+			<param-name>principalSessionName</param-name>
+			<param-value>_user_account</param-value>
+		</init-param>
+
+		<!-- 你可以关闭session统计功能 <init-param> <param-name>sessionStatEnable</param-name> 
+			<param-value>true</param-value> </init-param> -->
+	</filter>
+	<filter-mapping>
+		<filter-name>DruidWebStatFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<!--druid 监听 -->
+	<servlet>
+		<servlet-name>DruidStatView</servlet-name>
+		<servlet-class>com.alibaba.druid.support.http.StatViewServlet</servlet-class>
+		<!-- deny优先于allow，如果在deny列表中，就算在allow列表中，也会被拒绝。 如果allow没有配置或者为空，则允许所有访问 
+			<init-param> <param-name>allow</param-name> <param-value>128.242.127.1/24,127.0.0.1</param-value> 
+			</init-param> <init-param> <param-name>deny</param-name> <param-value>192.168.1.118</param-value> 
+			</init-param> -->
+		<!-- 在StatViewSerlvet输出的html页面中，有一个功能是Reset All，执行这个操作之后，会导致所有计数器清零，重新计数 -->
+		<init-param>
+			<param-name>resetEnable</param-name>
+			<param-value>false</param-value>
+		</init-param>
+		<!-- 用户名和密码 -->
+		<init-param>
+			<param-name>loginUsername</param-name>
+			<param-value>admin</param-value>
+		</init-param>
+		<init-param>
+			<param-name>loginPassword</param-name>
+			<param-value>115400</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DruidStatView </servlet-name>
+		<url-pattern>/druid/*</url-pattern>
+	</servlet-mapping>
+	<session-config>
+	    <session-timeout>100</session-timeout>
+	    <!-- 以分钟为单位的 -->
+	</session-config>
+	<!--druid 监听 end -->
+	<!-- end druid -->
+</web-app>

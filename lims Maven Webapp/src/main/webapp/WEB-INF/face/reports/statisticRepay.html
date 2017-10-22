@@ -1,0 +1,170 @@
+<link rel="stylesheet" href="assets/css/datepicker.css" />
+<!-- #section:basics/info.contents.breadcrumbs -->
+<div class="breadcrumbs" id="breadcrumbs">
+	<script type="text/javascript">
+		try {
+			ace.settings.check('breadcrumbs', 'fixed')
+		} catch (e) {
+		}
+	</script>
+	<ul class="breadcrumb">
+		<li><i class="ace-icon fa fa-desktop"></i> <a href="#"></a></li>
+		<li>统计报表</li>
+		<li>贷款还款情况</li>
+	</ul>
+	<!-- /.breadcrumb -->
+</div>
+<!-- /section:basics/info.contents.breadcrumbs -->
+<div class="page-content">
+	<div class="row">
+<!-- widget-box -->
+	<div class="col-xs-12 col-sm-12">
+		<div class="widget-box">				
+			<div class="widget-body">
+				<div class="widget-main"  style="padding:2px;">						
+					<div class="col-sm-12 col-xs-12  chosen-mine-div">
+			<form class="form-horizontal" role="form">
+				<label class="chosen-mine-label" for="form-field-1"> 选择日期 </label>
+				<div class="row">
+					<div class="col-xs-12 col-sm-2">
+						<div class="input-daterange input-group">
+							<input type="text" class="input-sm form-control date-picker" name="start" data-date-format="yyyy-mm" />
+						</div>
+						<!-- /section:plugins/date-time.datepicker -->
+					</div>
+					<div class="col-lg-6 col-xs-12 col-sm-6 col-md-6">
+						<button type="button" id="srepay_search_btn" class="btn btn-primary btn-sm chosen-mine-button">
+							<i class="ace-icon fa fa-search align-top bigger-125"></i> 确定
+						</button>
+						<a class="btn btn-sm btn-success"  onclick="return export_excel(this)" id="srepayExcelBtn" href="reportAction_srepayExcel.action">
+							<i class="ace-icon fa fa-file-text align-top bigger-125"></i>导出
+						</a>
+					</div>
+				</div>
+			</form>
+		</div>
+		<table id="srepay-table-2" class="col-sm-12 col-xs-12 table table-striped table-bordered table-hover mine-table-center">
+			<thead>
+				<tr style="background: url(assets/css/img/mine_thead_bg.png);">
+					<th class="center"><label class="position-relative"> <span class="lbl">序号</span>
+					</label></th>
+					<th >合同编号</th>
+					<th >项目名称</th>
+					<th >借款人姓名</th>
+					<th><i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i> 借款金额</th>
+					<th>利率</th>
+					<th >借款期限</th>
+					<th >借款起始日</th>
+					<th >借款到期日</th>
+					<th >还款日</th>
+					<th >还款金额</th>
+					<th >实际还款日</th>
+					<th >日期差额</th>
+					<th >累计应还款额</th>
+					<th style="white-space: nowrap;" >累计实际还款金额</th>
+					<th >累计逾期期数</th>
+					<th >主办</th>					
+				</tr>
+			</thead>
+			<tbody>
+				
+			</tbody>
+		</table>
+				</div>
+			</div>
+		</div>
+	</div>
+<!--end widget-box -->
+		
+	</div>
+</div>
+		<script src="assets/js/uncompressed/jquery.dataTables.js"></script>
+		<script src="assets/js/jquery.dataTables.bootstrap.js"></script>
+		<script src="assets/js/date-time/bootstrap-datepicker.js"></script>
+		<script type="text/javascript">
+			var oTable1=null;
+			$("#srepayExcelBtn").on("click",function(){				
+				window.location=$(this).attr("href")+"?start="+$("input[name='start']").val();
+				event.preventDefault();
+				event.stopPropagation();
+			});
+			$("#srepay_search_btn").on("click",function(){
+				var datatable_setting=oTable1.fnSettings();
+				var t_url=datatable_setting.sAjaxSource;
+				var o_url=t_url.split("?");
+				var startd=$("input[name='start']").val();								
+				oTable1.fnReloadAjax(o_url[0]+"?start="+startd);
+				
+			});
+			jQuery(function($) {
+				oTable1 = $('#srepay-table-2')
+				//.wrap("<div class='dataTables_borderWrap' />"),   //if you are applying horizontal scrolling (sScrollX)			
+				.dataTable({
+				//fixedHeader : {		header : true,	footer : true	},								
+				"aoColumns" : [ {
+				"mData" : "id1",
+				"bSortable" : false,"sWidth" : "85"
+				}, 
+				{"mData" : "id2","bSortable" : false},				
+				{"mData" : "id3","bSortable" : false},
+				{"mData" : "id4","bSortable" : false},
+				{"mData" : "id5","bSortable" : false},
+				{"mData" : "id6","bSortable" : false,"sWidth" : "85"},
+				{"mData" : "id7","bSortable" : false},
+				{"mData" : "id8","bSortable" : false},
+				{"mData" : "id9","bSortable" : false},
+				{"mData" : "id10","bSortable" : false},
+				{"mData" : "id11","bSortable" : false},
+				{"mData" : "id12","bSortable" : false},
+				
+				{"mData" : "id13","bSortable" : false},
+				{"mData" : "id14","bSortable" : false},
+				{"mData" : "id15","bSortable" : false},
+				{"mData" : "id16","bSortable" : false},
+				{"mData" : "id17","bSortable" : false}
+				]
+
+				,
+				"oLanguage" : {
+				"sLengthMenu" : "每页显示 _MENU_ 条记录",
+				"sZeroRecords" : "对不起，没有匹配的数据",
+				"sInfo" : "第 _START_ - _END_ 条 / 共 _TOTAL_ 条数据",
+				"sInfoEmpty" : "没有匹配的数据",
+				"sInfoFiltered" : "(数据表中共 _MAX_ 条记录)",
+				"sProcessing" : "正在加载中...",
+				"sSearch" : "全文过滤：",
+				"oPaginate" : {
+				"sFirst" : "第一页",
+				"sPrevious" : " 上一页 ",
+				"sNext" : " 下一页 ",
+				"sLast" : " 最后一页 "
+				}
+				},
+
+				"sScrollXInner" : '1600',
+								"bServerSide" : true, //是否启动服务器端数据导入  
+				"bStateSave" : true, //是否打开客户端状态记录功能,此功能在ajax刷新纪录的时候不会将个性化设定回复为初始化状态  
+				  
+				"sScrollY" : ($(window).height() - 420), //DataTables的高  
+				"sScrollX" :"100%", //DataTables的宽
+				
+				"aLengthMenu" : [ 10,15, 20, 40, 60 ], //更改显示记录数选项  
+				"iDisplayLength" : 15, //默认显示的记录数  
+				//"bAutoWidth" : false, //是否自适应宽度  
+				"bScrollInfinite" : false, //是否启动初始化滚动条  
+				"bScrollCollapse" : true, //是否开启DataTables的高度自适应，当数据条数不够分页数据条数的时候，插件高度是否随数据条数而改变  
+				"bPaginate" : true, //是否显示（应用）分页器  
+				"bInfo" : true, //是否显示页脚信息，DataTables插件左下角显示记录数  
+				//"sPaginationType" : "full_numbers", //详细分页组，可以支持直接跳转到某页  
+				"bSort" : true, //是否启动各个字段的排序功能  
+				//"aaSorting" : [ [ 1, "desc" ] ], //默认的排序方式，第2列，升序排列  
+				"bFilter" : false, //是否启动过滤、搜索功能
+				"sAjaxSource": "reportAction_srepay.action"  
+				});
+
+			});
+			$('.date-picker').datepicker({
+				autoclose : true
+			});
+		</script>
+		<script src="assets/js/ace/ace.new.onpage-help1.js"></script>

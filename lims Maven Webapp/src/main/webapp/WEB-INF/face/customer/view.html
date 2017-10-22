@@ -1,0 +1,260 @@
+<style>
+	label span{		
+		color:red;
+		margin:0px;
+		padding:0px;
+	}
+</style>
+<div class="page-content">	
+	<div class="row">
+		<div class="col-xs-12">
+			<!-- PAGE CONTENT BEGINS -->
+			<form class="form-horizontal" role="form" action="_customerAction!addcustomer.action" id="contract_form">
+				<!-- #section:elements.form -->
+				<h5 class="row header bigger lighter  col-xs-12 col-sm-12">
+					<i class="ace-icon fa fa-bars purple"></i> 借款人基本信息
+				</h5>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" > 借款人姓名(<span>√</span>): ${editcustomer.customername}</label>					
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" > 性别 ${cgender}</label>
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" >  出生日期(<span>√</span>): ${editcustomer.customerbirth?string("yyyy-MM-dd")}</label>
+				</div>				
+				<div class="space-4"></div>				
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" > 婚姻状况(<span>√</span>): ${cwed}</label>
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" > 证件类型(<span>√</span>): ${ccert}</label>
+					
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" >证件号码(<span>√</span>):  ${editcustomer.customercertnum}</label>					
+				</div>
+				<div class="space-4"></div>				
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" > 学历: ${ceduc}</label>					
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" > 联系方式(<span>√</span>): ${editcustomer.customermobile}</label>					
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" >家庭住址(<span>√</span>): ${editcustomer.customeraddr}</label>
+					
+				</div>
+				
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" > 住所状况(<span>√</span>):${cresid}</label>
+					
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" > 工作单位(<span>√</span>):${editcustomer.customercom}</label>
+					
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" > 职务 : ${cpost}</label>
+									</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" > 单位地址(<span>√</span>):${editcustomer.customercomaddr}</label>
+					
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 col-xs-12 control-label-0 no-padding-left" >年收入(<span>√</span>): ${editcustomer.customerincome!''}万元</label>
+					
+					
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" >车辆状况(<span>√</span>): ${ccar}</label>
+					
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" >QQ: ${editcustomer.customerqq!''}</label>
+					
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" >微信: ${editcustomer.customerwx!''} </label>
+					
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" >Email: ${editcustomer.customeremail!''}</label>
+					
+				</div>								
+				<div class="space-4"></div>
+				<h5 class="row header bigger lighter  col-xs-12 col-sm-12">
+					<i class="ace-icon fa fa-file-text purple"></i> 贷款信息
+				</h5>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" >房源位置 : ${editcustomer.customerhouseaddr!''}</label>
+					
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" >购买价 : ${editcustomer.customerhprice!'0'}万元</label>
+					
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" >紧急联系人1(<span>√</span>):${editcustomer.customercontact1!''}</label>
+						
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" >与贷款人关系1(<span>√</span>):${crealtion1!''}</label>
+				
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" >紧急联系人1电话(<span>√</span>): ${editcustomer.customermobile1!''}</label>
+						
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" >紧急联系人2 : ${editcustomer.customercontact2!''}</label>
+						
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" >与贷款人关系2: ${crealition2!''}</label>
+					
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" >紧急联系人2电话 : ${editcustomer.customermobile!''}</label>
+					
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" >代还款人1: ${editcustomer.customerreplace1!''}</label>
+					
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" >代还款人2: ${editcustomer.customerreplace2!''}</label>
+					
+				</div>
+				<h5 class="row header bigger lighter  col-xs-12 col-sm-12">
+					<i class="ace-icon fa fa-bars purple"></i> 配偶基本信息
+				</h5>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" > 配偶姓名(<span>√</span>): ${editcustomer.customertname!''}</label>					
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" > 性别 ${ctgender!''}</label>
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" >  出生日期(<span>√</span>):<#if editcustomer.customertbirth??> ${editcustomer.customertbirth?string("yyyy-MM-dd")}</#if></label>
+				</div>				
+				<div class="space-4"></div>				
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" > 婚姻状况(<span>√</span>): ${ctwed!''}</label>
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" > 证件类型(<span>√</span>): ${ctcert!''}</label>
+					
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" >证件号码(<span>√</span>):  ${editcustomer.customertcertnum!''}</label>					
+				</div>
+				<div class="space-4"></div>				
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" > 学历: ${cteduc!''}</label>					
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" > 联系方式(<span>√</span>): ${editcustomer.customertmobile!''}</label>					
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" >家庭住址(<span>√</span>): ${editcustomer.customertaddr!''}</label>
+					
+				</div>
+				
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" > 住所状况(<span>√</span>):${ctresid!''}</label>
+					
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" > 工作单位(<span>√</span>):${editcustomer.customertcom!''}</label>
+					
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" > 职务 : ${ctpost!''}</label>
+									</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" > 单位地址(<span>√</span>):${editcustomer.customertcomaddr!''}</label>
+					
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 col-xs-12 control-label-0 no-padding-left" >年收入(<span>√</span>): ${editcustomer.customertincome!''}万元</label>
+					
+					
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" >车辆状况(<span>√</span>): ${ccar!''}</label>
+					
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" >QQ: ${editcustomer.customertqq!''}</label>
+					
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" >微信: ${editcustomer.customertwx!''} </label>
+					
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-11 control-label-0 no-padding-left" >Email: ${editcustomer.customertemail!''}</label>
+					
+				</div>
+				<div class="space-4"></div>
+				<h5 class="row header bigger lighter  col-xs-12 col-sm-12">
+					<i class="ace-icon fa fa-file-text purple"></i> 其它
+				</h5>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-12">
+					<label class="col-sm-3 control-label-0 no-padding-left" >备注</label>
+					<textarea class="col-xs-12">${editcustomer.customerdesc!''}</textarea>
+				</div>
+				<div class="space-4"></div>
+				
+			</form>
+		</div>
+		<!-- /.col -->
+	</div>
+	<!-- /.row -->
+</div>
+<!-- /.page-content -->
+<script type="text/javascript">
+	
+</script>

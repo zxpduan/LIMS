@@ -1,0 +1,196 @@
+<link rel="stylesheet" href="assets/css/datepicker.css" />
+<script src="assets/js/dateUtil.js"></script>
+<!-- #section:basics/info.contents.breadcrumbs -->
+<div class="breadcrumbs" id="breadcrumbs">
+	<script type="text/javascript">
+		try {
+			ace.settings.check('breadcrumbs', 'fixed')
+		} catch (e) {
+		}
+	</script>
+	<ul class="breadcrumb">
+		<li><i class="ace-icon fa fa-desktop"></i> <a href="#"></a></li>
+		<li>统计报表</li>
+		<li>贷款本息核算情况表</li>
+	</ul>
+	<!-- /.breadcrumb -->
+</div>
+<!-- /section:basics/info.contents.breadcrumbs -->
+<div class="page-content">
+	<div class="row">
+<!-- widget-box -->
+	<div class="col-xs-12 col-sm-12">
+		<div class="widget-box">				
+			<div class="widget-body">
+				<div class="widget-main"  style="padding:2px;">						
+					<div class="col-sm-12 col-xs-12  chosen-mine-div">
+			<form class="form-horizontal" role="form">
+				<label class="chosen-mine-label" for="form-field-1"> 选择日期 </label>
+				<div class="row">
+					<div class="col-xs-12 col-sm-3">
+						<div class="input-daterange input-group">
+							<input type="text" class="input-sm form-control date-picker" name="start"  data-date-format="yyyy-mm" />
+							<!-- 
+							<span class="input-group-addon"> <i class="fa fa-exchange"></i>
+							</span> 
+							<input type="text" class="input-sm form-control date-picker" data-date-format="yyyy-mm-dd" name="end" />
+							 -->
+						</div>
+						<!-- /section:plugins/date-time.datepicker -->
+					</div>
+					<div class="col-lg-6 col-xs-12 col-sm-6 col-md-6">
+						<button type="button" id="costIn_search_btn" class="btn btn-primary btn-sm chosen-mine-button">
+							<i class="ace-icon fa fa-search align-top bigger-125"></i> 确定
+						</button>
+						<a class="btn btn-sm btn-success" id="costInExcelBtn" href="reportAction_costInExcel.action">
+							<i class="ace-icon fa fa-file-text align-top bigger-125"></i>导出
+						</a>
+					</div>
+				</div>
+			</form>
+		</div>
+		<table id="costIn-table-2" class="col-sm-12 col-xs-12 table table-striped table-bordered table-hover mine-table-center">
+			<thead>
+				<tr style="background: url(assets/css/img/mine_thead_bg.png);">
+					<th width="100px" rowspan="2" align="center" nowrap="nowrap" scope="col"><label class="position-relative"><span class="lbl">序号</span>
+					</label></th>
+					<th width="120px" rowspan="2" align="center" nowrap="nowrap" scope="col">放款时间</th>
+					<th width="100px" rowspan="2" align="center" nowrap="nowrap" scope="col">贷款人</th>
+					<th rowspan="2" align="center" nowrap="nowrap" scope="col">贷款金额</th>
+					<th rowspan="2" align="center" nowrap="nowrap" scope="col">月利率</th>
+					<th rowspan="2" align="center" nowrap="nowrap" scope="col">借款起始日</th>
+					<th rowspan="2" align="center" nowrap="nowrap" scope="col">借款到期日</th>
+					<th rowspan="2" align="center" nowrap="nowrap" scope="col">客户经理</th>
+					<th colspan="5" align="center" nowrap="nowrap" scope="col">本期应还金额</th>
+					<th colspan="5" align="center" nowrap="nowrap" scope="col">本期实还金额</th>
+					<th rowspan="2" align="center" nowrap="nowrap" scope="col">应还期数</th>
+					<th rowspan="2" align="center" nowrap="nowrap" scope="col">已还期数</th>
+					<th rowspan="2" align="center" scope="col">贷款本金余额</th>
+				</tr>
+				<tr>
+					<th height="22" align="center" nowrap="nowrap">应还款日</th>
+					<th align="center" nowrap="nowrap">本金</th>
+					<th align="center" nowrap="nowrap">利息</th>
+					<th align="center" nowrap="nowrap">逾期利息</th>
+					<th align="center" nowrap="nowrap">合计</th>
+					<th align="center" nowrap="nowrap">还款日期</th>
+					<th align="center" nowrap="nowrap">本金</th>
+					<th align="center" nowrap="nowrap">利息</th>
+					<th align="center" nowrap="nowrap">逾期利息</th>
+					<th align="center" nowrap="nowrap">合计</th>
+				</tr>
+			</thead>
+			<tbody>
+			</tbody>
+		</table>
+				</div>
+			</div>
+		</div>
+	</div>
+<!--end widget-box -->
+		
+	</div>
+</div>
+		<script src="assets/js/uncompressed/jquery.dataTables.js"></script>
+		<script src="assets/js/jquery.dataTables.bootstrap.js"></script>
+		<script src="assets/js/date-time/bootstrap-datepicker.js"></script>
+		<script type="text/javascript">
+			var oTable1=null;
+			$("#costInExcelBtn").on("click",function(){				
+				window.location=$(this).attr("href")+"?start="+$("input[name='start']").val();
+				event.preventDefault();
+				event.stopPropagation();
+			});
+			$("#costIn_search_btn").on("click",function(){
+				var datatable_setting=oTable1.fnSettings();
+				var t_url=datatable_setting.sAjaxSource;
+				var o_url=t_url.split("?");
+				var startd=$("input[name='start']").val();
+								
+				oTable1.fnReloadAjax(o_url[0]+"?start="+startd);
+				//$('#costIn-table-2').DataTable().ajax.reload(); 
+			});
+			jQuery(function($) {
+				oTable1 = $('#costIn-table-2')
+				//.wrap("<div class='dataTables_borderWrap' />"),   //if you are applying horizontal scrolling (sScrollX)			
+				.dataTable({
+				//fixedHeader : {		header : true,	footer : true	},								
+				"aoColumns" : [ {
+				"mData" : "id1",
+				"bSortable" : false,"sWidth": "100px", "aTargets": [0]
+				}, 
+				{"mData" : "id2","bSortable" : false,"sWidth": "110px", "aTargets": [1]},
+				{"mData" : "id3","bSortable" : false,"sWidth": "100px", "aTargets": [2]},
+				{"mData" : "id4","bSortable" : false,"sWidth": "100px", "aTargets": [3]},
+				{"mData" : "id5","bSortable" : false,"sWidth": "100px", "aTargets": [4]},
+				{"mData" : "id6","bSortable" : false,"sWidth": "120px", "aTargets": [5]},
+				{"mData" : "id7","bSortable" : false,"sWidth": "120px", "aTargets": [6]},
+				{"mData" : "id8","bSortable" : false,"sWidth": "120px", "aTargets": [7]},
+				{"mData" : "id9","bSortable" : false,"sWidth": "100px", "aTargets": [8]},
+				{"mData" : "id10","bSortable" : false,"sWidth": "100px", "aTargets": [9]},
+				{"mData" : "id11","bSortable" : false,"sWidth": "100px", "aTargets": [10]},
+				{"mData" : "id12","bSortable" : false,"sWidth": "100px", "aTargets": [11]},				
+				{"mData" : "id13","bSortable" : false,"sWidth": "100px", "aTargets": [12]},
+				{"mData" : "id14","bSortable" : false,"sWidth": "100px", "aTargets": [13]},
+				{"mData" : "id15","bSortable" : false,"sWidth": "100px", "aTargets": [14]},
+				{"mData" : "id16","bSortable" : false,"sWidth": "100px", "aTargets": [15]},
+				{"mData" : "id17","bSortable" : false,"sWidth": "100px", "aTargets": [16]},
+				{"mData" : "id18","bSortable" : false,"sWidth": "100px", "aTargets": [17]},
+				{"mData" : "id19","bSortable" : false,"sWidth": "100px", "aTargets": [18]},
+				{"mData" : "id20","bSortable" : false,"sWidth": "100px", "aTargets": [18]},
+				{"mData" : "id21","bSortable" : false}
+				]
+
+				,
+				"oLanguage" : {
+				"sLengthMenu" : "每页显示 _MENU_ 条记录",
+				"sZeroRecords" : "对不起，没有匹配的数据",
+				"sInfo" : "第 _START_ - _END_ 条 / 共 _TOTAL_ 条数据",
+				"sInfoEmpty" : "没有匹配的数据",
+				"sInfoFiltered" : "(数据表中共 _MAX_ 条记录)",
+				"sProcessing" : "正在加载中...",
+				"sSearch" : "全文过滤：",
+				"oPaginate" : {
+				"sFirst" : "第一页",
+				"sPrevious" : " 上一页 ",
+				"sNext" : " 下一页 ",
+				"sLast" : " 最后一页 "
+				}
+				},
+
+				"sScrollXInner" : '1800',
+				"bScrollCollapse" : true,
+				
+				//"iDisplayLength": 50,
+				"bProcessing" : true, //DataTables载入数据时，是否显示‘进度’提示  
+				"bServerSide" : true, //是否启动服务器端数据导入  
+				"bStateSave" : true, //是否打开客户端状态记录功能,此功能在ajax刷新纪录的时候不会将个性化设定回复为初始化状态  
+				//"bJQueryUI" : true, //是否使用 jQury的UI theme  
+				"sScrollY" : ($(window).height() - 120), //DataTables的高  
+				"sScrollX" :"100%", //DataTables的宽
+				//"scrollX" : "100%",
+				"aLengthMenu" : [ 5, 20, 40, 60 ], //更改显示记录数选项  
+				"iDisplayLength" : 20, //默认显示的记录数  
+				"bAutoWidth" : true, //是否自适应宽度  
+				"bScrollInfinite" : false, //是否启动初始化滚动条  
+				"bScrollCollapse" : true, //是否开启DataTables的高度自适应，当数据条数不够分页数据条数的时候，插件高度是否随数据条数而改变  
+				"bPaginate" : true, //是否显示（应用）分页器  
+				"bInfo" : true, //是否显示页脚信息，DataTables插件左下角显示记录数  
+				//"sPaginationType" : "full_numbers", //详细分页组，可以支持直接跳转到某页  
+				"bSort" : true, //是否启动各个字段的排序功能  
+				//"aaSorting" : [ [ 1, "desc" ] ], //默认的排序方式，第2列，升序排列  
+				"bFilter" : false, //是否启动过滤、搜索功能
+				"sAjaxSource": "reportAction_costIn.action"  
+				});
+		});
+				
+
+			
+			
+			
+			$('.date-picker').datepicker({
+				autoclose : true
+			});
+
+		</script>
+		<script src="assets/js/ace/ace.new.onpage-help1.js"></script>

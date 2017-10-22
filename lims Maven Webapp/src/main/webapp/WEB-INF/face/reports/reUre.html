@@ -1,0 +1,36 @@
+{"sEcho": ${sEcho},
+    "iTotalRecords": ${iTotalRecords},
+    "iTotalDisplayRecords": ${iTotalDisplayRecords},
+	"aaData":[
+	<#if reUres?exists >
+				 <#if (reUres.size()>0) >					 		 
+					<#list reUres as reUre>
+						{
+							"id1": "${reUre["RN"]}",
+							"id2": "${reUre["CTTCODE"]!''}",
+							"id3": "${reUre["PNAME"]!''}",
+							"id4": "${reUre["CUSTOMERNAME"]!''}",
+							"id5": "${reUre["CTTAMOUNT"]!''}",
+							"id6": "${reUre["RATIO"]!''}",
+							"id7": "${reUre["CTTCATE"]!''}",
+				            "id8": "${reUre["CTTSTART"]!''}",				            
+				            "id9": "${reUre["CTTLOADENDDATE"]!''}",
+				            "id10": "${reUre["CTTREPAYDAY"]!''}",
+				            "id11": "${reUre["CTTPAYMONTH"]!''}",
+				            "id12": "${reUre["ARREARSCOUNT"]!''}",
+				            "id13": "${reUre["HISARREARS"]!''}",
+				            "id14": "${reUre["TOTAL"]!''}",
+				            "id15": "${reUre["USERNAME"]!''}",
+				            "id16": "${reUre["OVERINTEREST"]!''}",
+				            "id17": "${reUre["OVERTIMES"]!''}",
+				            "id18": "${reUre["CUSTOMERMOBILE"]!''}"				             
+            
+					      }
+						<#if reUre_has_next>,</#if>	 
+					</#list>	 
+				</#if> 
+			</#if> 
+		
+	    ]  
+}
+

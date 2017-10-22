@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"	
+ 	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-3.0.xsd
+    http://www.springframework.org/schema/aop 
+    http://www.springframework.org/schema/aop/spring-aop.xsd
+    http://www.springframework.org/schema/tx 
+    http://www.springframework.org/schema/tx/spring-tx.xsd"    
+	default-autowire="byName">
+	<!-- 采用注释的方式配置bean -->
+	<context:annotation-config />
+	<!-- 读取自定义参数 -->
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:cfg.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- 配置要扫描的包 -->
+	<context:component-scan base-package="com.ioes.lims.action" />
+	<context:component-scan base-package="com.ioes.lims.dao" />
+	<context:component-scan base-package="com.ioes.lims.daoimp" />
+	<context:component-scan base-package="com.ioes.lims.idao" />
+	<bean id="dataSourceBoneCp" class="com.alibaba.druid.pool.DruidDataSource"
+		init-method="init" destroy-method="close">
+		<!-- 基本属性 url、user、password -->
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="${db.url}" />
+		<property name="username" value="${db.user}" />
+		<property name="password" value="${db.pw}" />
+
+		<!-- 配置初始化大小、最小、最大 -->
+		<property name="initialSize" value="20" />
+		<property name="minIdle" value="2" />
+		<property name="maxActive" value="20" />
+
+		<!-- 配置获取连接等待超时的时间 -->
+		<property name="maxWait" value="600000" />
+
+		<!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+		<property name="timeBetweenEvictionRunsMillis" value="600000" />
+
+		<!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+		<property name="minEvictableIdleTimeMillis" value="300000" />
+		<property name="validationQuery" value="SELECT 'x'" />
+		<!-- 超过时间限制是否回收 -->
+		<property name="removeAbandoned" value="true" />
+		<!-- 超时时间；单位为秒。180秒=3分钟 -->
+		<property name="removeAbandonedTimeout" value="7200" />
+		<!-- 关闭abanded连接时输出错误日志 -->
+		<property name="logAbandoned" value="true" />
+
+		<property name="testWhileIdle" value="true" />
+		<property name="testOnBorrow" value="false" />
+		<property name="testOnReturn" value="false" />
+
+		<!-- 打开PSCache，并且指定每个连接上PSCache的大小 -->
+		<property name="poolPreparedStatements" value="true" />
+		<property name="maxPoolPreparedStatementPerConnectionSize"
+			value="20" />
+
+		<!-- 配置监控统计拦截的filters，去掉后监控界面sql无法统计 -->
+		<property name="filters" value="stat" />
+		<!-- 如果配置了proxyFilters，此配置可以不配置 druid.stat.mergeSql=true 合并执行的相同sql，避免因为参数不同而统计多条sql语句 
+			druid.stat.slowSqlMillis=10000 用来配置SQL慢的标准，执行时间超过slowSqlMillis的就是慢 <property 
+			name="connectionProperties" value="druid.stat.mergeSql=true;druid.stat.slowSqlMillis=10000" 
+			/> -->
+
+		<!-- 监控统计拦截的filters -->
+		<!-- 并在filters属性中配置了log4j -->
+		<property name="proxyFilters">
+			<list>
+				<ref bean="stat-filter" />
+				<ref bean="log-filter" />
+			</list>
+		</property>
+	</bean>
+	<!-- 慢SQL记录 -->
+	<bean id="stat-filter" class="com.alibaba.druid.filter.stat.StatFilter">
+		<property name="mergeSql" value="true" />
+		<property name="slowSqlMillis" value="10000" />
+		<property name="logSlowSql" value="true" />
+	</bean>
+
+	<bean id="log-filter" class="com.alibaba.druid.filter.logging.Log4jFilter">
+		<!-- <property name="resultSetLogEnabled" value="false" /> -->
+		<!-- <property name="statementExecutableSqlLogEnable" value="true" /> -->
+	</bean>
+	<!-- ************************************************************************************ -->
+	<bean id="mySessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSourceBoneCp" />
+		</property>
+		<property name="mappingDirectoryLocations">
+			<list>
+				<!-- 以下用来列出所有的PO映射文件 -->
+				<value>classpath:./orm</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<!-- 设置Hibernate方言 -->
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<!-- 是否打印sql -->
+				<prop key="hibernate.show_sql">false</prop>
+				<!-- 格式化sql -->
+				<prop key="hibernate.format_sql">true</prop>
+				<!-- 是否自动更新表 -->
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.current_session_context_class">thread</prop>
+				<!-- 最大抓取深度，如果为0，则关闭默认的外连接抓取。建议值为0-3 -->
+				<prop key="hibernate.max_fetch_depth">1</prop>
+				<!-- 用于生成有助于调试的注释信息，默认为关闭 -->
+				<prop key="hibernate.use_sql_comments">true</prop>
+			</props>
+		</property>
+	</bean>
+	<!-- 配置事务管理器 -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory">
+			<ref bean="mySessionFactory" />
+		</property>
+	</bean>
+	<!-- 配置事务传播特性 -->
+	<!--其中*为通配符，即代表以save为开头的所有方法，即表示符合此命名规则的方法作为一个事务。
+	  propagation="REQUIRED"代表支持当前事务，如果当前没有事务，就新建一个事务。这是最常见的选择。
+	 -->
+	<tx:advice id="TestAdvice" transaction-manager="transactionManager" >
+		<tx:attributes>
+			<tx:method name="save*" propagation="REQUIRED" />
+			<tx:method name="del*" propagation="REQUIRED" />
+			<tx:method name="update*" propagation="REQUIRED" />
+			<tx:method name="add*" propagation="REQUIRED" />
+			<tx:method name="find*" propagation="REQUIRED" />
+			<tx:method name="get*" propagation="REQUIRED" />
+			<tx:method name="apply*" propagation="REQUIRED" />
+			<tx:method name="merge*" propagation="REQUIRED" />
+			
+		</tx:attributes>
+	</tx:advice>
+	<!-- 配置参与事务的类 -->
+	<!--
+		aop:pointcut标签配置参与事务的类，由于是在Service中进行数据库业务操作，配的应该是包含那些作为事务的方法的Service类。
+       	首先应该特别注意的是id的命名，同样由于每个模块都有自己事务切面，所以我觉得初步的命名规则因为 all+模块名+ServiceMethod。而且每个模块之间不同之处还在于以下一句：
+       	expression="execution(* com.ioes.model.service.*.*(..))"
+       	其中第一个*代表返回值，第二*代表service下子包，第三个*代表方法名，“（..）”代表方法参数。
+    -->   
+	<aop:config>
+		<aop:pointcut id="allTestServiceMethod"
+			expression="execution(* com.ioes.lims.daoimp.*.*(..))" />
+		<aop:advisor pointcut-ref="allTestServiceMethod"
+			advice-ref="TestAdvice" />
+	</aop:config>
+	
+	<!-- *************************************************** -->
+	<bean id="SessionIterceptor" class="com.ioes.lims.action.SessionIterceptor"
+		scope="prototype">		
+	</bean>	
+	<bean id="baseAction" class="com.ioes.lims.action.BaseAction" lazy-init="true" scope="prototype">				
+	</bean>
+	<bean id="databaseBonecpUtil" class="com.sias.util.DatabaseBonecpUtil">
+		<property name="dataSource" ref="dataSourceBoneCp" />
+	</bean>
+	<bean id="paginationBean" class="com.ioes.lims.beans.PaginationBean" scope="prototype">
+		<property name="dbtype">
+			<value>mysql</value>
+		</property>
+		<property name="databaseBoneUtil" ref="databaseBonecpUtil" />
+	</bean>	
+	</beans>

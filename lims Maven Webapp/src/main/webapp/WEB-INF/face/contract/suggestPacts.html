@@ -1,0 +1,20 @@
+{
+	"message": "",
+	"value": [
+		<#if sugestpacts?exists >
+				 <#if (sugestpacts.size()>0) >					 		 
+					<#list sugestpacts as pact>
+					{						
+						"customername": "${pact["CUSTOMERNAME"]!''}",
+						"pcode": "${pact["CTTCODE"]!''}",						
+						"id": "${pact["ID"]!''}"			
+					}						
+					<#if pact_has_next>,</#if>	 
+					</#list>	 
+				</#if> 
+			</#if>  
+		
+	],
+	"code": 200,
+	"redirect": ""
+}

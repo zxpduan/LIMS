@@ -1,0 +1,70 @@
+<script src="assets/js/fuelux/data/fuelux.tree-sample-demo-data.js"></script>
+<script src="assets/js/fuelux/fuelux.tree.min.js"></script>
+<link rel="stylesheet" href="assets/css/mine.css" />
+<div class="row">
+	<div class="col-xs-12">
+		<form id="editdeptform" action="deptAction!editdept.action" class="form-horizontal" role="form" id="contract_form">
+			<!-- #section:elements.form -->
+			<div class="space-4"></div>
+			<div class="form-group col-xs-12 col-sm-12">
+				<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 部门名称 </label>
+				<div class="col-sm-9">
+					<input type="text" id="form-field-1" name="name" placeholder="点击输入,不能重复" class="col-sm-11 col-xs-11" />
+					<input type="hidden" name="id"/>
+					<sapn class="note_star">*</sapn>
+				</div>				
+			</div>
+			<div class="form-group col-xs-12 col-sm-12">
+				<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 上级部门 </label>
+				<div class="col-sm-9">
+					<input type="text" readonly="" id="parentDept" name="deptname" maxlength=50 placeholder="缺省密码123456" class="col-sm-9 col-xs-9" />					
+					<input type="hidden" id="parentDeptid" name="parent"/>
+					
+					<a href="#" id="lookdept" data-remote="deptAction!depttree.action" data-mtitle="look dept" data-id="dept_edit_lookdept_dia" data-width="600" data-height="520" data-okevent="select_ok()"
+							data-oktitle="确定选择"  class="btn btn-success btn-sm chosen-mine-button lookdept"> 
+							<i class="ace-icon fa fa-plus align-top bigger-125"></i>
+							</a>
+				</div>				
+			</div>
+			
+			<div class="form-group col-xs-12 col-sm-12">
+				<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 备注 </label>
+				<div class="col-sm-9">
+					<input type="text" id="form-field-1" name="deptdesc" placeholder="" class="col-sm-11 col-xs-11" />
+				</div>
+			</div>
+			
+				
+		</form>
+	</div>
+</div>
+<script type="text/javascript">
+		//for dialog
+		$(".lookdept").each(function() {				
+				$(this).wwDialog();
+		});
+		//for set edit value
+		var treeSelectObj=zTree.getSelectedNodes()[0];		
+		$("#editdeptform").find("input[name='name']").val(treeSelectObj.name);
+		$("#editdeptform").find("input[name='id']").val(treeSelectObj.id);
+		$("#editdeptform").find("input[id='parentDeptid']").val(treeSelectObj.pId);
+		$("#editdeptform").find("input[name='deptdesc']").val(treeSelectObj.desc);
+		console.log(treeSelectObj.pId);
+		var targetNode_tem = zTree.getNodeByParam("id", treeSelectObj.pId, null);	
+		$("#editdeptform").find("input[name='deptname']").val(targetNode_tem.name);
+		// for dialog ok button event
+		function select_ok(){
+			var zSelectTree = $.fn.zTree.getZTreeObj("tree_select");
+			var _treeSelectObj=zSelectTree.getSelectedNodes()[0];
+			if (_treeSelectObj!=null){
+				$("#dept_edit_lookdept_dia").modal('hide');
+				$("#parentDept").val(_treeSelectObj.name);				
+				$("#parentDeptid").val(_treeSelectObj.id);				
+			}else{
+				showMsgByKevin("<center>请选择部门</center>");
+			}			
+			
+			//(treeNode.tId + ", " + treeNode.name + "," + treeNode.checked
+		}
+		
+</script>

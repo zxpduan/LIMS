@@ -1,0 +1,301 @@
+<table id="sample-table-3" class="col-sm-12 col-xs-12 table table-striped table-bordered table-hover mine-table-center">
+			<thead>
+				<tr>
+					<th class="hidden-480">合同编号</th>
+					<th>客户姓名</th>
+					<th class="hidden-480">还款期数</th>
+					<th class="hidden-480">月供</th>
+					<th class="hidden-480">历史累计欠款</th>
+					<th>实际还款</th>
+					<th class="hidden-480">应还本金</th>
+					<th class="hidden-480">应还利息</th>
+					<th class="hidden-480">累计欠款</th>
+					<th class="hidden-480">贷款本金余额</th>
+				</tr>
+			</thead>
+			<tbody>
+				
+				<#setting number_format="0">
+				
+				<#if pacts?exists >
+				 <#if (pacts.size()>0) >					 		 
+					<#list pacts as pact>						
+						<tr>
+					<td class="hidden-480">${pact["CTTCODE"]}
+					<input  name="repay[${pact_index}].pid" type="hidden" value="${pact["ID"]}"/>
+					<input  name="repay[${pact_index}].repayday" type="hidden" value="${repd}"/>
+					<input  name="repay[${pact_index}].operday" type="hidden" value="${opday}"/>
+					</td>
+					<td><a href="#">${pact["CUSTOMERNAME"]}</a></td>
+					<td class="hidden-480">${pact["PAYTIMES"]!''}</td>
+					<td class="hidden-480"><span>${pact["PAYAMOUNT"]?c}</span></td>
+					<#if (pact["CTTTAA"]??)>
+						<#if (pact["CTTTAA"]?string!="" && pact["CTTTAA"]?string!="null")>
+							<#if ((pact["CTTTAA"]?number)<0)>
+								<#assign paymont=(pact["CTTTAA"]?number)*(-1) />
+								<td class="hidden-480"><span>${pact["CTTTAA"]?c}</span></td>
+							<#else>
+							<td class="hidden-480"><span>${pact["CTTTAA"]?c}</span></td>
+							<#assign paymont=pact["PAYAMOUNT"]?c />
+							</#if>
+						<#else>
+						<td class="hidden-480"><span>0</span></td>
+						<#assign paymont=pact["PAYAMOUNT"]?c />
+						</#if>
+					<#else>
+					<td class="hidden-480"><span>0</span></td>
+					<#assign paymont=pact["PAYAMOUNT"]?c />
+					</#if>					
+					<td><input class="inputMon inputMonOrigin" name="repay[${pact_index}].payamount" type="text" value="${paymont}"/></td>
+					<td class="hidden-480">
+					<input readonly="readonly" class="inputMonOrigin" type="text" value="" placeholder="<#if (pact["COST"]??)><#if (pact["COST"]?string!="" && pact["COST"]?string!="null")>${pact["COST"]?c}<#else>0</#if><#else>0</#if>" />
+					</td>					
+					<td class="hidden-480">
+					<input readonly="readonly" class="inputMonOrigin" type="text" value="" placeholder="<#if (pact["INTEREST"]??)><#if (pact["INTEREST"]?string!="" && pact["INTEREST"]?string!="null")>${pact["INTEREST"]?c}<#else>0</#if><#else>0</#if>" />
+					</td>
+					<#if (pact["CTTTAA"]??)>
+						<#if (pact["CTTTAA"]?string!="" && pact["CTTTAA"]?string!="null")>
+							<#if ((pact["CTTTAA"]?number)>0)>
+								<td class="hidden-480"><span class='label label-warning '>${pact["CTTTAA"]?c}</span></td>
+							<#else>
+							<td class="hidden-480"><span>0</span></td>
+							</#if>
+						<#else>
+						<td class="hidden-480"><span>0</span></td>
+						</#if>
+					<#else>
+					<td class="hidden-480"><span>0</span></td>
+					</#if>
+					
+					<td class="hidden-480">${pact["CTTBALANCE"]!''}</td>
+				</tr>	 
+					</#list>	 
+				</#if> 
+			</#if>  				
+			</tbody>
+		</table>
+		<script type="text/javascript">
+			jQuery(function($) {
+				var oTable3 = $('#sample-table-3')
+				//.wrap("<div class='dataTables_borderWrap' />")   //if you are applying horizontal scrolling (sScrollX)
+				.dataTable({
+
+				"aoColumns" : [ {
+					"sWidth" : "20%"
+				}, {
+					"sWidth" : "10%"
+				}, null, null, {
+					"sWidth" : "10%"
+				}, {
+					"sWidth" : "10%"
+				}, {
+					"sWidth" : "10%"
+				}, {
+					"bSortable" : false
+				}, {
+					"bSortable" : false
+				}, {
+					"bSortable" : false
+				} ],
+				"bDrawing" : false,
+				fnDrawCallback : function() {
+					focusEvent();
+				},
+				"oLanguage" : {
+				"sLengthMenu" : "每页显示 _MENU_ 条记录",
+				"sZeroRecords" : "对不起，没有匹配的数据",
+				"sInfo" : "第 _START_ - _END_ 条 / 共 _TOTAL_ 条数据",
+				"sInfoEmpty" : "没有匹配的数据",
+				"sInfoFiltered" : "(数据表中共 _MAX_ 条记录)",
+				"sProcessing" : "正在加载中...",
+				"sSearch" : "全文过滤：",
+				"oPaginate" : {
+				"sFirst" : "第一页",
+				"sPrevious" : " 上一页 ",
+				"sNext" : " 下一页 ",
+				"sLast" : " 最后一页 "
+				}
+				},
+
+				//"sScrollXInner": "120%",
+				//"bScrollCollapse": true,
+				//Note: if you are applying horizontal scrolling (sScrollX) on a ".table-bordered"
+				//you may want to wrap the table inside a "div.dataTables_borderWrap" element
+
+				//"iDisplayLength": 50,
+				// "bProcessing" : true, //DataTables载入数据时，是否显示‘进度’提示  
+				//"bServerSide" : true, //是否启动服务器端数据导入  
+				"bStateSave" : true, //是否打开客户端状态记录功能,此功能在ajax刷新纪录的时候不会将个性化设定回复为初始化状态  
+				//"bJQueryUI" : true, //是否使用 jQury的UI theme  
+				//"sScrollY" : 450, //DataTables的高  
+				//"sScrollX" : "120%", //DataTables的宽  
+				"aLengthMenu" : [ 10,15, 20, 60, 120, 200 ], //更改显示记录数选项  
+				"iDisplayLength" : 15, //默认显示的记录数  
+				"bAutoWidth" : false, //是否自适应宽度  
+				//"bScrollInfinite" : false, //是否启动初始化滚动条  
+				//"bScrollCollapse" : true, //是否开启DataTables的高度自适应，当数据条数不够分页数据条数的时候，插件高度是否随数据条数而改变  
+				"bPaginate" : true, //是否显示（应用）分页器  
+				"bInfo" : true, //是否显示页脚信息，DataTables插件左下角显示记录数  
+				//"sPaginationType" : "full_numbers", //详细分页组，可以支持直接跳转到某页  
+				"bSort" : true, //是否启动各个字段的排序功能  
+				//"aaSorting" : [ [ 1, "desc" ] ], //默认的排序方式，第2列，升序排列  
+				"bFilter" : true, //是否启动过滤、搜索功能  
+				});
+				//$("#sample-table-3_paginate").on("click", "a", function() { alert("clicked") });
+			})
+			
+			
+			
+			
+			$(document).ready(function() {
+				focusEvent();
+				
+			});
+			
+			////enter focus
+			function focusEvent() {
+				/* $.browser.mozilla = /firefox/.test(navigator.userAgent.toLowerCase());
+				$.browser.webkit = /webkit/.test(navigator.userAgent.toLowerCase());
+				$.browser.opera = /opera/.test(navigator.userAgent.toLowerCase());
+				$.browser.msie = /msie/.test(navigator.userAgent.toLowerCase()); */
+				//$(':input:text:first').focus();
+				$('#sample-table-3 :input:text:eq(0)').focus();
+
+				$(':input:enabled').addClass('enterIndex');
+				// get only input tags with class data-entry 
+				textboxes = $('.inputMon.enterIndex');
+				// now we check to see which browser is being used 
+				if ($.browser.mozilla) {
+					$(textboxes).bind('keypress', CheckForEnterUpDown);
+				} else {
+					$(textboxes).bind('keydown', CheckForEnterUpDown);
+				}
+				//$(':input:text.inputMonOrigin').css("width", "66px");//设置表中输入框的宽度
+				/////////////calculate cost and interest
+				$(".inputMon").each(function(){
+					$(this).off("blur");
+					$(this).on("blur", function() {
+								var principal = $(this).parent("td").nextUntil().children("input");
+								var interest = principal.parent("td").nextUntil().children("input");
+								var historyArrears=$(this).parent("td").prevUntil().children("span");
+								var monthpay=historyArrears.parent("td").prevUntil().children("span").text();//月供
+								var newArrears=interest.parent("td").nextUntil().children("span");
+								
+								var money = $(this).val();//实际付
+								if (money == "")
+									money = 0;
+								if (isNaN(money)) {
+									money = 0;
+									alert("输入金额有误！");
+									return;
+								}
+								//var principal_v = (money * 0.8).toFixed(2);
+								var principal_v =isNaN($(principal).attr("placeholder"))?0:$(principal).attr("placeholder");//本金
+								var hist=historyArrears.html();//历史欠款
+								//var interest_v = (money * 1 - principal_v).toFixed(2);
+								var interest_v=isNaN($(interest).attr("placeholder"))?0:$(interest).attr("placeholder");//利息
+								var intersecter=money-hist;//实还金额和欠款差额
+								var intersecter1=intersecter-principal_v;//还完欠款后和本金的差额
+								var intersecter2=intersecter1-interest_v;//除了本金后的实付金额和应付利息的差额
+								
+								
+								//优先还历史欠款，其次是本金，最后是利息，历史欠款，按照时间先后顺序，还最早的欠款记录
+								if (intersecter>=0){
+								
+									if (intersecter1>=0){//结余
+									
+										principal.val(principal_v);
+										if (intersecter2>=0){
+											newArrears.text(intersecter2*(-1));
+											interest.val(interest_v);
+										}else{
+											newArrears.text(intersecter2*(-1));
+											interest.val(0);
+										}
+																		
+									}else{//不够
+																											
+										principal.val(intersecter);
+										newArrears.text(intersecter1*(-1)+interest_v*1);
+										interest.val(0);
+									}						
+								}else{//不够								
+									principal.val(0);
+									interest.val(0);		
+									//console.log(monthpay+":"+money+":"+hist);				
+									newArrears.text((intersecter)*(-1)+monthpay*1);
+								}	
+												
+							});
+				});
+				//////////////end calculate cost and interest
+			}
+			function CheckForEnterUpDown(event) {
+				
+				if (event.keyCode == 13 && $(this).attr('type') != 'button' && $(this).attr('type') != 'submit' && $(this).attr('type') != 'textarea' && $(this).attr('type') != 'reset') {
+					var i = $('.inputMon.enterIndex').index($(this));
+					var n = $('.inputMon.enterIndex').length;
+
+					if (i < n - 1) {
+						if ($(this).attr('type') != 'radio') {
+							NextDOM($('.inputMon.enterIndex'), i);
+						} else {
+							var last_radio = $('.inputMon.enterIndex').index($('.enterIndex[type=radio][name=' + $(this).attr('name') + ']:last'));
+							NextDOM($('.inputMon.enterIndex'), last_radio);
+						}
+					}
+					return false;
+				}
+				if (event.keyCode == 38 && $(this).attr('type') != 'button' && $(this).attr('type') != 'submit' && $(this).attr('type') != 'textarea' && $(this).attr('type') != 'reset') {
+					var i = $('.inputMon.enterIndex').index($(this));
+					var n = $('.inputMon.enterIndex').length;
+
+					if (i <= n - 1) {
+						if ($(this).attr('type') != 'radio') {
+							PreDOM($('.inputMon.enterIndex'), i);
+						} else {
+							var last_radio = $('.inputMon.enterIndex').index($('.enterIndex[type=radio][name=' + $(this).attr('name') + ']:last'));
+							PreDOM($('.inputMon.enterIndex'), last_radio);
+						}
+					}
+					return false;
+				}
+				if (event.keyCode == 40 && $(this).attr('type') != 'button' && $(this).attr('type') != 'submit' && $(this).attr('type') != 'textarea' && $(this).attr('type') != 'reset') {
+					var i = $('.inputMon.enterIndex').index($(this));
+					var n = $('.inputMon.enterIndex').length;
+
+					if (i <= n - 1) {
+						if ($(this).attr('type') != 'radio') {
+							NextDOM($('.inputMon.enterIndex'), i);
+						} else {
+							var last_radio = $('.inputMon.enterIndex').index($('.enterIndex[type=radio][name=' + $(this).attr('name') + ']:last'));
+							NextDOM($('.inputMon.enterIndex'), last_radio);
+						}
+					}
+					return false;
+				}
+			}
+			function NextDOM(myjQueryObjects, counter) {
+				var n = $('.inputMon.enterIndex').length;
+				
+				if (counter + 1>=n) {
+					counter=0;
+					myjQueryObjects.eq(counter).trigger('focus');
+					
+				}else{
+					if (myjQueryObjects.eq(counter + 1)[0].disabled) {
+						NextDOM(myjQueryObjects, counter + 1);
+					} else {
+						myjQueryObjects.eq(counter + 1).trigger('focus');
+					}
+				}
+				
+			}
+			function PreDOM(myjQueryObjects, counter) {
+				if (myjQueryObjects.eq(counter - 1)[0].disabled) {
+					PreDOM(myjQueryObjects, counter - 1);
+				} else {
+					myjQueryObjects.eq(counter - 1).trigger('focus');
+				}
+			}
+		</script>

@@ -1,0 +1,20 @@
+{
+	"message": "",
+	"value": [
+		<#if sugestusers?exists >
+				 <#if (sugestusers.size()>0) >					 		 
+					<#list sugestusers as user>
+					{
+			"userName": "${user["USERNAME"]!''}",
+			"shortAccount": "${user["ACCOUNT"]!''}"
+		} 
+						
+						<#if user_has_next>,</#if>	 
+					</#list>	 
+				</#if> 
+			</#if>  
+		
+	],
+	"code": 200,
+	"redirect": ""
+}

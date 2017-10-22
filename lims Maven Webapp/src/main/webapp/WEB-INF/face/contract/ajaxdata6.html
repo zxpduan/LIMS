@@ -1,0 +1,23 @@
+{	"sEcho": ${sEcho},
+    "iTotalRecords": ${iTotalRecords},
+    "iTotalDisplayRecords": ${iTotalDisplayRecords},
+	"aaData": [
+			<#if pacts?exists >
+				 <#if (pacts.size()>0) >					 		 
+					<#list pacts as pact>
+						{
+							"id1": "<label class='position-relative'><b style='display:none;'>${pact["ID"]}</b><input type='checkbox' class='ace checkbtn' /><span class='lbl'>${pact["RN"]}</span></label>",
+							"id2": "${pact["CTTCODE"]!''}",
+							"id3": "${pact["CUSTOMERNAME"]!''} ${pact["CUSTOMERREPLACE1"]!''} ${pact["CUSTOMERREPLACE2"]!''}",
+							"id4": "${pact["USERNAME"]!''}",
+							"id5": "${pact["CTTAMOUNT"]!''}",
+					        "id6": "${pact["ADDTIME"]!''}",
+					        "id7": "<div class='hidden-sm hidden-xs action-buttons'><a data-remote='pactAction_editpact.action?id=${pact["ID"]}&optype=${optype!''}' data-draggable='false' data-mtitle='修改合同信息' data-id='editpact_dia' data-width='950' data-height='600' data-okevent='doSaveEdit()' data-oktitle='保存'  class='green user_delop' href='#' title='修改合同信息'> <i class='ace-icon fa fa-pencil bigger-130'></i></a> </div><div class='hidden-md hidden-lg'><div class='inline position-relative'><button class='btn btn-minier btn-yellow dropdown-toggle' data-toggle='dropdown' data-position='auto'><i class='ace-icon fa fa-caret-down icon-only bigger-120'></i></button><ul class='dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close'><li><a data-remote='pactAction_editpact.action?id=${pact["ID"]}' data-draggable='false' data-mtitle='修改合同信息' data-id='editpact_dia' data-width='950' data-height='600' data-okevent='doSaveEdit()' data-oktitle='保存'  class='green user_delop' href='#'><span class='green'><i class='ace-icon fa fa-pencil-square-o bigger-120'></i></span></a></li></ul></div></div>"
+					      }
+						<#if pact_has_next>,</#if>	 
+					</#list>	 
+				</#if> 
+			</#if>  
+	    ]  
+}
+

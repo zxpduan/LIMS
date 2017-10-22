@@ -1,0 +1,21 @@
+{	"sEcho": ${sEcho},
+    "iTotalRecords": ${iTotalRecords},
+    "iTotalDisplayRecords": ${iTotalDisplayRecords},
+	"aaData": [
+			<#if lrList?exists >
+				 <#if (lrList.size()>0) >					 		 
+					<#list lrList as rp>
+						{
+							"id1": "${rp["PAYTIMES"]!''}",							
+							"id2": "${rp["PAYAMOUNT"]!''}",
+							"id3": "${rp["COST"]!''}",
+							"id4": "${rp["INTEREST"]!''}",
+					        "id5": "${rp["PAYDAY"]!''}"
+					      }
+						<#if rp_has_next>,</#if>	 
+					</#list>	 
+				</#if> 
+			</#if>  
+	    ]  
+}
+

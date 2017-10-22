@@ -1,0 +1,23 @@
+{	"sEcho": ${sEcho},
+    "iTotalRecords": ${iTotalRecords},
+    "iTotalDisplayRecords": ${iTotalDisplayRecords},
+	"aaData": [
+			<#if pacts?exists >
+				 <#if (pacts.size()>0) >					 		 
+					<#list pacts as pact>
+						{
+							"id1": "<label class='position-relative'><span class='lbl'>${pact["RN"]}</span></label>",
+							"id2": "${pact["CTTCODE"]!''}",
+							"id3": "${pact["PAYTIMES"]!''}",
+					        "id4": "${pact["STARTDATE"]!''}",
+					        "id5": "${pact["AMOUNT"]!''}",
+							"id6": "${pact["OVERDAY"]!''}",
+							"id7": "${pact["OVERINTEREST"]!''}"
+					      }
+						<#if pact_has_next>,</#if>	 
+					</#list>	 
+				</#if> 
+			</#if>  
+	    ]  
+}
+

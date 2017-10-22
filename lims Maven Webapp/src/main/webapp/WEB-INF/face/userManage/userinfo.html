@@ -1,0 +1,32 @@
+<div class="page-content">
+	<div class="row">
+		<form class="form-horizontal" role="form" id="contract_form">
+			<div class="col-xs-12">
+				<div class="widget-box">
+					<div class="widget-body">
+						<div class="widget-main row">
+							<!-- /section:settings.skins -->
+							<label class="col-sm-2 control-label no-padding-right" for="form-field-1">账号</label>
+							<div class="col-sm-9" style="margin-bottom:5px;">
+								<input type="text" id="form-field-1" value="${userinfo.getAccount()!'已被管理员删除,请重新登录'}" class="col-sm-12 col-xs-12" />
+							</div>
+							<label class="col-sm-2 control-label no-padding-right" for="form-field-1">姓名</label>
+							<div class="col-sm-9" style="margin-bottom:5px;">
+								<input type="text" id="form-field-1" value="${userinfo.getUsername()!'已被管理员删除,请重新登录'}" class="col-sm-12 col-xs-12" />
+							</div>
+							<label class="col-sm-2 control-label no-padding-right" for="form-field-1">所在部门</label>
+							<div class="col-sm-9" style="margin-bottom:5px;">
+								<input type="text" id="form-field-1" value="${deptinfo!''}" class="col-sm-12 col-xs-12" />
+							</div>
+							<label class="col-sm-2 control-label no-padding-right" for="form-field-1">角色</label>
+							<div class="col-sm-9" style="margin-bottom:5px;">
+								<input type="text" id="form-field-1" value="${rolename!''}" class="col-sm-12 col-xs-12" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /.span -->
+		</form>
+	</div>
+</div>

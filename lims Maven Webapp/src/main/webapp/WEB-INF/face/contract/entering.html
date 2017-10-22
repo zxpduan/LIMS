@@ -1,0 +1,657 @@
+<link rel="stylesheet" href="assets/css/datepicker.css" />
+<style>
+label span {
+	vertical-align: middle;
+	color: red;
+}
+</style>
+<!-- #section:basics/info.contents.breadcrumbs -->
+<div class="breadcrumbs" id="breadcrumbs">
+	<script type="text/javascript">
+		try {
+			ace.settings.check('breadcrumbs', 'fixed')
+		} catch (e) {
+		}
+	</script>
+	<ul class="breadcrumb">
+		<li><i class="ace-icon fa fa-desktop"></i> <a href="#"></a></li>
+		<li>合同管理</li>
+		<li>合同录入</li>
+	</ul>
+	<!-- /.breadcrumb -->
+</div>
+<!-- /section:basics/info.contents.breadcrumbs -->
+<div class="page-content">
+	<div class="row">
+		<div class="col-xs-12">
+			<!-- PAGE CONTENT BEGINS -->
+			
+			<form class="form-horizontal" role="form" action="pactAction!addpact.action" id="contract_form">
+			<!-- #section:pact/info.contents -->
+				
+				<div class="space-4"></div>
+				<h5 class="row header bigger lighter  col-xs-12 col-sm-12">
+					<i class="ace-icon fa fa-bars purple"></i> 基本信息
+				</h5>
+				
+				
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right"> 合同日期 </label>
+					<div class="col-sm-9">
+						<div class="input-group">
+							<input class="form-control date-picker" readonly="" name="cttdate" id="id-date-picker-1" type="text" data-date-format="yyyy-mm-dd" /> <span class="input-group-addon">
+								<i class="fa fa-calendar bigger-110"></i>
+							</span>
+						</div>
+					</div>
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right" for="form-field-1">案场<span>*</span></label>
+					<div class="col-sm-9">
+						<div class="input-group">
+							<input type="text" name="cttprojectname" readonly="readonly" class="form-control" id="BorrowerProject">
+							<input type="hidden" name="cttproject" />
+							<div class="input-group-btn">
+								<button type="button" class="btn btn-info btn-white dropdown-toggle" data-toggle="dropdown">
+									<span class="caret"></span>
+								</button>
+								<a href="#projectAction_projectman.action" class="btn btn-sm btn-success" style="height:34px;width:35px;"><i class="ace-icon fa fa-plus"></i></a>
+								<ul class="dropdown-menu" role="menu">
+								</ul>
+							</div>
+							<!-- /btn-group -->
+						</div>
+					</div>
+				</div>
+				
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right">是否优惠<span>*</span>
+					</label>
+					<div class="col-sm-9">
+						<small class="muted smaller-90"></small> 
+						<input name="cttdiscount" id="id-button-borders" value="1" type="checkbox"  class="ace ace-switch ace-switch-6" /> 
+						<span class="lbl middle" style="margin-top:5px;"></span>
+					</div>
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right"> 流水号 <span>*</span></label>
+					<div class="col-sm-9">
+						<input type="text" name="cttserial"  placeholder="" class="col-sm-12 col-xs-12" />
+						<input type="hidden" name="ctt_serail"  value=""/>
+						
+					</div>
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 合同编码 <span>*</span></label>
+					<div class="col-sm-9">
+						<input type="text" name="cttcode" readonly="" id="form-field-1" placeholder="be created by system" class="col-sm-12 col-xs-12" />
+					</div>
+				</div>
+				<div class="space-4"></div>
+				<h5 class="row header bigger lighter  col-xs-12 col-sm-12">
+					<i class="ace-icon fa fa-coffee purple"></i> 个人信息
+				</h5>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 借款人<span>*</span></label>
+					<div class="col-sm-9">
+						<div class="input-group">
+							<input type="text" name="cttlender" class="form-control" id="Borrower">
+							<input type="hidden" name="cttcustomer" class="form-control" id="Borrower">
+							<div class="input-group-btn">
+								<button type="button" class="btn btn-info btn-white dropdown-toggle" data-toggle="dropdown">
+									<span class="caret"></span>
+								</button>
+								<a href="#customer_entering.action" class="btn btn-sm btn-pink" style="height:34px;width:35px;"><i class="ace-icon fa fa-plus"></i></a>
+								<ul class="dropdown-menu" role="menu">
+								</ul>
+							</div>
+							<!-- /btn-group -->
+						</div>
+					</div>
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right"> 证件类型<span>*</span></label>
+					<div class="col-sm-9">
+						<input type="text" readonly="" name="cttcert" placeholder="" class="col-sm-12 col-xs-12" />
+					</div>
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right">证件号码 <span>*</span></label>
+					<div class="col-sm-9">
+						<input type="text" readonly="" name="cttcertnum" placeholder="" class="col-sm-12 col-xs-12" />
+					</div>
+				</div>
+				<div class="space-4"></div>
+				<h5 class="row header bigger lighter  col-xs-12 col-sm-12">
+					<i class="ace-icon fa  fa-credit-card purple"></i> 银行账号信息
+				</h5>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right"> 开户银行 </label>
+					<div class="col-sm-9">
+						<input type="text"  name="cttbank" value="中国建设银行河南省分行"  placeholder="" class="col-sm-12 col-xs-12" />
+					</div>
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right">银行账号 </label>
+					<div class="col-sm-9">
+						<input type="text"  name="cttbankcard"  placeholder="" class="col-sm-12 col-xs-12" />
+					</div>
+				</div>
+				<div class="space-4"></div>
+				<h5 class="row header bigger lighter  col-xs-12 col-sm-12">
+					<i class="ace-icon fa fa-file-text purple"></i> 合同详细信息
+				</h5>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 借款金额</label>
+					<div class="col-sm-9">
+						<input type="text" name="cttamount" id="form-field-1" value="0" placeholder="only number" class="col-sm-12 col-xs-12" />
+					</div>
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right"> 借款金额大写</label>
+					<div class="col-sm-9">
+						<input type="text" name="cttamountu" readonly="" value="零元整" placeholder="" class="col-sm-12 col-xs-12" />
+					</div>
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right"> 借款期限 </label>
+					<div class="col-sm-9">
+						<!-- 
+						<input type="text" maxlength=20 name="datelimit" class="col-sm-12 col-xs-12 date-picker" data-date-format="yyyy-mm-dd" />
+					 -->
+						<select  name="cttcate"  class="form-control" >
+							<option value="12">12期</option>
+							<option value="24">24期</option>
+							<option value="36" selected>36期</option>
+							<option value="48">48期</option>
+							<option value="60">60期</option>
+						</select>
+					</div>
+				</div>
+				
+				<!-- 
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right"> 借款期限大写</label>
+					<div class="col-sm-9">
+						<input type="text" readonly="" name="datelimitU" value="壹仟万元整" placeholder="" class="col-sm-12 col-xs-12" />
+					</div>
+				</div>
+				 -->
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right">借款利率 </label>
+					<div class="col-sm-9">
+						<select  name="cttratio"  class="form-control" >
+							<#if editratios?exists >
+									 <#if (editratios.size()>0) >					 		 
+										<#list editratios as ratio>
+										<option value="${ratio.id}">${ratio.ratio}|${ratio.ratiodesc!''}</option>									
+										</#list>	 
+									</#if> 
+								</#if> 
+						</select>
+					</div>
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right">月供计算方法 </label>
+					<div class="col-sm-9">
+						<select class="form-control"   name="calculatecate"  >
+							<option value="1">分段法</option>
+							<option value="2">普通法</option>
+						</select>
+					</div>
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right">还款方式 </label>
+					<div class="col-sm-9">
+						<select class="form-control"   name="cttrepaycate"  >
+							<option value="0">等额本息</option>
+							<option value="1">等额本金</option>
+						</select>
+					</div>
+				</div>
+				
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right">贷款用途 </label>
+					<div class="col-sm-9">
+						<select name="cttfun" class="form-control" >
+							<option value="0">购车位|C</option>
+							<option value="1">装修|Z</option>
+							<option value="2">电器|D</option>
+							<option value="3">其他|Q</option>
+						</select>
+					</div>
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right">购买金额 </label>
+					<div class="col-sm-9">
+						<input type="text" name="cttprice" placeholder="" value="0" class="col-sm-12 col-xs-12" />
+					</div>
+				</div>				
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right">客户自付款 </label>
+					<div class="col-sm-9">
+						<input type="text" name="cttselfprice" placeholder="" value="10000" class="col-sm-12 col-xs-12" />
+					</div>
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right">借款起始日<span>*</span> </label>
+					<div class="col-sm-9">
+						<input type="text"  name="cttstart"  maxlength=20 class="col-sm-12 col-xs-12 date-picker" data-date-format="yyyy-mm-dd" />
+					</div>
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right">放款日期 <span>*</span></label>
+					<div class="col-sm-9">
+						<input type="text"  name="cttloandate"  maxlength=20 class="col-sm-12 col-xs-12 date-picker" data-date-format="yyyy-mm-dd" />
+					</div>
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right">还款日<span>*</span> </label>
+					<div class="col-sm-9">						
+						<input type="text"  name="cttrepayday" value=""  maxlength=20 class="col-sm-12 col-xs-12 date-picker" data-date-format="yyyy-mm-dd"/>
+					</div>
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right">车位位置 </label>
+					<div class="col-sm-9">
+						<input type="text" name="cttcarloc"  maxlength=20 class="col-sm-12 col-xs-12" />
+					</div>
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right">房屋位置 </label>
+					<div class="col-sm-9">
+						<input type="text" name="ctthouseloc"  maxlength=20 class="col-sm-12 col-xs-12" />
+					</div>
+				</div>
+				<div class="space-4"></div>
+				<h5 class="row header bigger lighter  col-xs-12 col-sm-12">
+					<i class="ace-icon fa  fa-credit-card purple"></i> 历史还款信息
+				</h5>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right">已还期 </label>
+					<div class="col-sm-9">
+						<input type="text" name="ctthpaytimes" placeholder="" value="0" class="col-sm-12 col-xs-12" />
+					</div>
+				</div>
+				<div class="space-4"></div>
+				<div class="form-group col-xs-12 col-sm-6">
+					<label class="col-sm-3 control-label no-padding-right">历史欠款 </label>
+					<div class="col-sm-9">
+						<input type="text" name="ctttaa" placeholder="" value="0" class="col-sm-12 col-xs-12" />
+					</div>
+				</div>
+				<div class="space-4"></div>
+				<div class="col-xs-12">
+					<div>
+						<center>
+							<button id="add_contract_btn" class="btn btn-info" type="button">
+								<i class="ace-icon fa fa-check bigger-110"></i> 提交
+							</button>
+							&nbsp; &nbsp; &nbsp;
+							<button class="btn" type="reset">
+								<i class="ace-icon fa fa-undo bigger-110"></i> 重置
+							</button>
+						</center>
+					</div>
+				</div>
+				<!-- /section:pact/info.contents -->
+			</form>
+			
+		</div>
+		<!-- /.col -->
+	</div>
+	<!-- /.row -->
+</div>
+<!-- /.page-content -->
+<script src="assets/js/jquery.maskedinput.min.js"></script>
+
+<script type="text/javascript">
+	var pcode="";
+	jQuery(function($) {
+		$('.date-picker').datepicker({
+		autoclose : true,
+		
+		todayHighlight : true
+		}).on('hide', function(event) {
+			//set yyyymm  to cttcode
+			if ($("input[name='cttdate']").val().trim()==""){
+				$("input[name='cttdate']").val("");								
+			}else{
+				cttcode_group();
+			}
+			if (event.target.name=='cttloandate'){
+				$("input[name='cttrepayday']").val($("input[name='cttloandate']").val());
+			}
+			event.preventDefault();
+			event.stopPropagation();
+		}).next().on(ace.click_event, function() {
+			$(this).prev().trigger("click");
+		});
+
+	});
+	$(document).ready(function() {
+		/* $.browser.mozilla = /firefox/.test(navigator.userAgent.toLowerCase());
+		$.browser.webkit = /webkit/.test(navigator.userAgent.toLowerCase());
+		$.browser.opera = /opera/.test(navigator.userAgent.toLowerCase());
+		$.browser.msie = /msie/.test(navigator.userAgent.toLowerCase()); */
+		$(':input:text:first').focus();
+		$(':input:enabled').addClass('enterIndex');
+		// get only input tags with class data-entry 
+		textboxes = $('.enterIndex');
+		// now we check to see which browser is being used 
+		if ($.browser.mozilla) {
+			$(textboxes).bind('keypress', CheckForEnter);
+		} else {
+			$(textboxes).bind('keydown', CheckForEnter);
+		}
+
+		$("input[name='cttamount']").on("blur", function() {
+			$("input[name='cttamountu']").val(atoc($(this).val()));
+		});
+		$("input[name='cttdiscount']").on("click", function() {
+			if ($("input[name='cttprojectname']").val().trim()==""){
+				alert("请先选择案场");
+				return;
+			}
+			
+			cttcode_group();	
+		});	
+		$("input[name='cttserial']").on("blur",function(){
+			if ($("input[name='cttprojectname']").val().trim()==""){
+				alert("请先选择案场");
+				return;
+			}
+			if ($("input[name='cttserial']").val().trim()=="___"){				
+				alert("请输入流水号！");				
+				return;
+			}
+			if ($("input[name='cttserial']").val().trim()!=$("input[name='ctt_serail']").val().trim()){
+				$("input[name='ctt_serail']").val("0");//0 is manual create,not no is auto create
+				alert("您手动输入了流水号，系统会按照您输入的流水号录入！");				
+			}
+			
+			cttcode_group();		
+		});	
+		
+		$("#add_contract_btn").on("click", function() {
+			
+			if ($("input[name='ctthpaytimes']").val().trim()==""){
+				$("input[name='ctthpaytimes']").val(0);
+			}			
+			if ($("select[name='cttcate']").val()<$("input[name='ctthpaytimes']").val()){
+				alert("已还期限超出贷款期限");
+				return;	
+			}
+			showConfirmDialogByKevin("<center>确定保存吗？</center>",function(){
+				doAddProjectFormAjax("contract_form");
+			});
+			
+		});
+		$("input[name='cttserial']").mask('999');	
+		var aa=1;
+		$("input[name='cttserial']").val(aa.LenWithZero(3))	
+		$("input[name='ctt_serail']").val(aa.LenWithZero(3))
+		var nowDate=(new Date()).GetNowDate();		
+		$("input[name='cttstart']").val(nowDate);
+		$("input[name='cttloandate']").val(nowDate);
+		$("input[name='cttrepayday']").val(nowDate);
+
+	});
+	function CheckForEnter(event) {
+		if (event.keyCode == 13 && $(this).attr('type') != 'button' && $(this).attr('type') != 'submit' && $(this).attr('type') != 'textarea' && $(this).attr('type') != 'reset') {
+			var i = $('.enterIndex').index($(this));
+			var n = $('.enterIndex').length;
+			if (i < n - 1) {
+				if ($(this).attr('type') != 'radio') {
+					NextDOM($('.enterIndex'), i);
+				} else {
+					var last_radio = $('.enterIndex').index($('.enterIndex[type=radio][name=' + $(this).attr('name') + ']:last'));
+					NextDOM($('.enterIndex'), last_radio);
+				}
+			}
+			return false;
+		}
+	}
+	function NextDOM(myjQueryObjects, counter) {
+		if (myjQueryObjects.eq(counter + 1)[0].disabled) {
+			NextDOM(myjQueryObjects, counter + 1);
+		} else {
+			myjQueryObjects.eq(counter + 1).trigger('focus');
+		}
+	}
+
+	function initBorrower() {
+		$("#Borrower").bsSuggest('init', {
+		/*url: "/rest/sys/getuserlist?keyword=",
+		effectiveFields: ["userName", "email"],
+		searchFields: [ "shortAccount"],
+		effectiveFieldsAlias:{userName: "姓名"},*/
+		effectiveFields: ["userName"],
+		effectiveFieldsAlias:{userName: "姓名"},
+		clearable : true,
+		url : "_customerAction_suggestCustomers.action?suggestparam=",
+		idField : "userId",
+		keyField : "userName",
+		getDataMethod: "url",    //获取数据的方式，总是从 URL 获取
+		delayUntilKeyup: true //获取数据方式为 firstByUrl 时，延迟到有输入/获取到焦点时请求
+		}).on('onDataRequestSuccess', function(e, result) {
+			//console.log('onDataRequestSuccess: ', result);
+		}).on('onSetSelectValue', function(e, keyword, data) {
+			console.log('onSetSelectValue: ', keyword, data);
+			$("input[name='cttcert']").val(data.customerCert=="0"?'身份证':'其他');
+			$("input[name='cttcertnum']").val(data.customerCertnum);
+			$("input[name='cttcustomer']").val(data.customerid);			
+		}).on('onUnsetSelectValue', function() {
+			//console.log('onUnsetSelectValue');
+		});
+	}
+	initBorrower();
+	function initBorrowerProject() {
+		$("#BorrowerProject").bsSuggest('init', {
+		/*url: "/rest/sys/getuserlist?keyword=",
+		effectiveFields: ["userName", "email"],
+		searchFields: [ "shortAccount"],
+		effectiveFieldsAlias:{userName: "姓名"},*/
+		effectiveFields: ["pname", "pcode"],
+		effectiveFieldsAlias:{pname:"案场名称",pcode: "案场编码"},
+		clearable : true,
+		url : "projectAction_suggestProjects.action?rid="+Math.random()*100000+"&suggestparam=",		
+		getDataMethod: "url",    //获取数据的方式，总是从 URL 获取
+		delayUntilKeyup: true //获取数据方式为 firstByUrl 时，延迟到有输入/获取到焦点时请求
+		}).on('onDataRequestSuccess', function(e, result) {
+			//console.log('onDataRequestSuccess: ', result);
+		}).on('onSetSelectValue', function(e, keyword, data) {
+			console.log('onSetSelectValue: ', keyword, data);
+			if ($("input[name='cttdate']").val().trim()==""){
+				alert("请先选择日期");
+				$("#BorrowerProject").val("");
+				return;
+			}
+			pcode=data.pcode;
+			$("input[name='cttproject']").val(data.id);
+			var pserial=data.serial*1;
+			$("input[name='cttserial']").val(pserial.LenWithZero(3));	
+			$("input[name='ctt_serail']").val(pserial.LenWithZero(3));
+			cttcode_group();			
+		}).on('onUnsetSelectValue', function() {
+			//console.log('onUnsetSelectValue');
+		});
+	}
+	function cttcode_group(){
+		var d="",e="",f="",g="";
+		if ($("input[name='cttdate']").val().trim()!=""){
+				var t=$("input[name='cttdate']").val().split("-");
+				d=t[0]+t[1];
+		}
+		if ($("input[name='cttdiscount']").prop("checked")){
+			e="Y";
+		}
+		if ($("input[name='cttserial']").val().trim()!=""){
+			g=$("input[name='cttserial']").val();
+		}
+		$("input[name='cttcode']").val(d+pcode+e+f+g);
+		
+	}
+	initBorrowerProject();
+	//////////////////////////
+	var validator=null;//for add customer form validate
+			/*
+				validate form
+			*/
+			function validateCheck(form_id_str){
+				return validator=$("#"+form_id_str).validate({
+					debug: true, //调试模式取消submit的默认提交功能   
+	                //errorClass: "label.error", //默认为错误的样式类为：error   
+	                focusInvalid: true, //当为false时，验证无效时，没有焦点响应  
+	                onkeyup: false,   
+	                submitHandler: function(form){   //表单提交句柄,为一回调函数，带一个参数：form   
+	                    alert("提交表单");
+	                },   
+					rules: {  
+				      cttcode: {  
+				         required: true
+				      },
+				      cttprojectname:{  
+				         required: true
+				      },
+				      cttserial: {  
+				         required: true
+				         ,number:true
+				      },
+				      cttlender: {
+				         //email:true
+				         required: true
+				      },
+				       cttamount: {
+				         number:true
+				      },
+				       cttselfprice: {
+				         number:true
+				      },
+				       cttrepayday: {
+				         required: true
+				         //number:true
+				      },				      
+				       cttstart: {
+				         required: true
+				         //number:true
+				      },
+				      
+				      cttloandate:{
+				      	required: true
+				      },
+				      ctthpaytimes:{
+				      	number:true
+				      },
+				      ctttaa:{
+				      	number:true
+				      }				      
+				      
+				   },  
+				   messages: {  
+				      cttcode: {  
+				         required: 'contract code is required'				           
+				      }
+				   },
+				   	highlight: function(element) {
+     					//$(element).addClass("has-error");
+     					$(element).css("border","1px solid rgb(213, 9, 0)");
+  				   	},
+				  	unhighlight: function(element) {
+				     	$(element).css("border","1px solid rgb(213, 213, 213)");
+				     	
+				     	
+				  	},
+				   //errorElement: "input",
+				   errorPlacement: function(error, element) {
+	     					/* if (element.attr("name") == "account" || element.attr("name") == "deptname")
+	       						error.insertAfter("#addfunform");
+	     					else
+	       						error.insertAfter(element); */
+	       					 		   						  
+   						} 
+				});
+			}
+		///////////////////////////
+		/*
+				add customer
+			*/			
+			function doAddProjectFormAjax(form) {
+				var $form=$("#"+form);
+				  
+				validator=validateCheck(form);
+				
+				
+				//only valid after excute validte mothod 
+				if ($("select[name='cttfun']").val()=="0"){//loan for car park
+					$("input[name='cttcarloc']").rules("add",{required:true});
+					$("input[name='ctthouseloc']").rules("remove");
+				}else if($("select[name='cttfun']").val()=="1"){//loan for buying house
+					$("input[name='ctthouseloc']").rules("add",{required:true});
+					$("input[name='cttcarloc']").rules("remove");
+				}else{
+					$("input[name='ctthouseloc']").rules("remove");
+					$("input[name='cttcarloc']").rules("remove");
+				}
+				var params=$form.zxp_serialize();
+				if (validator.form()){
+						var jqxhr = $.post($form.attr("action"), 
+							params 
+						).done(function(data) {	
+							if (data.indexOf("无权访问")!=-1){
+								alert("无权访问，请联系管理员！");
+								return;
+							}													
+							if (data==300){
+								alert("该合同已存在，请检查是否录入重复!");
+							}else if (data==301){
+								alert("该项目下的流水号已存在，请选择其他的流水号!");
+							}else if(data==400){
+								alert("身份证非法");							
+							}else if(data==250){
+								alert("Server db error!");							
+							}else if(data==200){//success
+								//if (callback) callback();
+								showMsgByKevin("<center>添加成功</center>","消息");
+							}else{
+								alert("Server error!");
+							}							
+						}).fail(function() {
+							alert("Server error!Please check Network.");
+						});
+				}
+				
+				/* .always(function() {
+					alert("finished");
+				}); */
+				
+				/* jqxhr.always(function() {
+					alert("second finished");
+				}); */
+			}
+			////////////////////////////
+</script>
+<script src="assets/js/ace/ace.new.onpage-help1.js"></script>

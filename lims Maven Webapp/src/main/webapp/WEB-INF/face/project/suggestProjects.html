@@ -1,0 +1,22 @@
+{
+	"message": "",
+	"value": [
+		<#if sugestprojects?exists >
+				 <#if (sugestprojects.size()>0) >					 		 
+					<#list sugestprojects as sugestproject>
+					{
+			"pname": "${sugestproject["PNAME"]!''}",
+			"pcode": "${sugestproject["PCODE"]!''}",
+			"serial": "${sugestproject["SERIAL"]!''}",
+			"id": "${sugestproject["ID"]}"
+		} 
+						
+						<#if sugestproject_has_next>,</#if>	 
+					</#list>	 
+				</#if> 
+			</#if>  
+		
+	],
+	"code": 200,
+	"redirect": ""
+}

@@ -1,0 +1,24 @@
+{
+	"message": "",
+	"value": [
+		<#if sugestcustomers?exists >
+				 <#if (sugestcustomers.size()>0) >					 		 
+					<#list sugestcustomers as customer>
+					{
+			"userName": "${customer["CUSTOMERNAME"]!''}",
+			"replace": "${customer["CUSTOMERREPLACE1"]!''} ${customer["CUSTOMERREPLACE2"]!''}",
+			"customerCertnum": "${customer["CUSTOMERCERTNUM"]!''}",
+			"customerCert": "${customer["CUSTOMERCERT"]!''}",
+			
+			"customerid": "${customer["ID"]!''}"
+		} 
+						
+						<#if customer_has_next>,</#if>	 
+					</#list>	 
+				</#if> 
+			</#if>  
+		
+	],
+	"code": 200,
+	"redirect": ""
+}

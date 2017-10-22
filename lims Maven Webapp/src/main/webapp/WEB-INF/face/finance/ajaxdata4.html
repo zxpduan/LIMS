@@ -1,0 +1,38 @@
+{	"sEcho": ${sEcho},
+    "iTotalRecords": ${iTotalRecords},
+    "iTotalDisplayRecords": ${iTotalDisplayRecords},
+	"aaData": [
+			<#if pacts?exists >
+				 <#if (pacts.size()>0) >					 		 
+					<#list pacts as pact>
+						{
+							"id1": "<label class='position-relative'><span class='lbl'>${pact["RN"]}</span></label>",
+							<#if (pact["ISPREPAY"]??)>
+								<#if (pact["ISPREPAY"]?string=="")>
+								"id2":"${pact["CTTCODE"]!''}",
+								<#elseif (pact["ISPREPAY"]?string=="1")>
+								"id2": "<span class='label label-danger'><i class='ace-icon fa fa-bolt bigger-120'></i>${pact["CTTCODE"]!''}</span>",
+								<#else>
+								"id2":"${pact["CTTCODE"]!''}",
+								</#if>
+							<#else>
+								"id2":"${pact["CTTCODE"]!''}",
+							</#if>
+							"id3": "${pact["INSTALMENT"]!''}",
+					        "id4": "${pact["PAYDAY"]!''}",
+					        "id5": "${pact["REPAYDATE"]!''}",
+							"id6": "${pact["SAMOUNT"]!''}",
+							"id7": "${pact["AMOUNT"]!''}",							
+							"id8": "${pact["COST"]!''}",
+							"id9": "${pact["INTEREST"]!''}",
+							"id10": "${pact["OVERINTEREST"]!''}",
+					        "id11": "${pact["ARREARS"]!''}"					        
+					        
+					      }
+						<#if pact_has_next>,</#if>	 
+					</#list>	 
+				</#if> 
+			</#if>  
+	    ]  
+}
+

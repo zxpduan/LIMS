@@ -1,0 +1,42 @@
+<link rel="stylesheet" href="assets/css/mine.css" />
+<div class="row">
+	<div class="col-xs-12">
+		<form id="addfunform" action="funAction!addfun.action" class="form-horizontal">
+			<!-- #section:elements.form -->
+			<div class="space-4"></div>
+			<div class="form-group col-xs-12 col-sm-12">
+				<label class="col-sm-3 control-label no-padding-right" for="account"> 模块名称</label>
+				<div class="col-sm-9">
+					<input type="text" id="account"  name="funname"  placeholder="模块不能重复" maxlength=20 class="col-sm-11 col-xs-11" />
+					<sapn class="note_star">*</sapn>
+				</div>				
+			</div>
+			<div class="form-group col-xs-12 col-sm-12">
+				<label class="col-sm-3 control-label no-padding-right" for="account"> 模块代码</label>
+				<div class="col-sm-9">
+					<input type="text" id="funcode"  name="funcode"  placeholder="代码不能重复" maxlength=20 class="col-sm-11 col-xs-11" />
+					<sapn class="note_star">*</sapn>
+				</div>				
+			</div>
+			<div class="form-group col-xs-12 col-sm-12">
+				<label class="col-sm-3 control-label no-padding-right" for="account"> URL</label>
+				<div class="col-sm-9">
+					<input type="text" id="account"  name="funrul"  placeholder="相对地址" maxlength=100 class="col-sm-11 col-xs-11" />
+					<sapn class="note_star">*</sapn>
+				</div>				
+			</div>
+			<div class="form-group col-xs-12 col-sm-12">
+				<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 备注 </label>
+				<div class="col-sm-9">
+					<input type="text"  name="fundesc" maxlength=20 placeholder="" class="inputerr col-sm-11 col-xs-11" />
+				</div>
+			</div>			
+		</form>
+	</div>
+</div>
+<script src="assets/js/jquery.maskedinput.min.js"></script>
+<script>
+
+//$('#funcode').mask('999999999999999');
+
+</script>

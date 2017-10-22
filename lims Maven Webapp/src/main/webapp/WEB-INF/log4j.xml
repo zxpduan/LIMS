@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j='http://jakarta.apache.org/log4j/'>
+	<appender name="DailyRolling" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="D\:/LIMS/log/lims_log_info.log" />
+		<param name="Threshold" value="info" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd-HH" />
+		<param name="Append" value="true" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{yyy-MM-dd HH:mm:ss,SSS} [%-5p] %c {%F:%L} - %m%n" />
+		</layout>
+	</appender>	
+	<appender name="ErrorFile" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="D\:/LIMS/log/lims_log_error.log" />
+		<param name="Threshold" value="error" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd" />
+		<param name="Append" value="true" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{yyy-MM-dd HH:mm:ss,SSS} [%-5p] %c {%F:%L} - %m%n" />
+		</layout>
+	</appender>
+	<root>
+		<priority value="debug" />
+		<appender-ref ref="DailyRolling" />
+		<appender-ref ref="ErrorFile" />
+	</root>
+</log4j:configuration>

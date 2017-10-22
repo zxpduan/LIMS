@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+    "http://struts.apache.org/dtds/struts-2.1.7.dtd">
+<struts>
+	<package name="session" namespace="/" extends="struts-default">
+		<interceptors>
+			<interceptor name="session" class="SessionIterceptor"></interceptor>
+			<interceptor-stack name="sessionStack">
+				<interceptor-ref name="session"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="sessionStack"></default-interceptor-ref>		
+		 <global-results>
+			<result name="sessiontimeout" type="freemarker">WEB-INF/login/session.ftl
+			</result>			
+			<result name="operateRes" type="freemarker">WEB-INF/login/operatorRes.ftl
+			</result>
+			<result name="noprivilige" type="freemarker">WEB-INF/login/noprivilige.ftl</result>
+			<result name="homenoprivilige" type="freemarker">WEB-INF/login/homenoprivilige.ftl</result>
+		</global-results>
+		<action name="userAction_*" class="userAction" method="{1}">
+			<result name="{1}" type="freemarker">WEB-INF/face/userManage/{1}.html</result>
+		</action>
+		<action name="roleAction_*" class="roleAction" method="{1}">
+			<result name="{1}" type="freemarker">WEB-INF/face/userManage/{1}.html</result>
+		</action>
+		<action name="sysAction_*" class="sysAction" method="{1}">
+			<result name="{1}" type="freemarker">WEB-INF/face/preference/{1}.html</result>
+		</action>
+		<action name="pactAction_*" class="pactAction" method="{1}">
+			<result name="{1}" type="freemarker">WEB-INF/face/contract/{1}.html</result>
+		</action>
+		<action name="reportAction_*" class="reportAction" method="{1}">
+			<result name="{1}" type="freemarker">WEB-INF/face/reports/{1}.html</result>
+		</action>
+		<action name="repayAction_*" class="repayAction" method="{1}">
+			<result name="{1}" type="freemarker">WEB-INF/face/finance/{1}.html</result>
+		</action>
+		<action name="ratioAction_*" class="ratioAction" method="{1}">
+			<result name="{1}" type="freemarker">WEB-INF/face/preference/{1}.html</result>
+		</action>
+		<action name="projectAction_*" class="projectAction" method="{1}">
+			<result name="{1}" type="freemarker">WEB-INF/face/project/{1}.html</result>
+		</action>
+		<action name="_customerAction_*" class="customerAction" method="{1}">
+			<result name="{1}" type="freemarker">WEB-INF/face/customer/{1}.html</result>
+		</action>		
+		<action name="funAction_*" class="funAction" method="{1}">
+			<result name="{1}" type="freemarker">WEB-INF/face/function/{1}.html</result>
+		</action>
+		<action name="deptAction_*" class="deptAction" method="{1}">
+			<result name="{1}" type="freemarker">WEB-INF/face/userManage/{1}.html</result>
+			<result name="depttree" type="freemarker">WEB-INF/face/userManage/depttree.html</result>			
+		</action>
+		<action name="index_*" class="indexAction" method="{1}">
+		    <result name="{1}" type="freemarker">WEB-INF/face/{1}.html</result>					
+		</action>
+		
+				
+		<action name="report_*"><result>WEB-INF/face/reports/{1}.html</result></action>		
+		<action name="contract_*"><result>WEB-INF/face/contract/{1}.html</result></action>
+		<action name="customer_*"><result>WEB-INF/face/customer/{1}.html</result></action>
+		<!-- 
+		<action name="finance_*"><result>WEB-INF/face/finance/{1}.html</result></action>
+		 -->
+		<action name="preference_*"><result>WEB-INF/face/preference/{1}.html</result></action>
+		<action name="projectManage_*"><result>WEB-INF/face/project/{1}.html</result></action>
+		<action name="userManage_*"><result>WEB-INF/face/userManage/{1}.html</result></action>		
+		<action name="function_*"><result>WEB-INF/face/function/{1}.html</result></action>
+		<action name="sugestdemo_*"><result>WEB-INF/face/sugestdemo/{1}.json</result></action>		
+	</package>
+	<package name="nosession" namespace="/" extends="struts-default">
+	   <action name="login_face"><result>WEB-INF/login/login.html</result></action>
+		<action name="verifyCodeAction" class="verifyCodeAction"
+			method="doCode">
+		</action>
+		<action name="loginAction" class="loginAction" method="doajaxrequest">
+			<result name="sessiontimeout" type="freemarker">WEB-INF/login/session.ftl
+			</result>
+			<result name="redisinfo" type="freemarker">WEB-INF/login/info.ftl</result>
+		</action>
+	</package>
+	<!-- 开启使用开发模式，详细错误提示 -->
+	<constant name="struts.devMode" value="true" />
+	<!-- 指定每次请求到达，重新加载资源文件 -->
+	<constant name="struts.i18n.reload" value="true" />
+	<!-- 指定每次配置文件更改后，自动重新加载 -->
+	<constant name="struts.configuration.xml.reload" value="true" />
+</struts>    

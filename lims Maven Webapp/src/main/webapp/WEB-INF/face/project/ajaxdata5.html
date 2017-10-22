@@ -1,0 +1,22 @@
+{	"sEcho": ${sEcho},
+    "iTotalRecords": ${iTotalRecords},
+    "iTotalDisplayRecords": ${iTotalDisplayRecords},
+	"aaData": [
+			<#if projects?exists >
+				 <#if (projects.size()>0) >					 		 
+					<#list projects as project>
+						{
+							"id1": "<label class='position-relative'><b style='display:none;'>${project["ID"]}</b><input type='checkbox' class='ace checkbtn' /><span class='lbl'>${project["RN"]}</span></label>",
+							"id2": "${project["PNAME"]!''}",
+							"id3": "${project["PCODE"]!''}",							
+							"id4": "<#if project["PDESC"]?exists ><#if (project["PDESC"]?length>10) >${project["PDESC"][1..10]}...<#else>${project["PDESC"]}</#if></#if>",
+							"id5": "${project["ADDTIME"]!''}",
+					        "id6": "<div class='hidden-sm hidden-xs action-buttons'> <a data-remote='projectAction_editproject.action?id=${project["ID"]}' data-draggable='true' data-mtitle='修改案场信息' data-id='editProject_dia' data-width='600' data-height='400' data-okevent='doSaveEdit()' data-oktitle='保存'  class='green user_delop' href='#'> <i class='ace-icon fa fa-pencil bigger-130'></i></a> <a data-id='${project["ID"]}'  class='red delbtn' href='#'> <i class='ace-icon fa fa-trash-o bigger-130'></i></a></div><div class='hidden-md hidden-lg'><div class='inline position-relative'><button class='btn btn-minier btn-yellow dropdown-toggle' data-toggle='dropdown' data-position='auto'><i class='ace-icon fa fa-caret-down icon-only bigger-120'></i></button><ul class='dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close'><li><a data-remote='projectAction_editproject.action?id=${project["ID"]}' data-draggable='true' data-mtitle='修改案场信息' data-id='editProject_dia' data-width='600' data-height='400' data-okevent='doSaveEdit()' data-oktitle='保存'  class='green user_delop' href='#' class='tooltip-success' data-rel='tooltip' title='Edit'><span class='green'><i class='ace-icon fa fa-pencil-square-o bigger-120'></i></span></a></li><li><a data-id='${project["ID"]}'  class='red delbtn' href='#' class='tooltip-error' data-rel='tooltip' title='Delete'><span class='red'><i class='ace-icon fa fa-trash-o bigger-120'></i></span></a></li></ul></div></div>"
+					      }
+						<#if project_has_next>,</#if>	 
+					</#list>	 
+				</#if> 
+			</#if>  
+	    ]  
+}
+

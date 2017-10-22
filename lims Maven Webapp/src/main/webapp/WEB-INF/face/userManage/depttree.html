@@ -1,0 +1,64 @@
+<link rel="stylesheet" href="assets/css/mine.css" />
+<div class="row">
+	<div class="col-xs-12">
+		<ul id="tree_select" class="ztree" style="width:100%; overflow:auto;"></ul>
+	</div>
+</div>
+<!-- for dialgo bug by kevin -->
+<input type="text" name="tags" id="form-field-tags" style="display:none;" />
+<!-- end  for dialgo bug by kevin -->
+<script type="text/javascript">
+	var zTree;
+	var demoIframe;
+
+	var setting = {
+		check: {//增加复选
+				enable: false,
+				chkStyle: "radio",
+				radioType: "all",
+				autoCheckTrigger: true
+			},	
+		view: {
+			dblClickExpand: false,
+			showLine: true,
+			selectedMulti: false
+		},
+		data: {
+			simpleData: {
+				enable:true,
+				idKey: "id",
+				pIdKey: "pId",
+				rootPId: ""
+			}
+		},
+		callback: {	
+			onCheck: zTreeOnCheck		
+		}
+	};
+	function zTreeOnCheck(event, treeId, treeNode) {
+			//alert(treeNode.check_Child_State);
+		    //alert(treeNode.tId + ", " + treeNode.name + "," + treeNode.checked);
+		    treeSelectObj=treeNode;						
+		};
+	var zNodes =[	
+			
+			<#if depts?exists >
+				 <#if (depts.size()>0) >					 
+					<#list depts as dept>
+						{id:'${dept.id}', pId:'${dept.parent}', name:"${dept.name}",desc:"${dept.deptdesc}" ,open:true}
+						<#if dept_has_next>,</#if>	 
+					</#list>	 
+				</#if> 
+			</#if>
+			];
+
+	$(document).ready(function(){
+		var t = $("#tree_select");
+		t = $.fn.zTree.init(t, setting, zNodes);
+		
+		var zTree = $.fn.zTree.getZTreeObj("tree_select");
+		zTree.selectNode(zTree.getNodeByParam("id", 101));
+
+	});
+	
+</script>

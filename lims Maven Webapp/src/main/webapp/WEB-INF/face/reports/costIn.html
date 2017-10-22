@@ -1,0 +1,39 @@
+{"sEcho": ${sEcho},
+    "iTotalRecords": ${iTotalRecords},
+    "iTotalDisplayRecords": ${iTotalDisplayRecords},
+	"aaData":[
+	<#if costIns?exists >
+				 <#if (costIns.size()>0) >					 		 
+					<#list costIns as costIn>
+						{
+							"id1": "${costIn["RN"]}",
+							"id2": "${costIn["CTTLOANDATE"]!''}",							
+							"id3": "${costIn["CUSTOMERNAME"]!''}",
+							"id4": "${costIn["CTTAMOUNT"]!''}",
+							"id5": "${costIn["RATIO"]!''}",							
+				            "id6": "${costIn["CTTSTART"]!''}",				            
+				            "id7": "${costIn["CTTLOADENDDATE"]!''}",
+				            "id8": "${costIn["USERNAME"]!''}",
+				            "id9": "${costIn["PAYDAY"]!''}",
+				            "id10": "${costIn["COST"]!''}",
+				            "id11": "${costIn["INTEREST"]!''}",
+				            "id12": "${costIn["OVERINTEREST"]!''}",
+				            "id13": "${costIn["TOTAL1"]!''}",
+				            "id14": "${costIn["REPAYDATE"]!''}",
+				            "id15": "${costIn["COSTED"]!''}",
+				            "id16": "${costIn["INTERESTED"]!''}",
+				            "id17": "${costIn["REPAYINTEREST"]!''}",
+				            "id18": "${costIn["TOTAL2"]!''}",
+            				"id19": "${costIn["CTTSPAYTIMES"]!''}",
+            				"id20": "${costIn["CTTHPAYTIMES"]!''}",
+            				"id21": "${costIn["CTTBALANCE"]!''}"
+            				
+					      }
+						<#if costIn_has_next>,</#if>	 
+					</#list>	 
+				</#if> 
+			</#if> 
+		
+	    ]  
+}
+

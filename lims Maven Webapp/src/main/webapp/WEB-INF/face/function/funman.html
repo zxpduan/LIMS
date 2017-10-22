@@ -1,0 +1,419 @@
+<!-- #section:basics/info.contents.breadcrumbs -->
+<div class="breadcrumbs" id="breadcrumbs">
+	<script type="text/javascript">
+		try {
+			ace.settings.check('breadcrumbs', 'fixed')
+		} catch (e) {
+		}
+	</script>
+	<ul class="breadcrumb">
+		<li><i class="ace-icon fa fa-desktop"></i> <a href="#"></a></li>
+		<li>系统设置</li>
+		<li>基础功能管理</li>
+	</ul>
+	<!-- /.breadcrumb -->
+</div>
+<!-- /section:basics/info.contents.breadcrumbs -->
+<div class="page-content">
+	<div class="row">
+<!-- widget-box -->
+	<div class="col-xs-12 col-sm-12">
+		<div class="widget-box">				
+			<div class="widget-body">
+				<div class="widget-main"  style="padding:2px;">						
+					<div class="col-sm-12 col-xs-12  chosen-mine-div">
+			<form class="form-horizontal" role="form">	
+			<!-- #section:basics/fun.contents -->			
+				<div class="row">					
+					<div class="col-lg-6 col-xs-12 col-sm-6 col-md-6">						
+						<a href="#" data-remote="function_addfun.action" data-draggable="true" data-mtitle="增加模块" data-id="addFun_dia" data-width="600" data-height="400"
+							data-okevent="ok()" data-oktitle="保存" data-closeEvent="closew()" data-cancelEvent="closew()" class="btn btn-success btn-sm chosen-mine-button userdelop">
+							<i class="ace-icon fa fa-plus align-top bigger-125"></i>增加模块
+						</a> <a href="#" id="del_fun_bat" class="btn btn-yellow btn-sm chosen-mine-button"> <i class="ace-icon fa fa-plus align-top bigger-125"></i>批量删除
+						</a>
+					</div>
+				</div>
+			<!-- /section:basics/fun.contents -->	
+			</form>
+		</div>
+		<table id="fun-table-list" class="col-sm-12 col-xs-12 table table-striped table-bordered table-hover mine-table-center">
+			<thead>
+				<tr style="background: url(assets/css/img/mine_thead_bg.png);">
+					<th class="center"><label class="position-relative"> <input type="checkbox" class="ace" /> <span class="lbl">序号</span>
+					</label></th>
+					<th>功能名称</th>
+					<th>功能代码</th>
+					<th class="hidden-480">URL</th>
+					<th class="hidden-480">备注</th>					
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+			</tbody>
+		</table>
+				</div>
+			</div>
+		</div>
+	</div>
+<!--end widget-box -->
+		
+	</div>	
+</div>
+		
+		<!--加载assets/js/jquery.dataTables.bootstrap.js 可以改变表格样式-->
+		<!-- 
+		<script src="assets/js/jquery.dataTables.bootstrap.js"></script>
+		 -->
+		<script type="text/javascript">	
+					
+			var oTable1=null;
+			var del_select_ids=[];//ids to delete
+			
+			function sdialog() {
+				$(".repaydiag").each(function() {
+					$(this).wwDialog();
+					//alert($(this).parent().html());
+				});
+			}
+			
+			
+			jQuery(function($) {
+				oTable1 = $('#fun-table-list')
+				//.wrap("<div class='dataTables_borderWrap' />"),   //if you are applying horizontal scrolling (sScrollX)			
+				.dataTable({
+				//fixedHeader : {		header : true,	footer : true	},
+				"fnInitComplete" : function() {
+					setTimeout("sdialog()", 100);
+				},
+				"aoColumns" : [ {
+				"mData" : "id1",
+				"bSortable" : false,
+				"sWidth" : "110"
+				}, {
+					"mData" : "id2","bSortable" : false
+				}, {
+					"mData" : "id3","bSortable" : false
+				}, {
+					"mData" : "id4","bSortable" : false
+				}, {
+					"mData" : "id5","bSortable" : false
+				}, {
+					"mData" : "id6","bSortable" : false
+				}				
+				],
+				"oLanguage" : {
+				"sLengthMenu" : "每页显示 _MENU_ 条记录",
+				"sZeroRecords" : "对不起，没有匹配的数据",
+				"sInfo" : "第 _START_ - _END_ 条 / 共 _TOTAL_ 条数据",
+				"sInfoEmpty" : "没有匹配的数据",
+				"sInfoFiltered" : "(数据表中共 _MAX_ 条记录)",
+				"sProcessing" : "正在加载中...",
+				"sSearch" : "全文过滤：",
+				"oPaginate" : {
+				"sFirst" : "第一页",
+				"sPrevious" : " 上一页 ",
+				"sNext" : " 下一页 ",
+				"sLast" : " 最后一页 "
+				}
+				},
+
+				//"sScrollXInner" : "160%",
+				//"bScrollCollapse" : true,
+				//Note: if you are applying horizontal scrolling (sScrollX) on a ".table-bordered"
+				//you may want to wrap the table inside a "div.dataTables_borderWrap" element
+
+				"bDestroy":true,
+				// "bProcessing" : true, //DataTables载入数据时，是否显示‘进度’提示  
+				"bServerSide" : true, //是否启动服务器端数据导入  
+				"bStateSave" : true, //是否打开客户端状态记录功能,此功能在ajax刷新纪录的时候不会将个性化设定回复为初始化状态  
+				//"bJQueryUI" : true, //是否使用 jQury的UI theme  
+				//"sScrollY" : ($(window).height() - 420), //DataTables的高  
+				//"sScrollX" : "100%", //DataTables的宽
+				//"scrollX" : true,
+				"aLengthMenu" : [ 10,15, 20, 30, 60,100 ], //更改显示记录数选项  
+				"iDisplayLength" : 15, //默认显示的记录数  
+				"bAutoWidth" : false, //是否自适应宽度  
+				"bScrollInfinite" : false, //是否启动初始化滚动条  
+				"bScrollCollapse" : true, //是否开启DataTables的高度自适应，当数据条数不够分页数据条数的时候，插件高度是否随数据条数而改变  
+				"bPaginate" : true, //是否显示（应用）分页器  
+				"bInfo" : true, //是否显示页脚信息，DataTables插件左下角显示记录数  
+				//"sPaginationType" : "full_numbers", //详细分页组，可以支持直接跳转到某页  
+				"bSort" : true, //是否启动各个字段的排序功能  
+				//"aaSorting" : [ [ 1, "desc" ] ], //默认的排序方式，第2列，升序排列  
+				"bFilter" : false, //是否启动过滤、搜索功能
+				"sAjaxSource" : "funAction_ajaxdata4.action",
+				"fnServerData": function (sSource, aoData, fnCallback, oSettings) {//do something after ajax load
+	            					oSettings.jqXHR = $.ajax({
+	                				"dataType": 'json',
+	                				"type": "POST",
+	                				"url": sSource,
+	                				"data": aoData,
+	                				"success": function (json) {
+	                    				fnCallback(json);	                  　							
+	                    				//for init dialog e.g. after load ajax data
+						                $(".user_delop").each(function() {
+											$(this).wwDialog();//for dialog											
+										});
+										//for single check to delete  
+										$(".checkbtn").each(function() {
+											var that=this;											
+											$(this).on("click",function(){
+												var v=$(that).parent().find("b").text();
+												if (that.checked) del_select_ids.push(v);
+												else del_select_ids.removevalue(v);												
+												//alert(del_select_ids.toString());
+											})											
+										});										
+										//for del btn											
+										$(".delbtn").each(function(){
+											$(this).on('click',function(){
+												var that=$(this);//for transfer parameter to callback function
+												showConfirmDialogByKevin("<center>确定删除吗？</center>",function(){
+													
+													var request_del_ids = [];//save ids to delete
+													request_del_ids.push(that.attr("data-id"));	
+													$.post(
+															"funAction!delfun.action", 
+															[ {	name : 'delids',value : request_del_ids.toString()} ], "json" 
+															).done(function(data) {
+																if (data.indexOf("无权访问")!=-1){
+																	alert("无权访问，请联系管理员！");
+																	return;
+																}
+																data=JSON.parse(data);//parse to object
+																if (data.state!=200) alert("Server error!");
+																else{//success
+																	oTable1.fnReloadAjax(); //使用默认url refresh table
+																}
+															}).fail(function() {
+																alert("Server error!Please check Network.");
+															});
+													
+												});
+											});
+										});
+	                				}
+            					});
+        			}
+				});
+				/* setInterval(function() {
+					//oTable1.fnReloadAjax('pages/getPlayerNewData.php);
+					oTable1.fnReloadAjax(); //使用默认					
+				}, 5000); */
+				/* $(window).bind('resize', function() {
+					oTable1.fnAdjustColumnSizing();
+					//be care of fnAdjustColumnSizing() method,fnAdjustColumnSizing make a ajax request to server
+				}); */
+
+				//$('#fun-table-list').find("td").css( "background", "red");
+				$(document).off('click', 'th input:checkbox');
+				$(document).on('click', 'th input:checkbox', function() {
+					var that = this;
+					$(this).closest('table').find('tr > td:first-child input:checkbox').each(function() {
+						this.checked = that.checked;
+						//add by kevin for get the all ids to delete
+						if (this.checked)						
+						del_select_ids.push($(this).parent().find("b").text());						
+						//end by kevin
+						$(this).closest('tr').toggleClass('selected');
+					});
+					if (!that.checked){
+						del_select_ids.length=0;
+					}
+					//console.log(del_select_ids.toString());
+				});
+
+				$('[data-rel="tooltip"]').tooltip({
+					placement : tooltip_placement
+				});
+				function tooltip_placement(context, source) {
+					var $source = $(source);
+					var $parent = $source.closest('table')
+					var off1 = $parent.offset();
+					var w1 = $parent.width();
+
+					var off2 = $source.offset();
+					//var w2 = $source.width();
+
+					if (parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2))
+						return 'right';
+					return 'left';
+				}
+				
+			})
+			/* function adtable() {
+				$('#user-table-list').dataTable().fnAdjustColumnSizing();
+				//be care of fnAdjustColumnSizing() method,fnAdjustColumnSizing make a ajax request to server
+			}
+			setTimeout("adtable()", 50); */
+			$(".userdelop").each(function() {
+				$(this).wwDialog();
+			});
+			function closew() {
+				$(".modal-backdrop").remove();//删除class值为modal-backdrop的标签，可去除阴影				
+			}
+			function refreshTable(){
+				oTable1.fnReloadAjax(); //使用默认
+			}
+			
+			/*
+			batch delete function
+			*/
+			function bat_del_funs(){
+				if (del_select_ids.length==0){//Whether select checked
+					showMsgByKevin("<center>请选择要删除的部门</center>");
+					return;
+				}
+				$.post(//submit delete to server
+					"funAction!delfun.action", 
+					[ {	name : 'delids',value : del_select_ids.toString()} ], "json" 
+					).done(function(data) {
+						data=JSON.parse(data);//parse to object
+						if (data.state!=200) alert("Server error!");
+						else{//success
+							oTable1.fnReloadAjax();//使用默认url refresh table
+							del_select_ids.length=0
+						}
+					}).fail(function() {
+							alert("Server error!Please check Network.");
+					});
+			}
+			/*
+			batch delete Button	
+			*/
+			$("#del_fun_bat").on("click",function(){
+				//alert(del_select_ids.length);
+				if (del_select_ids.length==0){//Whether select checked
+					showMsgByKevin("<center>请选择要删除的角色</center>");
+					return;
+				}	
+				showConfirmDialogByKevin("<center>确定删除吗？</center>",bat_del_funs);				
+			});
+			function ok() {
+				doMineFormAjax("addfunform","addFun_dia",refreshTable);
+
+			}
+			/*
+				validate form
+			*/
+			function validateCheck(form_id_str){
+				return validator=$("#"+form_id_str).validate({
+					debug: true, //调试模式取消submit的默认提交功能   
+	                //errorClass: "label.error", //默认为错误的样式类为：error   
+	                focusInvalid: true, //当为false时，验证无效时，没有焦点响应  
+	                onkeyup: false,   
+	                submitHandler: function(form){   //表单提交句柄,为一回调函数，带一个参数：form   
+	                    alert("提交表单");
+	                },   
+					rules: {  
+				      funname: {  
+				         required: true
+				      },
+				      funcode: {  
+				         required: true,
+				         number:true
+				      },
+				      funrul: {  
+				         required: true
+				      }
+				   },  
+				   messages: {  
+				      funname: {  
+				         required: '必填'				           
+				      }
+				   },
+				   	highlight: function(element) {
+     					//$(element).addClass("has-error");
+     					$(element).css("border","1px solid rgb(213, 9, 0)");
+  				   	},
+				  	unhighlight: function(element) {
+				     	$(element).css("border","1px solid rgb(213, 213, 213)");
+				     	
+				     	
+				  	},
+				   //errorElement: "input",
+				   errorPlacement: function(error, element) {
+	     					/* if (element.attr("name") == "account" || element.attr("name") == "deptname")
+	       						error.insertAfter("#addfunform");
+	     					else
+	       						error.insertAfter(element); */
+	       					 		   						  
+   						} 
+				});
+			}
+			/*
+				save edit fun information
+			*/
+			function doSaveEdit(){							
+				var $form=$("#editfunform");
+				validator=validateCheck("editfunform");
+				if (validator.form()){
+					var jqxhr = $.post($form.attr("action"), 
+								$form.serialize() 
+							).done(function(data) {					
+								if (data==300){
+									alert("模块重复，请更换其他模块试试!");
+								}else if(data==250){
+									alert("Server db error!");							
+								}else if(data==200){//success
+									refreshTable();
+									showMsgByKevin("<center>修改成功</center>","消息");
+									$("#editFun_dia").modal('hide');								
+								}else{
+									alert("Server error!");
+								}							
+							}).fail(function() {
+								alert("Server error!Please check Network.");
+							});
+					}
+			}
+			/*
+			submit form of fun adding
+			param:
+			form is string ,form's id
+			dia_id is dialog id			
+			*/
+			var validator=null;//for add fun form validate
+			function doMineFormAjax(form,dia_id,callback) {
+				var $form=$("#"+form);
+				//validator = $('#addfunform').validate();
+				validator=validateCheck("addfunform");
+				//$("#login_form").validate({meta: "validate"})
+				
+				if (validator.form()){
+						var jqxhr = $.post($form.attr("action"), 
+							$form.serialize() 
+						).done(function(data) {					
+							if (data==300){
+								alert("模块重复，请更换其模块试试!");
+							}else if(data==250){
+								alert("Server db error!");							
+							}else if(data==200){//success
+								if (callback) callback();
+								showConfirmDialogByKevin("<center>添加成功，确定退出添加吗？<br>'确定'退出添加，'取消'继续添加</center>",function(){
+									$("#"+dia_id).modal('hide');
+								});
+							}else{
+								alert("Server error!");
+							}							
+						}).fail(function() {
+							alert("Server error!Please check Network.");
+						});
+				}
+				
+				
+			}
+			
+			
+			$('.date-picker').datepicker({
+				autoclose : true
+			});
+			function initSerachTable(){
+				var datatable_setting=oTable1.fnSettings();
+				var t_url=datatable_setting.sAjaxSource;
+				var o_url=t_url.split("?");
+			}
+			
+			//alert(oTable1.fnSettings().sAjaxSource);
+		</script>
+	<script src="assets/js/ace/ace.new.onpage-help1.js"></script>	

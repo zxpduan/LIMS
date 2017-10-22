@@ -1,0 +1,71 @@
+<link rel="stylesheet" href="assets/css/mine.css" />
+<div class="row">
+	<div class="col-xs-12">
+		<form id="editroleform" action="roleAction!doeditrole.action" class="form-horizontal">
+			<!-- #section:elements.form -->
+			<div class="space-4"></div>
+			<div class="form-group col-xs-12 col-sm-12">
+				<label class="col-sm-3 control-label no-padding-right" for="account"> 角色 </label>
+				<div class="col-sm-9">
+					<input type="text" id="account"  name="rolename" value="${editrole.rolename}"  placeholder="角色不能重复" maxlength=20 class="col-sm-11 col-xs-11" />
+					<input type="hidden" name="id" value="${editrole.id}" />
+					<sapn class="note_star">*</sapn>
+				</div>
+				
+			</div>
+			<div class="form-group col-xs-12 col-sm-12">
+				<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 备注</label>
+				<div class="col-sm-9">
+					<input type="text"  name="roledesc" maxlength=20 placeholder="" value="${editrole.roledesc}" class="inputerr col-sm-11 col-xs-11" />
+				</div>
+			</div>
+			<div class="form-group col-xs-12 col-sm-12">
+				<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 设置权限</label>
+				<div class="col-sm-9">
+					<a href="#" id="osetfun" data-remote="funAction_lookfun.action" data-mtitle="look function" data-id="lookfun_dia" data-width="600" data-height="600" data-okevent="select_fun_ok()"
+							data-oktitle="确定选择"  class="btn btn-success btn-sm lookfun"> <i
+							class="ace-icon fa fa-cog align-top bigger-125"></i>设置权限
+					</a>					
+				</div>
+			</div>
+			<div class="form-group col-xs-12 col-sm-12">
+			<label class="col-sm-3 control-label no-padding-right" for="form-field-1"></label>				
+				<div class="col-sm-9">					
+					<textarea name="funnames" class="col-xs-11"></textarea>
+					<input type="hidden" name="funs" value=""/>
+				</div>
+			</div>
+					
+		</form>
+	</div>
+</div>
+<script type="text/javascript">	
+		select_funs.length=0;//清空历史选择
+		select_funs_names.length=0;
+		<#if rolefuns?exists >
+				 <#if (rolefuns.size()>0) >					 		 
+					<#list rolefuns as rolefun>
+						select_funs.push('${rolefun.getFunid()}');
+							 
+					</#list>	 
+				</#if> 
+			</#if>  
+		
+		$(".lookfun").each(function() {				
+				$(this).wwDialog();
+		});		
+		function select_fun_ok(){				
+			if (select_funs.length!=0){
+				$("#lookfun_dia").modal('hide');
+				$("#editroleform").find("input[name='funs']").val(select_funs.toString());
+				$("#editroleform").find("textarea[name='funnames']").val(select_funs_names.toString());
+				
+				select_funs_names								
+			}else{
+				showMsgByKevin("<center>请选择角色</center>");
+			}
+			
+		}
+	
+	
+</script>

@@ -1,0 +1,29 @@
+{"sEcho": ${sEcho},
+    "iTotalRecords": ${iTotalRecords},
+    "iTotalDisplayRecords": ${iTotalDisplayRecords},
+	"aaData":[
+	<#if ledgers?exists >
+				 <#if (ledgers.size()>0) >					 		 
+					<#list ledgers as ledger>
+						{
+							"id1": "<label class='position-relative'><span class='lbl'>${ledger["RN"]}</span></label>",
+							"id2": "${ledger["CTTCODE"]!''}",
+							"id3": "${ledger["CUSTOMERNAME"]!''}",
+							"id4": "${ledger["CTTAMOUNT"]!''}",
+							"id5": "${ledger["RATIO"]!''}",
+							"id6": "${ledger["CTTCATE"]!''}",
+				            "id7": "${ledger["CTTSTART"]!''}",
+				            "id8": "${ledger["PAYDAY"]!''}",
+				            "id9": "${ledger["CUSTOMERMOBILE"]!''}",
+				            "id10": "${ledger["USERNAME"]!''}",
+				            "id11": "<span class='label label-sm label-warning'>${ledger["CTTBALANCE"]!''}</span>" 
+            
+					      }
+						<#if ledger_has_next>,</#if>	 
+					</#list>	 
+				</#if> 
+			</#if> 
+		
+	    ]  
+}
+

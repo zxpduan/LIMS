@@ -1,0 +1,19 @@
+{	"sEcho": ${sEcho},
+    "iTotalRecords": ${iTotalRecords},
+    "iTotalDisplayRecords": ${iTotalDisplayRecords},
+	"aaData": [
+			<#if funs?exists >
+				 <#if (funs.size()>0) >					 		 
+					<#list funs as fun>
+						{
+							"id1": "<label class='position-relative'><b style='display:none;'>${fun["ID"]}</b><#if (fun["SELECTED"]=="1")><input type='checkbox'  class='ace checkbtn' checked='true' name='select_fun' checked='true'  value='${fun["FUNNAME"]!''}' /><#else><input type='checkbox'  class='ace checkbtn' name='select_fun' value='${fun["FUNNAME"]!''}' /></#if><span class='lbl'>${fun["RN"]}</span></label>",
+							"id2": "${fun["FUNNAME"]!''}",
+							"id3": "${fun["FUNCODE"]!''}"
+					      }
+						<#if fun_has_next>,</#if>	 
+					</#list>	 
+				</#if> 
+			</#if>  
+	    ]  
+}
+

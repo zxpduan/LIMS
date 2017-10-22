@@ -1,0 +1,86 @@
+<link rel="stylesheet" href="assets/css/mine.css" />
+<div class="row">
+	<div class="col-xs-12">
+		<form id="adduserform" action="userAction!adduser.action" class="form-horizontal">
+			<!-- #section:elements.form -->
+			<div class="space-4"></div>
+			<div class="form-group col-xs-12 col-sm-12">
+				<label class="col-sm-3 control-label no-padding-right" for="account"> 登录账号 </label>
+				<div class="col-sm-9">
+					<input type="text" id="account"  name="account"  placeholder="账号不能重复" maxlength=20 class="col-sm-11 col-xs-11" />
+					<sapn class="note_star">*</sapn>
+				</div>
+				
+			</div>
+			<div class="form-group col-xs-12 col-sm-12">
+				<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 用户姓名 </label>
+				<div class="col-sm-9">
+					<input type="text"  name="username" maxlength=20 placeholder="" class="inputerr col-sm-11 col-xs-11" />
+				</div>
+			</div>
+			<div class="form-group col-xs-12 col-sm-12">
+				<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 密码 </label>
+				<div class="col-sm-9">
+					<input type="password"  name="pw" maxlength=20 placeholder="缺省密码123456" class="col-sm-11 col-xs-11" />
+				</div>
+			</div>
+			<div class="form-group col-xs-12 col-sm-12">
+				<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 部门 </label>
+				<div class="col-sm-9">
+					<input type="text" readonly="" id="form-field-dept" name="deptname" maxlength=50  class="col-sm-9 col-xs-9" />
+					<input type="hidden"  name="dept"/>
+					<a href="#" id="lookdept" data-remote="deptAction!depttree.action" data-mtitle="look dept" data-id="lookdept_dia" data-width="600" data-height="600" data-okevent="select_ok()"
+							data-oktitle="确定选择" data-closeEvent="closew()" data-cancelEvent="closew()" class="btn btn-success btn-sm chosen-mine-button lookdept"> <i
+							class="ace-icon fa fa-plus align-top bigger-125"></i>
+					</a>
+					<sapn class="note_star">*</sapn>		
+				</div>
+			</div>
+			<div class="form-group col-xs-12 col-sm-12">
+				<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 角色</label>
+				<div class="col-sm-9">
+					<input type="text" readonly=""  name="rolename" value="" maxlength=50  class="col-sm-9 col-xs-9" />
+					<input type="hidden"  name="userrole.roleid" value=""/>
+					<input type="hidden"  name="userrole.userid" value=""/>
+					<a href="#" id="lookrole" data-remote="roleAction_lookrole.action" data-mtitle="look role" data-id="lookrole_dia" data-width="600" data-height="400" data-okevent="select_role_ok()"
+							data-oktitle="确定选择"  class="btn btn-success btn-sm chosen-mine-button lookdept"> <i
+							class="ace-icon fa fa-search align-top bigger-125"></i>
+					</a>
+					<sapn class="note_star">*</sapn>		
+				</div>
+			</div>				
+		</form>
+	</div>
+</div>
+<script type="text/javascript">
+		var treeSelectObj=null;
+		$(".lookdept").each(function() {				
+				$(this).wwDialog();
+		});
+		function select_ok(){
+			
+			var zSelectTree = $.fn.zTree.getZTreeObj("tree_select");
+			var _treeSelectObj=zSelectTree.getSelectedNodes()[0];
+			if (_treeSelectObj!=null){
+				$("#lookdept_dia").modal('hide');
+				$("#adduserform").find("input[name='deptname']").val(_treeSelectObj.name);
+				$("#adduserform").find("input[name='dept']").val(_treeSelectObj.id);
+								
+			}else{
+				showMsgByKevin("<center>请选择部门</center>");
+			}			
+		}
+		function select_role_ok(){
+						
+			if (roleid!=null){
+				$("#lookrole_dia").modal('hide');
+				$("#adduserform").find("input[name='rolename']").val(rolename);
+				$("#adduserform").find("input[name='userrole.roleid']").val(roleid);				
+			}else{
+				showMsgByKevin("<center>请选择角色</center>");
+			}
+			
+		}		
+	
+	
+</script>

@@ -1,0 +1,23 @@
+{	"sEcho": ${sEcho},
+    "iTotalRecords": ${iTotalRecords},
+    "iTotalDisplayRecords": ${iTotalDisplayRecords},
+	"aaData": [
+			<#if customers?exists >
+				 <#if (customers.size()>0) >					 		 
+					<#list customers as customer>
+						{
+							"id1": "<label class='position-relative'><b style='display:none;'>${customer["ID"]}</b><input type='checkbox' class='ace checkbtn' /><span class='lbl'>${customer_index + 1}</span></label>",
+							"id2": "${customer["CUSTOMERNAME"]!''} ${customer["CUSTOMERREPLACE1"]!''} ${customer["CUSTOMERREPLACE2"]!''}",
+							"id3": "${customer["CUSTOMERCERTNUM"]!''}",
+							"id4": "${customer["CUSTOMERMOBILE"]!''}",
+							"id5": "${customer["CUSTOMERCONTACT1"]!''}",
+					        "id6": "${customer["ADDTIME"]!''}",
+					        "id7": "<div class='hidden-sm hidden-xs action-buttons'><a data-remote='_customerAction_view.action?id=${customer["ID"]}' data-draggable='false' data-mtitle='用户信息' data-id='viewcustomer_dia' data-width='950' data-height='500' data-okevent='doView()' class='green user_delop' class='blue' href='#'> <i class='ace-icon fa fa-search-plus bigger-130'></i></a><a data-remote='_customerAction_editcustomer.action?id=${customer["ID"]}' data-draggable='false' data-mtitle='修改客户信息' data-id='editcustomer_dia' data-width='950' data-height='600' data-okevent='doSaveEdit()' data-oktitle='保存'  class='green user_delop' href='#'> <i class='ace-icon fa fa-pencil bigger-130'></i></a> <a data-id='${customer["ID"]}'  class='red delbtn' href='#'> <i class='ace-icon fa fa-trash-o bigger-130'></i></a></div><div class='hidden-md hidden-lg'><div class='inline position-relative'><button class='btn btn-minier btn-yellow dropdown-toggle' data-toggle='dropdown' data-position='auto'><i class='ace-icon fa fa-caret-down icon-only bigger-120'></i></button><ul class='dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close'><li><a href='#' class='tooltip-info' data-rel='tooltip' title='View'> <a data-remote='_customerAction_view.action?id=${customer["ID"]}' data-draggable='false' data-mtitle='用户信息' data-id='viewcustomer_dia' data-width='950' data-height='500' data-okevent='doView()'  class='green user_delop' class='blue' href='#'> <i class='ace-icon fa fa-search-plus bigger-130'></i></a></a></li><li><a data-remote='_customerAction_editcustomer.action?id=${customer["ID"]}' data-draggable='false' data-mtitle='修改客户信息' data-id='editcustomer_dia' data-width='950' data-height='600' data-okevent='doSaveEdit()' data-oktitle='保存'  class='green user_delop' href='#'><span class='green'><i class='ace-icon fa fa-pencil-square-o bigger-120'></i></span></a></li><li><a data-id='${customer["ID"]}'  class='red delbtn' href='#' class='tooltip-error' data-rel='tooltip' title='Delete'><span class='red'><i class='ace-icon fa fa-trash-o bigger-120'></i></span></a></li></ul></div></div>"
+					      }
+						<#if customer_has_next>,</#if>	 
+					</#list>	 
+				</#if> 
+			</#if>  
+	    ]  
+}
+

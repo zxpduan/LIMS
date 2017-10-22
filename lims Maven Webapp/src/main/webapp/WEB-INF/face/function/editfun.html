@@ -1,0 +1,63 @@
+<link rel="stylesheet" href="assets/css/mine.css" />
+<div class="row">
+	<div class="col-xs-12">
+		<form id="editfunform" action="funAction!doeditfun.action" class="form-horizontal">
+			<!-- #section:elements.form -->
+			<div class="space-4"></div>
+			<div class="form-group col-xs-12 col-sm-12">
+				<label class="col-sm-3 control-label no-padding-right" for="account">模块 </label>
+				<div class="col-sm-9">
+					<input type="text" id="account"  name="funname" value="${editfun.funname}"  placeholder="模块不能重复" maxlength=20 class="col-sm-11 col-xs-11" />
+					<input type="hidden" name="id" value="${editfun.id}" />
+					<sapn class="note_star">*</sapn>
+				</div>				
+			</div>
+			<div class="form-group col-xs-12 col-sm-12">
+				<label class="col-sm-3 control-label no-padding-right" for="account">模块代码 </label>
+				<div class="col-sm-9">
+					<input type="text" id="account"  name="funcode" value="${editfun.funcode}"  placeholder="代码不能重复" maxlength=20 class="col-sm-11 col-xs-11" />
+					
+					<sapn class="note_star">*</sapn>
+				</div>				
+			</div>
+			<div class="form-group col-xs-12 col-sm-12">
+				<label class="col-sm-3 control-label no-padding-right" for="account">模块URL </label>
+				<div class="col-sm-9">
+					<input type="text" id="account"  name="funrul" value="${editfun.funrul}"  placeholder="相对URL" maxlength=100 class="col-sm-11 col-xs-11" />
+					
+					<sapn class="note_star">*</sapn>
+				</div>				
+			</div>
+			
+			<div class="form-group col-xs-12 col-sm-12">
+				<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 备注</label>
+				<div class="col-sm-9">
+					<input type="text"  name="fundesc" maxlength=50 placeholder="" value="${editfun.fundesc}" class="inputerr col-sm-11 col-xs-11" />
+				</div>
+			</div>
+					
+		</form>
+	</div>
+</div>
+<script type="text/javascript">
+		var treeSelectObj=null;
+		$(".lookdept").each(function() {				
+				$(this).wwDialog();
+		});
+		function select_ok(){
+			
+			var zSelectTree = $.fn.zTree.getZTreeObj("tree_select");
+			var _treeSelectObj=zSelectTree.getSelectedNodes()[0];
+			if (_treeSelectObj!=null){
+				$("#lookdept_dia").modal('hide');
+				$("#edituserform").find("input[name='deptname']").val(_treeSelectObj.name);
+				$("#edituserform").find("input[name='dept']").val(_treeSelectObj.id);
+								
+			}else{
+				showMsgByKevin("<center>请选择部门</center>");
+			}			
+		}
+		
+	
+	
+</script>

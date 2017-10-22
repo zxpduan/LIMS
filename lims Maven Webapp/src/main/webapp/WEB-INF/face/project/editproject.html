@@ -1,0 +1,32 @@
+<link rel="stylesheet" href="assets/css/mine.css" />
+<div class="row">
+	<div class="col-xs-12">
+		<form id="editprojectform" action="projectAction!doeditproject.action" class="form-horizontal">
+			<!-- #section:elements.form -->
+			<div class="space-4"></div>
+			<div class="form-group col-xs-12 col-sm-12">
+				<label class="col-sm-3 control-label no-padding-right"> 案场 </label>
+				<div class="col-sm-9">
+					<input type="text"  name="pname" value="${editproject.pname}"  placeholder="案场不能重复" maxlength=20 class="col-sm-11 col-xs-11" />
+					<input type="hidden" name="id" value="${editproject.id}" />
+					<sapn class="note_star">*</sapn>
+				</div>
+				
+			</div>
+			<div class="form-group col-xs-12 col-sm-12">
+				<label class="col-sm-3 control-label no-padding-right" for="account">代码</label>
+				<div class="col-sm-9">
+					<input type="text"   name="pcode"  maxlength=20  value="${editproject.pcode}" class="col-sm-11 col-xs-11" />
+					<sapn class="note_star">*</sapn>
+				</div>				
+			</div>
+			<div class="form-group col-xs-12 col-sm-12">
+				<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 备注</label>
+				<div class="col-sm-9">
+					<input type="text"  name="pdesc" maxlength=20 placeholder="" value="${editproject.pdesc}" class="inputerr col-sm-11 col-xs-11" />
+				</div>
+			</div>
+					
+		</form>
+	</div>
+</div>

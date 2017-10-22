@@ -1,0 +1,19 @@
+{	"sEcho": ${sEcho},
+    "iTotalRecords": ${iTotalRecords},
+    "iTotalDisplayRecords": ${iTotalDisplayRecords},
+	"aaData": [
+			<#if roles?exists >
+				 <#if (roles.size()>0) >					 		 
+					<#list roles as role>
+						{
+							"id1": "<label class='position-relative'><b style='display:none;'>${role["ID"]}</b><input type='radio' name='select_role' value='${role["ROLENAME"]!''}' class='ace checkbtn' /><span class='lbl'>${role["RN"]}</span></label>",
+							"id2": "${role["ROLENAME"]!''}",
+							"id3": "${role["ROLEDESC"]!''}"
+					      }
+						<#if role_has_next>,</#if>	 
+					</#list>	 
+				</#if> 
+			</#if>  
+	    ]  
+}
+

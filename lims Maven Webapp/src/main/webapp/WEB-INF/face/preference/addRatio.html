@@ -1,0 +1,32 @@
+<link rel="stylesheet" href="assets/css/mine.css" />
+<div class="row">
+	<div class="col-xs-12">
+		<form id="addratioform" action="ratioAction!saveRatio.action" class="form-horizontal" role="form" id="addratio_form">
+			<!-- #section:elements.form -->
+			<div class="space-4"></div>
+			<div class="form-group col-xs-12 col-sm-12">
+				<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 新利率 </label>
+				<div class="col-sm-9">
+					<input type="text" id="form-field-1" name="ratio" placeholder="点击输入,不能重复" class="col-sm-11 col-xs-11" />
+					<input type="hidden" name="parent"/>
+					<sapn class="note_star">*</sapn>
+				</div>
+				
+			</div>
+			<div class="form-group col-xs-12 col-sm-12">
+				<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 备注 </label>
+				<div class="col-sm-9">
+					<input type="text" id="form-field-1" maxlength=15 name="ratiodesc" placeholder="" class="col-sm-11 col-xs-11" />
+				</div>
+			</div>
+			
+				
+		</form>
+	</div>
+</div>
+<script type="text/javascript">
+		$(document).ready(function() {		
+		$("input[name='ratio']").mask('9.99');	
+	});
+</script>
+<script src="assets/js/ace/ace.new.onpage-help1.js"></script>

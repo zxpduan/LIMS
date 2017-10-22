@@ -1,0 +1,24 @@
+{	"sEcho": ${sEcho},
+    "iTotalRecords": ${iTotalRecords},
+    "iTotalDisplayRecords": ${iTotalDisplayRecords},
+	"aaData": [
+			<#if pacts?exists >
+				 <#if (pacts.size()>0) >					 		 
+					<#list pacts as pact>
+						{
+							"id1": "<label class='position-relative'><b style='display:none;'>${pact["ID"]}</b><input type='checkbox' class='ace checkbtn' /><span class='lbl'>${pact["RN"]}</span></label>",
+							"id2": "${pact["CTTCODE"]!''}",
+							"id3": "${pact["CUSTOMERNAME"]!''}",
+							"id4": "<#if (pact["AUDITSTATE"]==4)><i class='red ace-icon fa fa-bolt bigger-130'></i><#else><i class='ace-icon fa fa-bolt bigger-130'></i></#if>",
+							"id5": "${pact["USERNAME"]!''}",
+							"id6": "${pact["CTTAMOUNT"]!''}",
+					        "id7": "${pact["ADDTIME"]!''}",					        
+					        "id8": "<#if (pact["AUDITSTATE"]!=4)><div class='action-buttons'><a data-remote='pactAction_prepayview.action?id=${pact["ID"]}' data-draggable='false' data-mtitle='提前还款-合同信息' data-id='pre_dia' data-width='950' data-height='500' data-okevent='doPrepay()' data-oktitle='确定提前还款' class='green prerepay' href='#' title='提前还款' > <i class='ace-icon fa fa-bolt bigger-130'></i></a></a> </div></#if>"
+					      }
+						<#if pact_has_next>,</#if>	 
+					</#list>	 
+				</#if> 
+			</#if>  
+	    ]  
+}
+

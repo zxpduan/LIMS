@@ -1,0 +1,47 @@
+<link rel="stylesheet" href="assets/css/mine.css" />
+<div class="row">
+	<div class="col-xs-12">
+		<div id="tree1" class="tree"></div>
+	</div>
+</div>
+<!-- for dialgo bug by kevin -->
+<input type="text" name="tags" id="form-field-tags" style="display:none;" />
+<!-- end  for dialgo bug by kevin -->
+<script type="text/javascript">
+	jQuery(function($) {
+		$('#tree1').ace_tree({
+		dataSource : treeDataSource,
+		multiSelect : false,
+		loadingHTML : '<div class="tree-loading"><i class="ace-icon fa fa-refresh fa-spin blue"></i></div>',
+		'open-icon' : 'ace-icon tree-minus',
+		'close-icon' : 'ace-icon tree-plus',
+		'selectable' : true,
+		'selected-icon' : 'ace-icon fa fa-check',
+		'unselected-icon' : 'ace-icon fa fa-times'
+		});
+		$('#tree1').on('selected', function (evt, data) {
+			//alert(JSON.stringify(data));
+			//alert(data.info[0].name);
+			//alert(data.info[0].type);
+			treeSelectObj=data.info[0];
+			
+		});
+		/**
+		$('#tree1').on('loaded', function (evt, data) {
+		});
+
+		$('#tree1').on('opened', function (evt, data) {
+		});
+
+		$('#tree1').on('closed', function (evt, data) {
+		});
+		var items = $('#tree1').tree('selectedItems');
+            for (var i in items) if (items.hasOwnProperty(i)) {
+                var item = items[i];
+                ids += item.additionalParameters['id'] + ",";
+                output += item.text + ",";
+            }
+		
+		 */
+	});
+</script>
